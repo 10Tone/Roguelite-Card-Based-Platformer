@@ -1,0 +1,11 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace></RootNamespace>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Source\Game\GameUI" />
+    <Folder Include="Source\Game\World" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+using AutoLoads;
+using Godot;
+
+public class MainManager : Node2D
+{
+   private GlobalEvents _globalEvents;
+   private GlobalVariables _globalVariables;
+
+   public override void _EnterTree()
+   {
+      _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
+      _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
+      _globalEvents.Connect(nameof(GlobalEvents.GameReady), this, nameof(OnGameReady));
+   }
+
+   private void OnGameReady()
+   {
+      GD.Print("Game Loaded");
+   }
+}
