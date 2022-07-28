@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Source/Game/Entities/Player/Data/PlayerData.cs" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+Acceleration = 512.0
+AirResistance = 0.02
+AmountOfJumps = 2
+CoyoteTime = 0.2
+Friction = 0.25
+Gravity = 200.0
+JumpForce = 128.0
+MaxSpeed = 64.0
+VariableJumpHeightMultiplier = 0.1

@@ -2,7 +2,7 @@
 
 namespace Tools;
 
-public class Statemachine
+public class StateMachine
 {
     public State CurrentState { get; private set; }
 
