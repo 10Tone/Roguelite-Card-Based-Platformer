@@ -17,5 +17,6 @@ public class GameManager : Node2D
     public override void _Ready()
     {
         _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
+        _globalVariables.PlayerInputEnabled = true;
     }
 }

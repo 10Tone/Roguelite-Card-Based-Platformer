@@ -17,7 +17,7 @@ public class PlayerInputHandler : Node
     public override void _EnterTree()
     {
         base._EnterTree();
-        _globalVariables = _globalVariables = GetNode<GlobalVariables>("/root/Globals");
+        _globalVariables = _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
     }
 
     public override void _PhysicsProcess (float delta)
@@ -30,9 +30,9 @@ public class PlayerInputHandler : Node
     }
         
     private void CheckForHorizontalInput() =>
-        HorizontalInput = Input.GetActionStrength("right") - Input.GetActionStrength("left");
+        HorizontalInput = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
     private void CheckForVerticalInput() =>
-        VerticalInput = Input.GetActionStrength("up") - Input.GetActionStrength("down");
+        VerticalInput = Input.GetActionStrength("ui_up") - Input.GetActionStrength("ui_down");
         
     private void CheckForJumpInput()
     {

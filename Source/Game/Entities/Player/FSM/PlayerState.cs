@@ -1,26 +1,24 @@
-﻿using Tools;
+﻿using Godot;
+using Tools;
 
 namespace Game;
 
 public class PlayerState:State
 {
-    protected Player player;
-    protected PlayerStateMachine playerFSM;
-    protected PlayerData playerData;
+    protected IPlayer Player { get;}
+
     protected string animName;
 
-    public PlayerState(Player player, PlayerStateMachine playerFSM, PlayerData playerData, string animName)
+    protected PlayerState(IPlayer player, string animName)
     {
-        this.player = player;
-        this.playerFSM = playerFSM;
-        this.playerData = playerData;
+        Player = player;
         this.animName = animName;
     }
 
     public override void Enter()
     {
         base.Enter();
-        // GD.Print(animName);
+        GD.Print( animName + " state entered");
         // player.AnimationFinished = false;
         // player.Animator.Play(animName);
     }

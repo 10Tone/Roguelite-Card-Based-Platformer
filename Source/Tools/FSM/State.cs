@@ -2,7 +2,7 @@
 
 namespace Tools;
 
-public class State
+public class State: Object
 {
     protected float StartTime;
 
