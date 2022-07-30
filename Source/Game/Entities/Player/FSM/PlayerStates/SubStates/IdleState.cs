@@ -18,7 +18,7 @@ public class IdleState: GroundedState
         base.PhysicsUpdate(delta);
         if (Player.InputHandler.HorizontalInput != 0f)
         {
-            Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.MOVE]);
+            Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.Move]);
         }
     }
 

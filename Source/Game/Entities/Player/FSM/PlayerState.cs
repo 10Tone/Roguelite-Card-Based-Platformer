@@ -7,18 +7,18 @@ public class PlayerState:State
 {
     protected IPlayer Player { get;}
 
-    protected string animName;
+    protected string AnimName;
 
     protected PlayerState(IPlayer player, string animName)
     {
         Player = player;
-        this.animName = animName;
+        this.AnimName = animName;
     }
 
     public override void Enter()
     {
         base.Enter();
-        GD.Print( animName + " state entered");
+        GD.Print( AnimName + " state entered");
         // player.AnimationFinished = false;
         // player.Animator.Play(animName);
     }

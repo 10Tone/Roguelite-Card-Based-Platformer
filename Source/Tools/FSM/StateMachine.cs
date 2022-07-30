@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.PlayerStates;
-using Godot;
+﻿using Godot;
 
 namespace Tools;
 
-public class StateMachine
+public class StateMachine: Object
 {
     public State CurrentState { get; private set; }
 
     public void Initialize(State startingState)
     {
         CurrentState = startingState;
+        if(CurrentState is null){GD.PushWarning("CurrentState is null!");
+            return;
+        }
         CurrentState.Enter();
     }
 
     public virtual void ChangeState(State newState)
     {
+        if(newState is null){GD.PushWarning("NewState is null!");
+            return;
+        }
         CurrentState.Exit();
         CurrentState = newState;
         CurrentState.Enter();

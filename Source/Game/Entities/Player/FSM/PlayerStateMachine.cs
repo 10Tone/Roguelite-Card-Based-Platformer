@@ -6,6 +6,6 @@ namespace Game;
 
 public class PlayerStateMachine: StateMachine
 {
-    public Godot.Collections.Dictionary<PlayerStates.PlayerStates, State> States = new Godot.Collections.Dictionary<PlayerStates.PlayerStates, State>();
+    public Godot.Collections.Dictionary<PlayerStates.PlayerStates, State> States = new();
 }
 
