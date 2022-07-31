@@ -1,8 +1,8 @@
 ﻿namespace Game.PlayerStates;
 
-public class GroundedState: PlayerState
+public class NotGroundedState: PlayerState
 {
-    public GroundedState(IPlayer player, string animName) : base(player, animName)
+    public NotGroundedState(IPlayer player, string animName) : base(player, animName)
     {
     }
 
@@ -24,9 +24,9 @@ public class GroundedState: PlayerState
     public override void PhysicsUpdate(float delta)
     {
         base.PhysicsUpdate(delta);
-        if (Player.InputHandler.JumpInput && Player.IsGrounded)
+        if (Player.IsGrounded)
         {
-            Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.Jump]);
+            Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.Idle]);
         }
     }
 
@@ -34,6 +34,4 @@ public class GroundedState: PlayerState
     {
         base.DoChecks();
     }
-
-
 }

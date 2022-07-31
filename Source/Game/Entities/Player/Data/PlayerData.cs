@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using AutoLoads;
+using Godot;
 
 namespace Game;
 

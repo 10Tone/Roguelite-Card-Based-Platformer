@@ -20,6 +20,10 @@ public class IdleState: GroundedState
         {
             Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.Move]);
         }
+
+        var motion = Player.Motion;
+        motion.x = Mathf.Lerp(motion.x, 0, Player.PlayerData.Friction);
+        Player.Motion = motion;
     }
 
     public override void DoChecks()

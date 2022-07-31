@@ -2,5 +2,5 @@
 
 public enum PlayerStates
 {
-    Idle, Move
+    Idle, Move, Jump
 }

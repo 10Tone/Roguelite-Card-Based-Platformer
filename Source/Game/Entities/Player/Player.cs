@@ -12,12 +12,15 @@ public class Player : KinematicBody2D, IPlayer
     public PlayerStateMachine PlayerStateMachine { get; set; }
     public PlayerData PlayerData { get; set; }
     public PlayerInputHandler InputHandler { get; set; }
-    
+    public Vector2 Motion { get; set; }
+    public bool IsGrounded { get; set; }
+
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
     
     private IdleState _idleState;
     private MoveState _moveState;
+    private JumpState _jumpState;
 
     public override void _EnterTree()
     {
@@ -45,6 +48,10 @@ public class Player : KinematicBody2D, IPlayer
     public override void _PhysicsProcess(float delta)
     {
         PlayerStateMachine.CurrentState.PhysicsUpdate(delta);
+        IsGrounded = IsOnFloor();
+        var motion = Motion;
+        motion.y += PlayerData.Gravity * delta;
+        Motion = MoveAndSlide(motion, Vector2.Up, false, 4, 0f);
        
     }
 
@@ -52,6 +59,7 @@ public class Player : KinematicBody2D, IPlayer
     {
         PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Idle, _idleState = new IdleState(this, PlayerStates.PlayerStates.Idle.ToString()));
         PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Move, _moveState = new MoveState(this, PlayerStates.PlayerStates.Move.ToString()));
+        PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Jump, _jumpState = new JumpState(this, PlayerStates.PlayerStates.Jump.ToString()));
         PlayerStateMachine.Initialize(_idleState);
         
     }
