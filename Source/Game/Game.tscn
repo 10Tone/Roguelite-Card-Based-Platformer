@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Source/Game/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://Source/Game/Entities/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Content Assets/TileSets/Mossy - TileSet - 128grid.png" type="Texture" id=3]
+[ext_resource path="res://Source/Game/World/WorldBuilding/BuildGrid.cs" type="Script" id=4]
+[ext_resource path="res://Source/Game/World/WorldBuilding/BuildingBlocks/TestBuildingBlock.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 128, 128, 32, 128, 32, 32, 128, 32 )
@@ -111,6 +113,8 @@ points = PoolVector2Array( 96, 96, 0, 96, 0, 0, 96, 0 )
 } ]
 0/z_index = 0
 
+[sub_resource type="TileSet" id=11]
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -124,3 +128,13 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( 393217, 0, 0, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 0, 1, 393222, 0, 1, 393223, 0, 1, 393224, 0, 1, 393225, 0, 2, 458753, 0, 131072, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131073, 458760, 0, 131073, 458761, 0, 131074, 524298, 0, 0, 524299, 0, 1, 524300, 0, 1, 524301, 0, 1, 524302, 0, 1, 524303, 0, 1, 524304, 0, 1, 524305, 0, 1, 524306, 0, 1, 524307, 0, 2, 589834, 0, 131072, 589835, 0, 131073, 589836, 0, 131073, 589837, 0, 131073, 589838, 0, 131073, 589839, 0, 131073, 589840, 0, 131073, 589841, 0, 131073, 589842, 0, 131073, 589843, 0, 131074 )
+
+[node name="BuildGrid" type="TileMap" parent="World"]
+tile_set = SubResource( 11 )
+cell_size = Vector2( 128, 128 )
+cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
+cell_tile_origin = 1
+format = 1
+tile_data = PoolIntArray( 131077, 1, 0, 196621, 0, 0, 262155, 0, 0, 393230, 1, 0, 393234, 0, 0 )
+script = ExtResource( 4 )
+_buildingBlockPath = ExtResource( 5 )
