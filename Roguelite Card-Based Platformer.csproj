@@ -5,7 +5,7 @@
     <LangVersion>10</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Source\Game\GameUI" />
+    <Folder Include="Source\Game\GameUI\BuildUI" />
     <Folder Include="Source\Game\World" />
   </ItemGroup>
 </Project>

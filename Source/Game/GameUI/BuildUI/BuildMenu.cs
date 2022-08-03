@@ -2,7 +2,7 @@ using Godot;
 
 namespace Game;
 
-public class BuildingBlock : StaticBody2D
+public class BuildMenu : Control
 {
     // Declare member variables here. Examples:
     // private int a = 2;
