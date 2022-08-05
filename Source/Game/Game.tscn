@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Source/Game/GameManager.cs" type="Script" id=1]
 [ext_resource path="res://Source/Game/Entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Source/Game/World/WorldBuilding/BuildingBlockTest/TestBuildingBlock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Content Assets/Sprites/grid_128x.png" type="Texture" id=6]
 [ext_resource path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Source/Game/LevelValueCalculator.cs" type="Script" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 128, 128, 32, 128, 32, 32, 128, 32 )
@@ -151,3 +152,6 @@ region_rect = Rect2( 128, 128, 2560, 1440 )
 [node name="BuildUI" parent="." instance=ExtResource( 7 )]
 
 [node name="GameplayUI" type="CanvasLayer" parent="."]
+
+[node name="LevelValueCalculator" type="Node" parent="."]
+script = ExtResource( 8 )

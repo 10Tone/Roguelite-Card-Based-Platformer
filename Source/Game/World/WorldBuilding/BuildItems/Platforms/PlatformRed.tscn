@@ -8,6 +8,7 @@ extents = Vector2( 64, 64 )
 
 [node name="PlatformRed" type="StaticBody2D"]
 script = ExtResource( 2 )
+BuildItemValue = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

@@ -9,4 +9,3 @@ script = ExtResource( 3 )
 Name = "PlatformBlue"
 Icon = ExtResource( 1 )
 Scene = ExtResource( 2 )
-BuildItemType = 0

@@ -9,6 +9,7 @@ extents = Vector2( 64, 64 )
 [node name="PlatformBlue" type="StaticBody2D"]
 input_pickable = true
 script = ExtResource( 2 )
+BuildItemValue = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

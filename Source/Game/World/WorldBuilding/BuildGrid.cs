@@ -45,11 +45,15 @@ public class BuildGrid : TileMap
         {
             if (cell < 0) { return;}
             GD.Print("remove block");
-            var item = _buildedItems[tilePos];
+            var blockInstance = _buildedItems[tilePos];
             // item.CallDeferred("QueueFree");
-            item.QueueFree();
+            blockInstance.QueueFree();
             _buildedItems.Remove(tilePos);
             SetCellv(tilePos, -1);
+            
+            var item = (IBuildItem)blockInstance;
+            // GD.Print(item.BuildItemValue);
+            _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
         }
 
         else if (eventMouseButton.ButtonIndex == 1)
@@ -65,6 +69,10 @@ public class BuildGrid : TileMap
             AddChild(blockInstance);
             SetCellv(tilePos, 0);
             _buildedItems.Add(tilePos, blockInstance);
+
+            var item = (IBuildItem)blockInstance;
+            // GD.Print(item.BuildItemValue);
+            _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
         }
         
         
