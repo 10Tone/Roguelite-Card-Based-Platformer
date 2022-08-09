@@ -32,6 +32,7 @@ public class Player : KinematicBody2D, IPlayer
 
     public override void _Ready()
     {
+        AddToGroup("Player");
         PlayerData = _playerData;
         if(PlayerData is null) {GD.PushWarning("PlayerData is null!");}
         InputHandler = GetNode(_inputHandlerPath) as PlayerInputHandler;
