@@ -20,4 +20,10 @@ public class GlobalEvents : Node
 
     [Signal]
     public delegate void LevelValueUpdated(int value);
+
+    [Signal]
+    public delegate void GameStateEntered(GameStates gameState);
+
+    [Signal]
+    public delegate void GameModeButtonPressed(GameStates gameState);
 }

@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Source\Game\GameUI\BuildUI" />
+    <Folder Include="Source\Game\Interactables" />
     <Folder Include="Source\Game\World" />
   </ItemGroup>
 </Project>
