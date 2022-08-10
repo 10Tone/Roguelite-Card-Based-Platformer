@@ -85,7 +85,7 @@ public class Player : KinematicBody2D, IPlayer
     private void MoveBackToStartPosition()
     {
         // TEMP
-        GlobalPosition = new Vector2(456, 1064);
+        GlobalPosition = new Vector2(640, 1560);
     }
     
 }
