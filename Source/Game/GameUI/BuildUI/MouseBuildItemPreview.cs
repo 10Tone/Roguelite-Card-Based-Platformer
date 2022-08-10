@@ -17,22 +17,22 @@ public class MouseBuildItemPreview : TextureRect
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
         _globalEvents.Connect(nameof(GlobalEvents.BuildItemButtonClicked), this, nameof(OnBuildItemButtonClicked));
-    }
-
-    public override void _Ready()
-    {
-        base._Ready();
-        Texture = null;
+        _globalEvents.Connect(nameof(GlobalEvents.GameStateEntered), this, nameof(ResetTextureToNull));
     }
 
     public override void _Process(float delta)
-  {
+    {
       RectPosition = GetViewport().GetMousePosition() + _offSet;
-  }
+    }
 
     private void OnBuildItemButtonClicked(BuildItemResource buildItemResource)
     {
         Texture = buildItemResource.Icon;
+    }
+
+    private void ResetTextureToNull(GameStates gameState)
+    {
+        Texture = null;
     }
     
 }

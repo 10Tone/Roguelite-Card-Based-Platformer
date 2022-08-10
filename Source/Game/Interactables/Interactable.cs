@@ -16,12 +16,17 @@ public class Interactable: Area2D
         Connect("body_entered", this, nameof(OnBodyEntered));
     }
 
-    protected virtual void OnBodyEntered(Node _body)
+    private void OnBodyEntered(Node _body)
     {
         if (_body is KinematicBody2D && _body.IsInGroup("Player"))
         {
             var player = _body as IPlayer;
-            
+            BodyEnteredAction(player);
         }
+    }
+
+    protected virtual void BodyEnteredAction(IPlayer player)
+    {
+        
     }
 }

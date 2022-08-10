@@ -20,6 +20,7 @@ public class GameManager : Node2D
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
 
         _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressed), this, nameof(OnGameModeButtonPressed));
+        _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevel), this, nameof(OnPlayerFinishedLevel));
     }
 
     public override void _Ready()
@@ -59,5 +60,10 @@ public class GameManager : Node2D
                 throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
         }
         
+    }
+
+    private void OnPlayerFinishedLevel()
+    {
+        _gameStateMachine.ChangeState(_buildModeState);
     }
 }

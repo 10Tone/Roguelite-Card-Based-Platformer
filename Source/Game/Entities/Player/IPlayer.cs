@@ -10,4 +10,4 @@ public interface IPlayer
     PlayerInputHandler InputHandler { get; set; }
     Vector2 Motion { get; set; }
     bool IsGrounded { get; set; }
-}
+    }

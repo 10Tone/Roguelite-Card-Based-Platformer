@@ -1,3 +1,4 @@
+using System;
 using AutoLoads;
 using Game.PlayerStates;
 using Godot;
@@ -28,6 +29,8 @@ public class Player : KinematicBody2D, IPlayer
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
         _playerData = (PlayerData)GD.Load("res://Source/Game/Entities/Player/Data/PlayerData.tres");
+
+        _globalEvents.Connect(nameof(GlobalEvents.GameStateEntered), this, nameof(OnGameStateEntered));
     }
 
     public override void _Ready()
@@ -63,6 +66,26 @@ public class Player : KinematicBody2D, IPlayer
         PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Jump, _jumpState = new JumpState(this, PlayerStates.PlayerStates.Jump.ToString()));
         PlayerStateMachine.Initialize(_idleState);
         
+    }
+
+    private void OnGameStateEntered(GameStates gameState)
+    {
+        switch (gameState)
+        {
+            case GameStates.PlayMode:
+                break;
+            case GameStates.BuildMode:
+                MoveBackToStartPosition();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+        }
+    }
+
+    private void MoveBackToStartPosition()
+    {
+        // TEMP
+        GlobalPosition = new Vector2(456, 1064);
     }
     
 }

@@ -26,4 +26,7 @@ public class GlobalEvents : Node
 
     [Signal]
     public delegate void GameModeButtonPressed(GameStates gameState);
+
+    [Signal]
+    public delegate void PlayerFinishedLevel();
 }
