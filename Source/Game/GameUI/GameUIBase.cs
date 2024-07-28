@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using AutoLoads;
 using Godot;
 
 namespace Game;
 
-public class GameUIBase : CanvasLayer
+public partial class GameUIBase : CanvasLayer
 {
     [Export()] private NodePath _gameModeButtonPath;
     [Export()] protected GameStates GameState;
@@ -19,13 +19,20 @@ public class GameUIBase : CanvasLayer
     {
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
-        _globalEvents.Connect(nameof(GlobalEvents.GameStateEntered), this, nameof(OnGameStateEntered));
+        // _globalEvents.Connect(nameof(GlobalEvents.GameStateEnteredEventHandler), new Callable(this, nameof(OnGameStateEntered)));
+        _globalEvents.GameStateEntered += OnGameStateEntered;
     }
 
     public override void _Ready()
     {
         _gameModeButton = GetNode(_gameModeButtonPath) as Button;
-        _gameModeButton?.Connect("pressed", this, nameof(OnGameModeButtonPressed));
+        // _gameModeButton?.Connect("pressed", new Callable(this, nameof(OnGameModeButtonPressed)));
+        if(_gameModeButton == null) 
+        {
+            GD.PushWarning("GameModeButton is null!");
+            return;
+        }
+        _gameModeButton.Pressed += OnGameModeButtonPressed;
         GD.Print("UI: " + GameState);
     }
 
@@ -44,6 +51,6 @@ public class GameUIBase : CanvasLayer
 
     protected void OnGameModeButtonPressed()
     {
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameModeButtonPressed), GameState);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.GameModeButtonPressed), (int)GameState);
     }
 }

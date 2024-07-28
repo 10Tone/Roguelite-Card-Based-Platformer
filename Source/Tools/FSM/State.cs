@@ -1,15 +1,15 @@
-﻿using Godot;
+using Godot;
 
 namespace Tools;
 
-public class State: Object
+public partial class State: GodotObject
 {
     protected float StartTime;
 
     public virtual void Enter()
     {
         DoChecks();
-        StartTime = OS.GetTicksUsec();
+        StartTime = Time.GetTicksUsec();
     }
 
     public virtual void Exit()
@@ -17,12 +17,12 @@ public class State: Object
             
     }
 
-    public virtual void LogicUpdate(float delta)
+    public virtual void LogicUpdate(double delta)
     {
             
     }
 
-    public virtual void PhysicsUpdate(float delta)
+    public virtual void PhysicsUpdate(double delta)
     {
         DoChecks();
     }

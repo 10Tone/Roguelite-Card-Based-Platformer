@@ -1,9 +1,9 @@
-﻿using AutoLoads;
+using AutoLoads;
 using Godot;
 
 namespace Game;
 
-public class LevelValueCalculator: Node
+public partial class LevelValueCalculator: Node
 {
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
@@ -15,8 +15,11 @@ public class LevelValueCalculator: Node
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
 
-        _globalEvents.Connect(nameof(GlobalEvents.ItemBuild), this, nameof(OnItemBuild));
-        _globalEvents.Connect(nameof(GlobalEvents.ItemRemoved), this, nameof(OnItemRemoved));
+        // _globalEvents.Connect(nameof(GlobalEvents.ItemBuildEventHandler), new Callable(this, nameof(OnItemBuild)));
+        // _globalEvents.Connect(nameof(GlobalEvents.ItemRemovedEventHandler), new Callable(this, nameof(OnItemRemoved)));
+        
+        _globalEvents.ItemBuild += OnItemBuild;
+        _globalEvents.ItemRemoved += OnItemRemoved;
     }
 
     private void OnItemBuild(int value)

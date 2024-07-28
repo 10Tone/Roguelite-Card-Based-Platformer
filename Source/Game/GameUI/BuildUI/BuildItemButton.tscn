@@ -4,9 +4,9 @@
 [ext_resource path="res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/PlatformRed.tres" type="Resource" id=2]
 
 [node name="BuildItemButton" type="TextureRect"]
-margin_right = 128.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 128, 128 )
+offset_right = 128.0
+offset_bottom = 128.0
+custom_minimum_size = Vector2( 128, 128 )
 stretch_mode = 1
 script = ExtResource( 1 )
 _buildItemResource = ExtResource( 2 )

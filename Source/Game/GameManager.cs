@@ -4,7 +4,7 @@ using Godot;
 
 namespace Game;
 
-public class GameManager : Node2D
+public partial class GameManager : Node2D
 {
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
@@ -19,8 +19,10 @@ public class GameManager : Node2D
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
 
-        _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressed), this, nameof(OnGameModeButtonPressed));
-        _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevel), this, nameof(OnPlayerFinishedLevel));
+        // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
+        // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
+        _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
+        _globalEvents.PlayerFinishedLevel += OnPlayerFinishedLevel;
     }
 
     public override void _Ready()
@@ -33,13 +35,13 @@ public class GameManager : Node2D
         _gameStateMachine.Initialize((_buildModeState));
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         base._Process(delta);
         _gameStateMachine.CurrentState.LogicUpdate(delta);
     }
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
         _gameStateMachine.CurrentState.PhysicsUpdate(delta);

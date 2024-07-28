@@ -1,9 +1,9 @@
-﻿using AutoLoads;
+using AutoLoads;
 using Godot;
 
 namespace Game;
 
-public class PlayerData : Resource
+public partial class PlayerData : Resource
 {
     [Export] public float Acceleration = 512;
     [Export] public float AirResistance = 0.02f;

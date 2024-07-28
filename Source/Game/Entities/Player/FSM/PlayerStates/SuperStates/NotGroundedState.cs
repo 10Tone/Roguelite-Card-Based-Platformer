@@ -1,6 +1,6 @@
-﻿namespace Game.PlayerStates;
+namespace Game.PlayerStates;
 
-public class NotGroundedState: PlayerState
+public partial class NotGroundedState: PlayerState
 {
     public NotGroundedState(IPlayer player, string animName) : base(player, animName)
     {
@@ -16,12 +16,12 @@ public class NotGroundedState: PlayerState
         base.Exit();
     }
 
-    public override void LogicUpdate(float delta)
+    public override void LogicUpdate(double delta)
     {
         base.LogicUpdate(delta);
     }
 
-    public override void PhysicsUpdate(float delta)
+    public override void PhysicsUpdate(double delta)
     {
         base.PhysicsUpdate(delta);
         if (Player.IsGrounded)

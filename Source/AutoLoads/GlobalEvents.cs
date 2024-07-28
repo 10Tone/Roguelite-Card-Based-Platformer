@@ -4,29 +4,29 @@ using Godot;
 
 namespace AutoLoads;
 
-public class GlobalEvents : Node
+public partial class GlobalEvents : Node
 {
     [Signal]
-    public delegate void GameReady();
+    public delegate void GameReadyEventHandler();
 
     [Signal]
-    public delegate void BuildItemButtonClicked(BuildItemResource buildItemResource);
+    public delegate void BuildItemButtonClickedEventHandler(BuildItemResource buildItemResource);
 
     [Signal]
-    public delegate void ItemBuild(int value);
+    public delegate void ItemBuildEventHandler(int value);
 
     [Signal]
-    public delegate void ItemRemoved(int value);
+    public delegate void ItemRemovedEventHandler(int value);
 
     [Signal]
-    public delegate void LevelValueUpdated(int value);
+    public delegate void LevelValueUpdatedEventHandler(int value);
 
     [Signal]
-    public delegate void GameStateEntered(GameStates gameState);
+    public delegate void GameStateEnteredEventHandler(GameStates gameState);
 
     [Signal]
-    public delegate void GameModeButtonPressed(GameStates gameState);
+    public delegate void GameModeButtonPressedEventHandler(GameStates gameState);
 
     [Signal]
-    public delegate void PlayerFinishedLevel();
+    public delegate void PlayerFinishedLevelEventHandler();
 }

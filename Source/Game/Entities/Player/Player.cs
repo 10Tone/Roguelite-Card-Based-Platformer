@@ -5,7 +5,7 @@ using Godot;
 
 namespace Game;
 
-public class Player : KinematicBody2D, IPlayer
+public partial class Player : CharacterBody2D, IPlayer
 {
     [Export()] private PlayerData _playerData;
     [Export()] private NodePath _inputHandlerPath;
@@ -30,7 +30,8 @@ public class Player : KinematicBody2D, IPlayer
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
         _playerData = (PlayerData)GD.Load("res://Source/Game/Entities/Player/Data/PlayerData.tres");
 
-        _globalEvents.Connect(nameof(GlobalEvents.GameStateEntered), this, nameof(OnGameStateEntered));
+        // _globalEvents.Connect(nameof(GlobalEvents.GameStateEnteredEventHandler), new Callable(this, nameof(OnGameStateEntered)));
+        _globalEvents.GameStateEntered += OnGameStateEntered;
     }
 
     public override void _Ready()
@@ -44,18 +45,20 @@ public class Player : KinematicBody2D, IPlayer
         AddStates();
     }
     
-    public override void _Process(float delta) 
+    public override void _Process(double delta) 
     {
         PlayerStateMachine.CurrentState.LogicUpdate(delta);
     }
 
-    public override void _PhysicsProcess(float delta)
+    public override void _PhysicsProcess(double delta)
     {
         PlayerStateMachine.CurrentState.PhysicsUpdate(delta);
         IsGrounded = IsOnFloor();
         var motion = Motion;
-        motion.y += PlayerData.Gravity * delta;
-        Motion = MoveAndSlide(motion, Vector2.Up, false, 4, 0f);
+        motion.Y += PlayerData.Gravity * (float)delta;
+        Motion = motion;
+        MoveAndSlide();
+        
        
     }
 

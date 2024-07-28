@@ -3,7 +3,7 @@ using System;
 using AutoLoads;
 using Game;
 
-public class LevelGoal : Interactable
+public partial class LevelGoal : Interactable
 {
     protected override void BodyEnteredAction(IPlayer player)
     {

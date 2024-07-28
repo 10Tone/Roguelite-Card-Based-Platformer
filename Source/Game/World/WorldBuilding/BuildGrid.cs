@@ -4,7 +4,7 @@ using Godot.Collections;
 
 namespace Game.WorldBuilding;
 
-public class BuildGrid : TileMap
+public partial class BuildGrid : TileMap
 {
     [Export()] private PackedScene _buildingBlockPath;
 
@@ -29,55 +29,48 @@ public class BuildGrid : TileMap
     }
 
     public override void _UnhandledInput(InputEvent @event)
+{
+    base._UnhandledInput(@event);
+
+    if (@event is not InputEventMouseButton eventMouseButton) { return; }
+
+    if (!eventMouseButton.Pressed) { return; }
+    
+    var mousePos = GetViewport().GetMousePosition();
+    var tilePos = LocalToMap(mousePos);
+
+    var cell = GetCellAtlasCoords(0, tilePos); // Changed from GetCellv
+
+    if (eventMouseButton.ButtonIndex == MouseButton.Right) // Changed from 2 to MouseButton.Right
     {
-        base._UnhandledInput(@event);
-
-        if (@event is not InputEventMouseButton eventMouseButton) { return;}
-
-        if (!eventMouseButton.Pressed) {return;}
+        if (cell == Vector2I.Zero) { return; } // Changed comparison
+        GD.Print("remove block");
+        var blockInstance = _buildedItems[tilePos];
+        blockInstance.QueueFree();
+        _buildedItems.Remove(tilePos);
+        SetCell(0, tilePos); // Changed from SetCellv
         
-        var mousePos = GetViewport().GetMousePosition();
-        var tilePos = WorldToMap(mousePos);
-
-        var cell = GetCellv(tilePos);
-
-        if (eventMouseButton.ButtonIndex == 2)
-        {
-            if (cell < 0) { return;}
-            GD.Print("remove block");
-            var blockInstance = _buildedItems[tilePos];
-            // item.CallDeferred("QueueFree");
-            blockInstance.QueueFree();
-            _buildedItems.Remove(tilePos);
-            SetCellv(tilePos, -1);
-            
-            var item = (IBuildItem)blockInstance;
-            // GD.Print(item.BuildItemValue);
-            _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
-        }
-
-        else if (eventMouseButton.ButtonIndex == 1)
-        {
-            if (cell >= 0) { GD.Print("cell is not empty");return;}
-            var blockInstance = _globalVariables.SelectedBuildItem?.Scene.Instance() as Node2D;
-            if (blockInstance is null)
-            {
-                GD.Print("BlockInstance is null");
-                return;
-            }
-            blockInstance.Position = MapToWorld(tilePos) * Scale;
-            AddChild(blockInstance);
-            SetCellv(tilePos, 0);
-            _buildedItems.Add(tilePos, blockInstance);
-
-            var item = (IBuildItem)blockInstance;
-            // GD.Print(item.BuildItemValue);
-            _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
-        }
-        
-        
-        
+        var item = (IBuildItem)blockInstance;
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
     }
+    else if (eventMouseButton.ButtonIndex == MouseButton.Left) // Changed from 1 to MouseButton.Left
+    {
+        if (cell != Vector2I.Zero) { GD.Print("cell is not empty"); return; } // Changed comparison
+        var blockInstance = _globalVariables.SelectedBuildItem?.Scene.Instantiate() as Node2D; // Changed from Instance to Instantiate
+        if (blockInstance is null)
+        {
+            GD.Print("BlockInstance is null");
+            return;
+        }
+        blockInstance.Position = ToGlobal(MapToLocal(tilePos)) * Scale; // Changed from MapToWorld
+        AddChild(blockInstance);
+        SetCell(0, tilePos, 0); // Changed from SetCellv
+        _buildedItems.Add(tilePos, blockInstance);
+
+        var item = (IBuildItem)blockInstance;
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
+    }
+}       
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)

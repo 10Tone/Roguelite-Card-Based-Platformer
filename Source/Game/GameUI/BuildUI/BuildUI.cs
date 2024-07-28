@@ -3,7 +3,7 @@ using System;
 using AutoLoads;
 using Game;
 
-public class BuildUI : GameUIBase
+public partial class BuildUI : GameUIBase
 {
     protected override void OnGameStateEntered(GameStates gameState)
     {

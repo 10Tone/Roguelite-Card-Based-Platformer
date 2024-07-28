@@ -4,7 +4,7 @@ using Godot;
 
 namespace Game;
 
-public class BuildItemButton : TextureRect
+public partial class BuildItemButton : TextureRect
 {
     [Export()] private BuildItemResource _buildItemResource;
     private GlobalEvents _globalEvents;
@@ -35,7 +35,7 @@ public class BuildItemButton : TextureRect
     public void _on_BuildItemButton_gui_input(InputEvent @event)
     {
         if (@event is not InputEventMouseButton eventMouseButton) return;
-        if (eventMouseButton.Pressed && eventMouseButton.ButtonIndex == 1)
+        if (eventMouseButton.Pressed && eventMouseButton.ButtonIndex == MouseButton.Left)
         {
             _globalEvents.EmitSignal(nameof(GlobalEvents.BuildItemButtonClicked), _buildItemResource);
             _globalVariables.SelectedBuildItem = _buildItemResource;

@@ -1,10 +1,13 @@
-﻿using AutoLoads;
+using AutoLoads;
 using Godot;
 
 namespace Game;
 
-public class PlayModeState: GameState
+public partial class PlayModeState: GameState
 {
+    public PlayModeState() : base(null, null)
+    {
+    }
     public PlayModeState(GlobalEvents globalEvents, GlobalVariables globalVariables) : base(globalEvents, globalVariables)
     {
     }
@@ -14,26 +17,26 @@ public class PlayModeState: GameState
         base.Enter();
         GD.Print("BuildMode entered");
         GlobalVariables.PlayerInputEnabled = true;
-        GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), GameStates.PlayMode);
+        GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), (int)GameStates.PlayMode);
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
-    public override void LogicUpdate(float delta)
-    {
-        base.LogicUpdate(delta);
-    }
-
-    public override void PhysicsUpdate(float delta)
-    {
-        base.PhysicsUpdate(delta);
-    }
-
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
+    // public override void Exit()
+    // {
+    //     base.Exit();
+    // }
+    //
+    // public override void LogicUpdate(double delta)
+    // {
+    //     base.LogicUpdate(delta);
+    // }
+    //
+    // public override void PhysicsUpdate(double delta)
+    // {
+    //     base.PhysicsUpdate(delta);
+    // }
+    //
+    // public override void DoChecks()
+    // {
+    //     base.DoChecks();
+    // }
 }

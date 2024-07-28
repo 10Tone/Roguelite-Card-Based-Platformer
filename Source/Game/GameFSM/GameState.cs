@@ -1,9 +1,9 @@
-﻿using AutoLoads;
+using AutoLoads;
 using Tools;
 
 namespace Game;
 
-public class GameState: State
+public partial class GameState: State
 {
    protected GlobalEvents GlobalEvents { get; }
    protected GlobalVariables GlobalVariables { get; }
