@@ -1,9 +1,9 @@
-﻿using AutoLoads;
+using AutoLoads;
 using Godot;
 
 namespace Game;
 
-public class PlayerInputHandler : Node
+public partial class PlayerInputHandler : Node
 {
     public float HorizontalInput { get; private set; }
     public float VerticalInput { get; private set; }
@@ -20,7 +20,7 @@ public class PlayerInputHandler : Node
         _globalVariables = _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
     }
 
-    public override void _PhysicsProcess (float delta)
+    public override void _PhysicsProcess (double delta)
     {
         base._PhysicsProcess(delta);
         if (!_globalVariables.PlayerInputEnabled) return;
@@ -41,7 +41,7 @@ public class PlayerInputHandler : Node
         {
             JumpInput = true;
             JumpInputStop = false;
-            _jumpInputStartTime = OS.GetTicksUsec();
+            _jumpInputStartTime = Time.GetTicksUsec();
         }
 
         if (Input.IsActionJustReleased("jump"))
@@ -54,7 +54,7 @@ public class PlayerInputHandler : Node
 
     private void CheckJumpInputHoldTime()
     {
-        if (OS.GetTicksUsec() >= _jumpInputStartTime + _inputHoldTime)
+        if (Time.GetTicksUsec() >= _jumpInputStartTime + _inputHoldTime)
         {
             JumpInput = false;
         }

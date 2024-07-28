@@ -1,9 +1,9 @@
-﻿using Godot;
+using Godot;
 using Tools;
 
 namespace Game;
 
-public class PlayerState:State
+public partial class PlayerState:State
 {
     protected IPlayer Player { get;}
 
@@ -23,7 +23,7 @@ public class PlayerState:State
         // player.Animator.Play(animName);
     }
 
-    public override void PhysicsUpdate(float delta)
+    public override void PhysicsUpdate(double delta)
     {
         base.PhysicsUpdate(delta);
     }

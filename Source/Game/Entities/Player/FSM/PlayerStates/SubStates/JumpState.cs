@@ -1,6 +1,6 @@
-﻿namespace Game.PlayerStates;
+namespace Game.PlayerStates;
 
-public class JumpState: NotGroundedState
+public partial class JumpState: NotGroundedState
 {
     public JumpState(IPlayer player, string animName) : base(player, animName)
     {
@@ -10,7 +10,7 @@ public class JumpState: NotGroundedState
     {
         base.Enter();
         var motion = Player.Motion;
-        motion.y = -Player.PlayerData.JumpForce;
+        motion.Y = -Player.PlayerData.JumpForce;
         Player.Motion = motion;
     }
 
@@ -19,12 +19,12 @@ public class JumpState: NotGroundedState
         base.Exit();
     }
 
-    public override void LogicUpdate(float delta)
+    public override void LogicUpdate(double delta)
     {
         base.LogicUpdate(delta);
     }
 
-    public override void PhysicsUpdate(float delta)
+    public override void PhysicsUpdate(double delta)
     {
         base.PhysicsUpdate(delta);
     }

@@ -1,7 +1,7 @@
 using AutoLoads;
 using Godot;
 
-public class MainManager : Node2D
+public partial class MainManager : Node2D
 {
    private GlobalEvents _globalEvents;
    private GlobalVariables _globalVariables;
@@ -10,7 +10,8 @@ public class MainManager : Node2D
    {
       _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
       _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
-      _globalEvents.Connect(nameof(GlobalEvents.GameReady), this, nameof(OnGameReady));
+      // _globalEvents.Connect(nameof(GlobalEvents.GameReadyEventHandler), new Callable(this, nameof(OnGameReady)));
+      _globalEvents.GameReady += OnGameReady;
    }
 
    private void OnGameReady()

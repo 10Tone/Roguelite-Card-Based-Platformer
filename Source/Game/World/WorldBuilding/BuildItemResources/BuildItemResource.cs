@@ -3,10 +3,10 @@ using Godot;
 
 namespace Game.WorldBuilding;
 
-public class BuildItemResource : Resource
+public partial class BuildItemResource : Resource
 {
   [Export()] public String Name { get; set; }
-  [Export()] public Texture Icon { get; set; }
+  [Export()] public Texture2D Icon { get; set; }
   [Export()] public PackedScene Scene { get; set; }
   
 }

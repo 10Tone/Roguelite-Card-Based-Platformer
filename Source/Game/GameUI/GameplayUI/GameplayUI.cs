@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using AutoLoads;
 using Godot;
 
 namespace Game.GameplayUI;
 
-public class GameplayUI : GameUIBase
+public partial class GameplayUI : GameUIBase
 {
     protected override void OnGameStateEntered(GameStates gameState)
     {

@@ -1,9 +1,9 @@
-﻿using AutoLoads;
+using AutoLoads;
 using Godot;
 
 namespace Game.PlayerStates;
 
-public class MoveState: GroundedState
+public partial class MoveState: GroundedState
 {
     public MoveState(IPlayer player, string animName) : base(player, animName)
     {
@@ -14,7 +14,7 @@ public class MoveState: GroundedState
         base.Enter();
     }
 
-    public override void PhysicsUpdate(float delta)
+    public override void PhysicsUpdate(double delta)
     {
         base.PhysicsUpdate(delta);
         if (Player.InputHandler.HorizontalInput == 0f)
@@ -24,11 +24,11 @@ public class MoveState: GroundedState
         Move(delta);
     }
     
-    private void Move(float delta)
+    private void Move(double delta)
     {
         var motion = Player.Motion;
-        motion.x += Player.InputHandler.HorizontalInput * Player.PlayerData.Acceleration;
-        motion.x = Mathf.Clamp(motion.x, -Player.PlayerData.MaxSpeed, Player.PlayerData.MaxSpeed);
+        motion.X += Player.InputHandler.HorizontalInput * Player.PlayerData.Acceleration;
+        motion.X = Mathf.Clamp(motion.X, -Player.PlayerData.MaxSpeed, Player.PlayerData.MaxSpeed);
         Player.Motion = motion;
     }
 
@@ -42,7 +42,7 @@ public class MoveState: GroundedState
         base.Exit();
     }
 
-    public override void LogicUpdate(float delta)
+    public override void LogicUpdate(double delta)
     {
         base.LogicUpdate(delta);
     }

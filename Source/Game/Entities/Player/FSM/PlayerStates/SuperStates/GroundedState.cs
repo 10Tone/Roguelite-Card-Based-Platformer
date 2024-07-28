@@ -1,6 +1,6 @@
-﻿namespace Game.PlayerStates;
+namespace Game.PlayerStates;
 
-public class GroundedState: PlayerState
+public partial class GroundedState: PlayerState
 {
     public GroundedState(IPlayer player, string animName) : base(player, animName)
     {
@@ -16,12 +16,12 @@ public class GroundedState: PlayerState
         base.Exit();
     }
 
-    public override void LogicUpdate(float delta)
+    public override void LogicUpdate(double delta)
     {
         base.LogicUpdate(delta);
     }
 
-    public override void PhysicsUpdate(float delta)
+    public override void PhysicsUpdate(double delta)
     {
         base.PhysicsUpdate(delta);
         if (Player.InputHandler.JumpInput && Player.IsGrounded)

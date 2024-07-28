@@ -1,9 +1,9 @@
-﻿using AutoLoads;
+using AutoLoads;
 using Godot;
 
 namespace Game;
 
-public class Interactable: Area2D
+public partial class Interactable: Area2D
 {
     protected GlobalEvents GlobalEvents;
     protected GlobalVariables GlobalVariables;
@@ -13,12 +13,12 @@ public class Interactable: Area2D
         GlobalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         GlobalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
 
-        Connect("body_entered", this, nameof(OnBodyEntered));
+        Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
     }
 
     private void OnBodyEntered(Node _body)
     {
-        if (_body is KinematicBody2D && _body.IsInGroup("Player"))
+        if (_body is CharacterBody2D && _body.IsInGroup("Player"))
         {
             var player = _body as IPlayer;
             BodyEnteredAction(player);

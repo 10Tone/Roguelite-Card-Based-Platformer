@@ -1,8 +1,8 @@
-﻿using Godot;
+using Godot;
 
 namespace Game.PlayerStates;
 
-public class IdleState: GroundedState
+public partial class IdleState: GroundedState
 {
     public IdleState(IPlayer player, string animName) : base(player, animName)
     {
@@ -13,7 +13,7 @@ public class IdleState: GroundedState
         base.Enter();
     }
 
-    public override void PhysicsUpdate(float delta)
+    public override void PhysicsUpdate(double delta)
     {
         base.PhysicsUpdate(delta);
         if (Player.InputHandler.HorizontalInput != 0f)
@@ -22,7 +22,7 @@ public class IdleState: GroundedState
         }
 
         var motion = Player.Motion;
-        motion.x = Mathf.Lerp(motion.x, 0, Player.PlayerData.Friction);
+        motion.X = Mathf.Lerp(motion.X, 0, Player.PlayerData.Friction);
         Player.Motion = motion;
     }
 
@@ -36,7 +36,7 @@ public class IdleState: GroundedState
         base.Exit();
     }
 
-    public override void LogicUpdate(float delta)
+    public override void LogicUpdate(double delta)
     {
         base.LogicUpdate(delta);
         

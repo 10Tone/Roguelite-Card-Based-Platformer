@@ -1,4 +1,4 @@
-﻿namespace Game.WorldBuilding;
+namespace Game.WorldBuilding;
 
 public enum BuildItemTypes
 {

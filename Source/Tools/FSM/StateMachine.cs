@@ -1,8 +1,8 @@
-﻿using Godot;
+using Godot;
 
 namespace Tools;
 
-public class StateMachine: Object
+public partial class StateMachine: GodotObject
 {
     public State CurrentState { get; private set; }
 

@@ -1,8 +1,8 @@
-﻿using Tools;
+using Tools;
 
 namespace Game;
 
-public class GameStateMachine: StateMachine
+public partial class GameStateMachine: StateMachine
 {
     
 }
