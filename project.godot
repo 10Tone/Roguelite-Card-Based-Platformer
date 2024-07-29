@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 
 GlobalEvents="*res://Source/AutoLoads/GlobalEvents.cs"
 GlobalVariables="*res://Source/AutoLoads/GlobalVariables.cs"
+DebugOverlay="*res://Source/Tools/Debug/DebugOverlay.cs"
 
 [display]
 

@@ -1,5 +1,7 @@
 using AutoLoads;
 using Godot;
+using Tools;
+
 
 public partial class MainManager : Node2D
 {
@@ -16,6 +18,7 @@ public partial class MainManager : Node2D
 
    private void OnGameReady()
    {
-      GD.Print("Game Loaded");
+      DebugOverlay.Instance.DebugPrint("Game Loaded");
+      // GD.Print("Game Loaded");
    }
 }
