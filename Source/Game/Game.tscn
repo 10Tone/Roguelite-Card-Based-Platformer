@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dr3tq0mlgnnah" path="res://Content Assets/Sprites/PlatformRed.png" id="3"]
 [ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildGrid.cs" id="4"]
 [ext_resource type="PackedScene" path="res://Source/Game/World/WorldBuilding/BuildingBlockTest/TestBuildingBlock.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://c5el1eqpdre2" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="7"]
 [ext_resource type="Script" path="res://Source/Game/LevelValueCalculator.cs" id="8"]
 [ext_resource type="Texture2D" uid="uid://buwu68a18inkv" path="res://Content Assets/Sprites/Background/Cave_Background.png" id="9"]
 [ext_resource type="PackedScene" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="10"]
@@ -90,27 +90,50 @@ script = ExtResource("4")
 _buildingBlockPath = ExtResource("5")
 
 [node name="BuildUI" parent="WorldBuilding" instance=ExtResource("7")]
-visible = false
 
 [node name="TextureRect" parent="WorldBuilding/BuildUI" index="0"]
 anchors_preset = 15
+offset_left = 0.0
+offset_right = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BuildMenu" parent="WorldBuilding/BuildUI" index="1"]
 layout_mode = 3
 anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="ColorRect" parent="WorldBuilding/BuildUI/BuildMenu" index="0"]
 visible = false
 layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 
 [node name="VBoxContainer" parent="WorldBuilding/BuildUI/BuildMenu" index="1"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -527.0
+offset_bottom = 1296.0
+grow_horizontal = 0
 
 [node name="TextureRect" parent="WorldBuilding/BuildUI/BuildMenu/VBoxContainer" index="0"]
 layout_mode = 2
 
 [node name="PlayButton" parent="WorldBuilding/BuildUI/BuildMenu/VBoxContainer/TextureRect" index="0"]
 layout_mode = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 128.0
+offset_bottom = 40.0
 
 [node name="HBoxContainer" parent="WorldBuilding/BuildUI/BuildMenu/VBoxContainer" index="1"]
 layout_mode = 2
@@ -119,7 +142,15 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="GridContainer" parent="WorldBuilding/BuildUI/BuildMenu/VBoxContainer/HBoxContainer/TextureRect" index="0"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = -384.0
+offset_right = 452.0
+offset_bottom = 384.0
+grow_vertical = 2
 
 [node name="BuildItemButton" parent="WorldBuilding/BuildUI/BuildMenu/VBoxContainer/HBoxContainer/TextureRect/GridContainer" index="0"]
 layout_mode = 2
