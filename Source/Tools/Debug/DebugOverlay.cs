@@ -29,6 +29,7 @@ namespace Tools
             _debugLabel = new Label();
             _debugLabel.Modulate = new Color(231, 221, 0);
             _debugLabel.Position = new Vector2(20, 20);
+            _debugLabel.AddThemeFontSizeOverride("font_size", 32);
             AddChild(_debugLabel);
         }
 
