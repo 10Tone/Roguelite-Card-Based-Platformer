@@ -9,9 +9,9 @@ public partial class JumpState: NotGroundedState
     public override void Enter()
     {
         base.Enter();
-        var motion = Player.Motion;
-        motion.Y = -Player.PlayerData.JumpForce;
-        Player.Motion = motion;
+        var velocity = Player.PlayerVelocity;
+        velocity.Y = -Player.PlayerData.JumpForce;
+        Player.PlayerVelocity = velocity;
     }
 
     public override void Exit()

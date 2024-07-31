@@ -16,6 +16,12 @@ public partial class Player : CharacterBody2D, IPlayer
     public PlayerInputHandler InputHandler { get; set; }
     public Vector2 Motion { get; set; }
     public bool IsGrounded { get; set; }
+    
+    public Vector2 PlayerVelocity
+    {
+        get => Velocity;
+        set => Velocity = value;
+    }
 
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;

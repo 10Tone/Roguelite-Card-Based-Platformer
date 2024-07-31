@@ -21,9 +21,9 @@ public partial class IdleState: GroundedState
             Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.Move]);
         }
 
-        var motion = Player.Motion;
-        motion.X = Mathf.Lerp(motion.X, 0, Player.PlayerData.Friction);
-        Player.Motion = motion;
+        var velocity = Player.PlayerVelocity;
+        velocity.X = Mathf.Lerp(velocity.X, 0, Player.PlayerData.Friction);
+        Player.PlayerVelocity = velocity;
     }
 
     public override void DoChecks()
