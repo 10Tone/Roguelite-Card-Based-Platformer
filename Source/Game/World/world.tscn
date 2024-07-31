@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://6iv7d7igmb8l"]
+
+[ext_resource type="Texture2D" uid="uid://dr3tq0mlgnnah" path="res://Content Assets/Sprites/PlatformRed.png" id="1_7203i"]
+[ext_resource type="Texture2D" uid="uid://buwu68a18inkv" path="res://Content Assets/Sprites/Background/Cave_Background.png" id="2_70pr5"]
+[ext_resource type="PackedScene" uid="uid://j7vmgqcomgld" path="res://Source/Game/Entities/Player/Player.tscn" id="3_4al3g"]
+[ext_resource type="PackedScene" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="4_be2hl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pk848"]
+texture = ExtResource("1_7203i")
+texture_region_size = Vector2i(128, 128)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(64, -64, -64, -64, -64, 64, 64, 64)
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 64, 64, 64, 64, -64, -64, -64)
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(64, 64, -64, 64, -64, -64, 64, -64)
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(64, -64, 64, 64, -64, 64, -64, -64)
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/6/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 64, -64, -64, 64, -64, 64, 64)
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+0:0/7/physics_layer_0/polygon_0/points = PackedVector2Array(64, 64, 64, -64, -64, -64, -64, 64)
+
+[sub_resource type="TileSet" id="1"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_pk848")
+
+[node name="World" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("1")
+format = 2
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_70pr5")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("3_4al3g")]
+position = Vector2(663, 1586)
+
+[node name="LevelGoal" parent="." instance=ExtResource("4_be2hl")]
+position = Vector2(3120, 312)
+
+[node name="CollisionShape2D" parent="LevelGoal" index="0"]
+position = Vector2(24, 56)
+
+[editable path="LevelGoal"]

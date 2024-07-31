@@ -16,7 +16,7 @@ public partial class PlayModeState: GameState
     public override void Enter()
     {
         base.Enter();
-        DebugOverlay.Instance.DebugPrint("BuildMode entered");
+        DebugOverlay.Instance.DebugPrint("PlayMode entered");
         GlobalVariables.PlayerInputEnabled = true;
         GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), (int)GameStates.PlayMode);
     }

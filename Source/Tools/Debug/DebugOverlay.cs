@@ -10,7 +10,7 @@ namespace Tools
 
         private Label _debugLabel;
         private List<string> _debugMessages = new List<string>();
-        private const int MaxMessages = 10;
+        private const int MaxMessages = 30;
 
         public override void _EnterTree()
         {

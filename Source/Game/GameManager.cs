@@ -33,7 +33,7 @@ public partial class GameManager : Node2D
         _playModeState = new PlayModeState(_globalEvents, _globalVariables);
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
         
-        _gameStateMachine.Initialize((_buildModeState));
+        _gameStateMachine.Initialize((_playModeState));
     }
 
     public override void _Process(double delta)

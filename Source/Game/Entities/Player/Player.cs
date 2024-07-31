@@ -2,6 +2,7 @@ using System;
 using AutoLoads;
 using Game.PlayerStates;
 using Godot;
+using Tools;
 
 namespace Game;
 
@@ -54,12 +55,10 @@ public partial class Player : CharacterBody2D, IPlayer
     {
         PlayerStateMachine.CurrentState.PhysicsUpdate(delta);
         IsGrounded = IsOnFloor();
-        var motion = Motion;
-        motion.Y += PlayerData.Gravity * (float)delta;
-        Motion = motion;
+        var velocity = Velocity;
+        velocity.Y += (float)delta * PlayerData.Gravity;
+        Velocity = velocity;
         MoveAndSlide();
-        
-       
     }
 
     private void AddStates()
