@@ -1,6 +1,7 @@
 using AutoLoads;
 using Game.WorldBuilding;
 using Godot;
+using Tools;
 
 namespace Game;
 
@@ -23,7 +24,7 @@ public partial class BuildItemButton : TextureRect
     public override void _Ready()
     {
         Texture = _buildItemResource.Icon;
-        GD.Print(_buildItemResource.Name);
+        DebugOverlay.Instance.DebugPrint($"Clicked {_buildItemResource.Name}");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

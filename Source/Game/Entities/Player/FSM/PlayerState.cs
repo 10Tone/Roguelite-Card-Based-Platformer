@@ -18,7 +18,7 @@ public partial class PlayerState:State
     public override void Enter()
     {
         base.Enter();
-        GD.Print( AnimName + " state entered");
+        DebugOverlay.Instance.DebugPrint(AnimName + " state entered");
         // player.AnimationFinished = false;
         // player.Animator.Play(animName);
     }

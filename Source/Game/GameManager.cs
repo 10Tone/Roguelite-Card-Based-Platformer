@@ -1,6 +1,7 @@
 using System;
 using AutoLoads;
 using Godot;
+using Tools;
 
 namespace Game;
 
@@ -49,7 +50,7 @@ public partial class GameManager : Node2D
 
     private void OnGameModeButtonPressed(GameStates currentGameState)
     {
-        GD.Print("received signal from UI " + currentGameState);
+        DebugOverlay.Instance.DebugPrint("received signal from UI " + currentGameState);
         switch (currentGameState)
         {
             case GameStates.PlayMode:

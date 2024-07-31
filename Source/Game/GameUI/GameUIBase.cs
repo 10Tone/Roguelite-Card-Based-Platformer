@@ -1,6 +1,7 @@
 using System;
 using AutoLoads;
 using Godot;
+using Tools;
 
 namespace Game;
 
@@ -33,7 +34,7 @@ public partial class GameUIBase : CanvasLayer
             return;
         }
         _gameModeButton.Pressed += OnGameModeButtonPressed;
-        GD.Print("UI: " + GameState);
+        DebugOverlay.Instance.DebugPrint("UI: " + GameState);
     }
 
     protected virtual void OnGameStateEntered(GameStates gameState)

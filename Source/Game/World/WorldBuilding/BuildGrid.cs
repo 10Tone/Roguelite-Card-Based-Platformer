@@ -1,6 +1,7 @@
 using AutoLoads;
 using Godot;
 using Godot.Collections;
+using Tools;
 
 namespace Game.WorldBuilding;
 
@@ -44,7 +45,7 @@ public partial class BuildGrid : TileMap
     if (eventMouseButton.ButtonIndex == MouseButton.Right) // Changed from 2 to MouseButton.Right
     {
         if (cell == Vector2I.Zero) { return; } // Changed comparison
-        GD.Print("remove block");
+        DebugOverlay.Instance.DebugPrint("Removing block at position " + tilePos);
         var blockInstance = _buildedItems[tilePos];
         blockInstance.QueueFree();
         _buildedItems.Remove(tilePos);
@@ -55,11 +56,15 @@ public partial class BuildGrid : TileMap
     }
     else if (eventMouseButton.ButtonIndex == MouseButton.Left) // Changed from 1 to MouseButton.Left
     {
-        if (cell != Vector2I.Zero) { GD.Print("cell is not empty"); return; } // Changed comparison
+        if (cell != Vector2I.Zero)
+        {
+            DebugOverlay.Instance.DebugPrint("Cell is already occupied");
+            return;
+        } // Changed comparison
         var blockInstance = _globalVariables.SelectedBuildItem?.Scene.Instantiate() as Node2D; // Changed from Instance to Instantiate
         if (blockInstance is null)
         {
-            GD.Print("BlockInstance is null");
+            DebugOverlay.Instance.DebugPrint("BlockInstance is null");
             return;
         }
         blockInstance.Position = ToGlobal(MapToLocal(tilePos)) * Scale; // Changed from MapToWorld

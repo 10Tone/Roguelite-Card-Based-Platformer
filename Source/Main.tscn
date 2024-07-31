@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://brwnai60gtjg3"]
 
-[ext_resource type="PackedScene" path="res://Source/Game/Game.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b5d3m70kasiym" path="res://Source/Game/Game.tscn" id="1"]
 [ext_resource type="Script" path="res://Source/MainManager.cs" id="2"]
 [ext_resource type="Script" path="res://Source/Tools/Debug/DebugOverlay.cs" id="3_t53ah"]
 

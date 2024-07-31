@@ -1,5 +1,6 @@
 using AutoLoads;
 using Godot;
+using Tools;
 
 namespace Game;
 
@@ -17,7 +18,7 @@ public partial class BuildModeState : GameState
     public override void Enter()
     {
         base.Enter();
-        GD.Print("BuildMode entered");
+        DebugOverlay.Instance.DebugPrint("BuildMode entered");
         GlobalVariables.PlayerInputEnabled = false;
         GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), (int)GameStates.BuildMode);
     }

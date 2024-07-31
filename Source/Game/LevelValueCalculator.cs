@@ -1,5 +1,6 @@
 using AutoLoads;
 using Godot;
+using Tools;
 
 namespace Game;
 
@@ -35,7 +36,7 @@ public partial class LevelValueCalculator: Node
     private void UpdateLevelValue(int value)
     {
         _levelValue += value;
-        GD.Print(_levelValue);
+        DebugOverlay.Instance.DebugPrint(_levelValue.ToString());
         _globalEvents.EmitSignal(nameof(GlobalEvents.LevelValueUpdated), _levelValue);
     }
 }
