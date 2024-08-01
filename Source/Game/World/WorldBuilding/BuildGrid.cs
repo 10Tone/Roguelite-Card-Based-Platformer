@@ -23,11 +23,6 @@ public partial class BuildGrid : TileMapLayer
     public override void _Ready()
     {
         TileSet.TileSize = _globalVariables.WorldGridSize;
-        // foreach (Vector2 cellPos in GetUsedCells())
-        // {
-        //     var cell = GetCellv(cellPos);
-        //     GD.Print("tile with index " + cell + " is at position " + cellPos);
-        // }
     }
 
 
@@ -52,54 +47,51 @@ public partial class BuildGrid : TileMapLayer
         
         DebugOverlay.Instance.DebugPrint(cellPos.ToString());
         
-        if (eventMouseButton.ButtonIndex == MouseButton.Right) // Changed from 2 to MouseButton.Right
+        switch (eventMouseButton.ButtonIndex)
         {
-            if (cellPos == Vector2I.Zero)
-            {
+            // Changed from 2 to MouseButton.Right
+            case MouseButton.Right when !_buildedItems.ContainsKey(cellPos):
                 return;
-            } 
-        
-            // DebugOverlay.Instance.DebugPrint("Removing block at position " + tilePos);
-            // var blockInstance = _buildedItems[tilePos];
-            // blockInstance.QueueFree();
-            // _buildedItems.Remove(tilePos);
-            // SetCell(tilePos); // Changed from SetCellv
-            //
-            // var item = (IBuildItem)blockInstance;
-            // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
-        }
-        else if (eventMouseButton.ButtonIndex == MouseButton.Left) // Changed from 1 to MouseButton.Left
-        {
-            // check if a key in local dictionary _buildItems exists based on the cellPos value
-            if (_buildedItems.ContainsKey(cellPos))
+            case MouseButton.Right:
             {
+                DebugOverlay.Instance.DebugPrint("Removing block at position " + cellPos);
+                var blockInstance = _buildedItems[cellPos];
+                blockInstance.QueueFree();
+                _buildedItems.Remove(cellPos);
+                // SetCell(tilePos); // Changed from SetCellv
+                //
+                var item = (IBuildItem)blockInstance;
+                _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
+                break;
+            }
+            // Changed from 1 to MouseButton.Left
+            // check if a key in local dictionary _buildItems exists based on the cellPos value
+            case MouseButton.Left when _buildedItems.ContainsKey(cellPos):
                 DebugOverlay.Instance.DebugPrint("Cell is already occupied " + cellPos);
                 return;
-            }  
-            
-        
-            var blockInstance =
-                _globalVariables.SelectedBuildItem?.Scene
-                    .Instantiate() as Node2D; // Changed from Instance to Instantiate
-            if (blockInstance is null)
+            case MouseButton.Left:
             {
-                DebugOverlay.Instance.DebugPrint("BlockInstance is null");
-                return;
-            }
-
-            blockInstance.Position = ToGlobal(MapToLocal(cellPos)) - (Vector2)_globalVariables.WorldGridSize * 0.5f;
-            AddChild(blockInstance);
-            SetCell(cellPos, 0); // Changed from SetCellv
-            _buildedItems.Add(cellPos, blockInstance);
+                var blockInstance =
+                    _globalVariables.SelectedBuildItem?.Scene
+                        .Instantiate() as Node2D; // Changed from Instance to Instantiate
+                if (blockInstance is null)
+                {
+                    DebugOverlay.Instance.DebugPrint("BlockInstance is null");
+                    return;
+                }
+                var offset = new Vector2(_globalVariables.WorldGridSize.X + (_globalVariables.WorldGridSize.X * 0.0625f),
+                    _globalVariables.WorldGridSize.Y);
+                
+                blockInstance.Position = (ToGlobal(MapToLocal(cellPos)) - offset * 0.5f);
+                AddChild(blockInstance);
+                // SetCell(cellPos, 0); // Changed from SetCellv
+                _buildedItems.Add(cellPos, blockInstance);
         
-            var item = (IBuildItem)blockInstance;
-            _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
+                var item = (IBuildItem)blockInstance;
+                _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
+                break;
+            }
         }
     }
-
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    
 }
