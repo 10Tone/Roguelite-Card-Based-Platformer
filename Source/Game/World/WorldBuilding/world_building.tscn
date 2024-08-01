@@ -8,7 +8,7 @@
 
 [node name="WorldBuilding" type="Node2D"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="BuildGrid" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_fxb0m")
 script = ExtResource("1_k7iaw")
 _buildingBlockPath = ExtResource("2_r7oxv")

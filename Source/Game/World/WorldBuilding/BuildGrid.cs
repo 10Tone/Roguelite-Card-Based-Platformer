@@ -70,11 +70,13 @@ public partial class BuildGrid : TileMapLayer
         }
         else if (eventMouseButton.ButtonIndex == MouseButton.Left) // Changed from 1 to MouseButton.Left
         {
-            if (GetCellSourceId(cellPos) > -1)
+            // check if a key in local dictionary _buildItems exists based on the cellPos value
+            if (_buildedItems.ContainsKey(cellPos))
             {
-                DebugOverlay.Instance.DebugPrint("Cell is already occupied");
+                DebugOverlay.Instance.DebugPrint("Cell is already occupied " + cellPos);
                 return;
-            } // Changed comparison
+            }  
+            
         
             var blockInstance =
                 _globalVariables.SelectedBuildItem?.Scene
@@ -84,8 +86,8 @@ public partial class BuildGrid : TileMapLayer
                 DebugOverlay.Instance.DebugPrint("BlockInstance is null");
                 return;
             }
-        
-            blockInstance.Position = ToGlobal(MapToLocal(cellPos)) * Scale; // Changed from MapToWorld
+
+            blockInstance.Position = ToGlobal(MapToLocal(cellPos)) - (Vector2)_globalVariables.WorldGridSize * 0.5f;
             AddChild(blockInstance);
             SetCell(cellPos, 0); // Changed from SetCellv
             _buildedItems.Add(cellPos, blockInstance);
