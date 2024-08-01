@@ -22,6 +22,7 @@ public partial class BuildGrid : TileMapLayer
 
     public override void _Ready()
     {
+        TileSet.TileSize = _globalVariables.WorldGridSize;
         // foreach (Vector2 cellPos in GetUsedCells())
         // {
         //     var cell = GetCellv(cellPos);

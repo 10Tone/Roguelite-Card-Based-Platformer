@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_hmvup"]
 
 [sub_resource type="TileSet" id="TileSet_fxb0m"]
-tile_size = Vector2i(128, 128)
 
 [node name="WorldBuilding" type="Node2D"]
 

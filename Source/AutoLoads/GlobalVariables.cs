@@ -9,4 +9,5 @@ public partial class GlobalVariables: Node
     public bool PlayerInputEnabled { get; set; }
     public BuildItemResource SelectedBuildItem { get; set; }
     public GameStates GameState { get; set; }
+    public Vector2I WorldGridSize { get; set; }
 }

@@ -7,6 +7,8 @@ namespace Game;
 
 public partial class GameManager : Node2D
 {
+    [Export] private Vector2I _worldGridSize;
+    
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
     private GameStateMachine _gameStateMachine;
@@ -19,6 +21,7 @@ public partial class GameManager : Node2D
         _gameStateMachine = new GameStateMachine();
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
+        _globalVariables.WorldGridSize = _worldGridSize;
 
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
@@ -34,6 +37,7 @@ public partial class GameManager : Node2D
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
         
         _gameStateMachine.Initialize((_playModeState));
+        
     }
 
     public override void _Process(double delta)
