@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://dv7k102vwgnv0"]
 
 [ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildGrid.cs" id="1_k7iaw"]
-[ext_resource type="PackedScene" path="res://Source/Game/World/WorldBuilding/BuildingBlockTest/TestBuildingBlock.tscn" id="2_r7oxv"]
+[ext_resource type="PackedScene" uid="uid://dl2ioah3durck" path="res://Source/Game/World/WorldBuilding/BuildingBlockTest/TestBuildingBlock.tscn" id="2_r7oxv"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_hmvup"]
 
-[sub_resource type="TileSet" id="11"]
+[sub_resource type="TileSet" id="TileSet_fxb0m"]
+tile_size = Vector2i(128, 128)
 
 [node name="WorldBuilding" type="Node2D"]
 
-[node name="BuildGrid" type="TileMap" parent="."]
-tile_set = SubResource("11")
-format = 2
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_fxb0m")
 script = ExtResource("1_k7iaw")
 _buildingBlockPath = ExtResource("2_r7oxv")
 
@@ -21,10 +21,9 @@ offset_left = 0.0
 offset_right = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch_mode = 1
 
 [node name="BuildMenu" parent="BuildUI" index="1"]
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 

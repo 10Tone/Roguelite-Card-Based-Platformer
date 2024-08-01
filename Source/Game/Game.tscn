@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5d3m70kasiym"]
+[gd_scene load_steps=5 format=3 uid="uid://b5d3m70kasiym"]
 
 [ext_resource type="Script" path="res://Source/Game/GameManager.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://6iv7d7igmb8l" path="res://Source/Game/World/world.tscn" id="2_v0txj"]
 [ext_resource type="PackedScene" uid="uid://d2ck1jydgohwf" path="res://Source/Game/World/WorldBuilding/BuildItems/Platforms/PlatformBlue.tscn" id="3_u3iwm"]
-[ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="4_1pjim"]
 [ext_resource type="PackedScene" uid="uid://c5el1eqpdre2" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.tscn" id="6"]
 
 [node name="Game" type="Node2D"]
@@ -14,11 +13,7 @@ script = ExtResource("1")
 [node name="PlatformBlue" parent="World/Platforms" index="0" instance=ExtResource("3_u3iwm")]
 position = Vector2(667, 1742)
 
-[node name="WorldBuilding" parent="." instance=ExtResource("4_1pjim")]
-
 [node name="GameplayUI" parent="." instance=ExtResource("6")]
 
 [editable path="World"]
 [editable path="World/LevelGoal"]
-[editable path="WorldBuilding"]
-[editable path="WorldBuilding/BuildUI"]

@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://dl2ioah3durck"]
 
-[ext_resource path="res://icon.png" type="Texture2D" id=1]
-[ext_resource path="res://Source/Game/World/WorldBuilding/BuildingBlockTest/BuildingBlock.cs" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://bc7xow4nv2i1h" path="res://icon.png" id="1"]
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildingBlockTest/BuildingBlock.cs" id="2"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64, 64 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(128, 128)
 
 [node name="TestBuildingBlock" type="StaticBody2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
+scale = Vector2(2, 2)
+texture = ExtResource("1")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 64, 64 )
-shape = SubResource( 1 )
+position = Vector2(64, 64)
+shape = SubResource("1")
