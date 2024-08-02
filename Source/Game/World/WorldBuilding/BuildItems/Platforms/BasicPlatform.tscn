@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ub4jkyhy3mqr"]
+
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItems/Platforms/Platform.cs" id="1_7jm0t"]
+[ext_resource type="Texture2D" uid="uid://d4ej4ynekxdqo" path="res://Content Assets/free-swamp-game-tileset-pixel-art/1 Tiles/Tile_31.png" id="2_bhk41"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 32)
+
+[node name="BasicPlatform" type="StaticBody2D"]
+collision_layer = 2
+input_pickable = true
+script = ExtResource("1_7jm0t")
+BuildItemValue = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bhk41")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("1")
