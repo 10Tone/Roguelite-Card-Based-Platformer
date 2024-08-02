@@ -27,9 +27,15 @@ namespace Tools
         public override void _Ready()
         {
             _debugLabel = new Label();
-            _debugLabel.Modulate = new Color(231, 221, 0);
-            _debugLabel.Position = new Vector2(20, 20);
-            _debugLabel.AddThemeFontSizeOverride("font_size", 32);
+            // _debugLabel.Modulate = new Color(231, 221, 0);
+            _debugLabel.Position = new Vector2(8, 8);
+            var settings = new LabelSettings();
+            settings.FontColor = new Color(231, 221, 0);
+            settings.FontSize = 8;
+            var font = GD.Load("res://Content Assets/Fonts/roboto.tres") as Godot.Font;
+            settings.Font = font;
+            _debugLabel.LabelSettings = settings;
+            // _debugLabel.AddThemeFontSizeOverride("font_size", 6);
             AddChild(_debugLabel);
         }
 
