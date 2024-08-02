@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://py4tqnf1lhbd"]
 
-[ext_resource path="res://Source/Game/GameUI/BuildUI/BuildItemButton.cs" type="Script" id=1]
-[ext_resource path="res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/PlatformRed.tres" type="Resource" id=2]
+[ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.cs" id="1"]
+[ext_resource type="Resource" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/PlatformRed.tres" id="2"]
 
 [node name="BuildItemButton" type="TextureRect"]
-offset_right = 128.0
-offset_bottom = 128.0
-custom_minimum_size = Vector2( 128, 128 )
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
 stretch_mode = 1
-script = ExtResource( 1 )
-_buildItemResource = ExtResource( 2 )
+script = ExtResource("1")
+_buildItemResource = ExtResource("2")
 
 [connection signal="gui_input" from="." to="." method="_on_BuildItemButton_gui_input"]

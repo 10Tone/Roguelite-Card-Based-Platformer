@@ -1,100 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://piu1vtg3qoot"]
+[gd_scene load_steps=5 format=3 uid="uid://piu1vtg3qoot"]
 
-[ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildMenu.cs" id="1"]
-[ext_resource type="PackedScene" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.tscn" id="2"]
-[ext_resource type="Resource" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/PlatformBlue.tres" id="3"]
-[ext_resource type="Texture2D" uid="uid://db7m7ie4m4gt7" path="res://Content Assets/Sprites/Background/BuildingUI_RightPanel.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dmhn62xdmebkm" path="res://Content Assets/Sprites/grid_128x.png" id="5"]
+[ext_resource type="PackedScene" uid="uid://py4tqnf1lhbd" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dxtng5bptacpd" path="res://Source/Game/GameUI/BuildUI/mouse_build_item_preview.tscn" id="2_3o8wt"]
+[ext_resource type="Resource" uid="uid://dgl5jqt516ox3" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/BasicPlatform.tres" id="3_hxer8"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildUI.cs" id="6"]
-[ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/MouseBuildItemPreview.cs" id="8"]
 
 [node name="BuildUI" type="CanvasLayer"]
 script = ExtResource("6")
-_gameModeButtonPath = NodePath("BuildMenu/VBoxContainer/TextureRect/PlayButton")
-GameState = 1
-
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.384314)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 512.0
-offset_right = -512.0
-mouse_filter = 2
-texture = ExtResource("5")
-stretch_mode = 2
 
 [node name="BuildMenu" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -160.0
+offset_bottom = 160.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BuildMenu"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("1")
-
-[node name="ColorRect" type="ColorRect" parent="BuildMenu"]
-modulate = Color(1, 1, 1, 0.184314)
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
+color = Color(0.27451, 0.345098, 0.345098, 0.635294)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BuildMenu"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-theme_override_constants/separation = 0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BuildMenu/VBoxContainer"]
-custom_minimum_size = Vector2(0, 128)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="PlayButton" type="Button" parent="BuildMenu/VBoxContainer/TextureRect"]
-custom_minimum_size = Vector2(128, 40)
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -20.0
-offset_right = 64.0
-offset_bottom = 20.0
-text = "PLAY"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BuildMenu/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 0
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="BuildMenu/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4")
-
-[node name="GridContainer" type="GridContainer" parent="BuildMenu/VBoxContainer/HBoxContainer/TextureRect"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 256.0
-offset_right = 516.0
-offset_bottom = 1024.0
-mouse_filter = 2
-
-[node name="BuildItemButton" parent="BuildMenu/VBoxContainer/HBoxContainer/TextureRect/GridContainer" instance=ExtResource("2")]
+[node name="GridContainer" type="GridContainer" parent="BuildMenu/VBoxContainer"]
 layout_mode = 2
 
-[node name="BuildItemButton2" parent="BuildMenu/VBoxContainer/HBoxContainer/TextureRect/GridContainer" instance=ExtResource("2")]
+[node name="BuildItemButton" parent="BuildMenu/VBoxContainer/GridContainer" instance=ExtResource("2")]
 layout_mode = 2
-_buildItemResource = ExtResource("3")
+_buildItemResource = ExtResource("3_hxer8")
 
-[node name="MouseBuildItemPreview" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.27451)
-offset_right = 128.0
-offset_bottom = 128.0
-mouse_filter = 2
-script = ExtResource("8")
+[node name="MouseBuildItemPreview" parent="." instance=ExtResource("2_3o8wt")]

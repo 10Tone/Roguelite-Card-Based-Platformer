@@ -295,6 +295,8 @@ sources/0 = SubResource("TileSetAtlasSource_i3ejk")
 
 [node name="WorldBuilding" type="Node2D"]
 
+[node name="BuildUI" parent="." instance=ExtResource("3_hmvup")]
+
 [node name="Background" type="Node2D" parent="."]
 modulate = Color(0.571166, 0.278466, 0.120686, 0.8)
 
@@ -321,54 +323,3 @@ tile_set = SubResource("TileSet_bt2vn")
 tile_set = SubResource("TileSet_fxb0m")
 script = ExtResource("1_k7iaw")
 _buildingBlockPath = ExtResource("2_r7oxv")
-
-[node name="BuildUI" parent="." instance=ExtResource("3_hmvup")]
-visible = false
-
-[node name="TextureRect" parent="BuildUI" index="0"]
-offset_left = 0.0
-offset_right = 0.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch_mode = 1
-
-[node name="BuildMenu" parent="BuildUI" index="1"]
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="ColorRect" parent="BuildUI/BuildMenu" index="0"]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-
-[node name="VBoxContainer" parent="BuildUI/BuildMenu" index="1"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-offset_left = -527.0
-offset_bottom = 1296.0
-grow_horizontal = 0
-
-[node name="PlayButton" parent="BuildUI/BuildMenu/VBoxContainer/TextureRect" index="0"]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 128.0
-offset_bottom = 40.0
-
-[node name="GridContainer" parent="BuildUI/BuildMenu/VBoxContainer/HBoxContainer/TextureRect" index="0"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 0.0
-offset_top = -384.0
-offset_right = 452.0
-offset_bottom = 384.0
-grow_vertical = 2
-
-[editable path="BuildUI"]

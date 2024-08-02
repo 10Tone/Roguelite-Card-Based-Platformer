@@ -10,7 +10,7 @@ public partial class MouseBuildItemPreview : TextureRect
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
 
-    private Vector2 _offSet = new Vector2(-64, -64);
+    private Vector2 _offSet = new Vector2(-16, -16);
 
     public override void _EnterTree()
     {
