@@ -42,8 +42,12 @@ public partial class GameUIBase : CanvasLayer
         switch (gameState)
         {
             case GameStates.PlayMode:
+                _gameModeButton.Text = "Build";
+                GameState = GameStates.PlayMode;
                 break;
             case GameStates.BuildMode:
+                _gameModeButton.Text = "Play";
+                GameState = GameStates.BuildMode;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
