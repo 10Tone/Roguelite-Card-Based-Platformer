@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5d3m70kasiym"]
+[gd_scene load_steps=3 format=3 uid="uid://b5d3m70kasiym"]
 
 [ext_resource type="Script" path="res://Source/Game/GameManager.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://6iv7d7igmb8l" path="res://Source/Game/World/world.tscn" id="2_v0txj"]
-[ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="4_ttnsy"]
 
 [node name="Game" type="Node2D"]
 position = Vector2(3, 0)
@@ -10,5 +9,3 @@ script = ExtResource("1")
 _worldGridSize = Vector2i(128, 128)
 
 [node name="World" parent="." instance=ExtResource("2_v0txj")]
-
-[node name="WorldBuilding2" parent="World" instance=ExtResource("4_ttnsy")]

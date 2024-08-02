@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://6iv7d7igmb8l"]
+[gd_scene load_steps=3 format=3 uid="uid://6iv7d7igmb8l"]
 
 [ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="2_kyopi"]
+[ext_resource type="PackedScene" uid="uid://j7vmgqcomgld" path="res://Source/Game/Entities/Player/Player.tscn" id="2_v06uo"]
 
 [node name="World" type="Node2D"]
 
 [node name="WorldBuilding" parent="." instance=ExtResource("2_kyopi")]
+
+[node name="Player" parent="." instance=ExtResource("2_v06uo")]
+position = Vector2(64, 295)

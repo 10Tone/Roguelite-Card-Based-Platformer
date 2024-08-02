@@ -289,24 +289,26 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_bt2vn"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_i3ejk")
 
 [sub_resource type="TileSet" id="TileSet_fxb0m"]
 
 [node name="WorldBuilding" type="Node2D"]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Node2D" parent="."]
+modulate = Color(0.571166, 0.278466, 0.120686, 0.8)
+
+[node name="Background" type="Sprite2D" parent="Background"]
 position = Vector2(32, 0)
 texture = ExtResource("1_ax0sq")
 centered = false
 
-[node name="Background2" type="Sprite2D" parent="."]
+[node name="Background2" type="Sprite2D" parent="Background"]
 position = Vector2(32, 64)
 texture = ExtResource("2_syxyd")
 centered = false
 
-[node name="Background3" type="Sprite2D" parent="."]
+[node name="Background3" type="Sprite2D" parent="Background"]
 position = Vector2(32, 64)
 texture = ExtResource("3_kcrjw")
 centered = false

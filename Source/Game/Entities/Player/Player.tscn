@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://j7vmgqcomgld"]
 
 [ext_resource type="Script" path="res://Source/Game/Entities/Player/Player.cs" id="1"]
-[ext_resource type="Resource" path="res://Source/Game/Entities/Player/Data/PlayerData.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://b6h4g23rijre3" path="res://Content Assets/Sprites/PlayerTEMP/Chara - BlueIdle00000.png" id="3"]
+[ext_resource type="Resource" uid="uid://csrynsk4vbjx2" path="res://Source/Game/Entities/Player/Data/PlayerData.tres" id="2"]
 [ext_resource type="Script" path="res://Source/Game/Entities/Player/PlayerInputHandler.cs" id="4"]
+[ext_resource type="Texture2D" uid="uid://75ags6ahlh60" path="res://Content Assets/free-pixel-art-tiny-hero-sprites/2 Owlet_Monster/Owlet_Monster.png" id="4_cx872"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
-radius = 32.0
-height = 148.0
+radius = 8.0
+height = 32.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
@@ -19,8 +19,7 @@ _inputHandlerPath = NodePath("InputHandler")
 script = ExtResource("4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3")
+texture = ExtResource("4_cx872")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
