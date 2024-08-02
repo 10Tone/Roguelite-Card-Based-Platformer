@@ -1,40 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://6iv7d7igmb8l"]
+[gd_scene load_steps=2 format=3 uid="uid://6iv7d7igmb8l"]
 
-[ext_resource type="Texture2D" uid="uid://dr3tq0mlgnnah" path="res://Content Assets/Sprites/PlatformRed.png" id="1_7203i"]
-[ext_resource type="Texture2D" uid="uid://b6a0ii08lo065" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 2/1.png" id="2_gpi03"]
-[ext_resource type="PackedScene" uid="uid://j7vmgqcomgld" path="res://Source/Game/Entities/Player/Player.tscn" id="3_4al3g"]
-[ext_resource type="PackedScene" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="4_be2hl"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nfegg"]
-texture = ExtResource("1_7203i")
-texture_region_size = Vector2i(128, 128)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-
-[sub_resource type="TileSet" id="TileSet_4at3m"]
-tile_size = Vector2i(128, 128)
-physics_layer_0/collision_layer = 2
-sources/0 = SubResource("TileSetAtlasSource_nfegg")
+[ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="2_kyopi"]
 
 [node name="World" type="Node2D"]
 
-[node name="Platforms" type="Node2D" parent="."]
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAFAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA4AAAAAAAAAAAAEAA4AAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAAAAAAAAAAYAAQAAAAAAAAAAAAZAAQAAAAAAAAAAAAZAAUAAAAAAAAAAAAYAAUAAAAAAAAAAAAaAAQAAAAAAAAAAAAaAAUAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_4at3m")
-
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("2_gpi03")
-centered = false
-
-[node name="Player" parent="." instance=ExtResource("3_4al3g")]
-position = Vector2(666, 1451)
-
-[node name="LevelGoal" parent="." instance=ExtResource("4_be2hl")]
-position = Vector2(3120, 312)
-
-[node name="CollisionShape2D" parent="LevelGoal" index="0"]
-position = Vector2(24, 56)
-
-[editable path="LevelGoal"]
+[node name="WorldBuilding" parent="." instance=ExtResource("2_kyopi")]

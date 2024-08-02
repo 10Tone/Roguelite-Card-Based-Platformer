@@ -73,7 +73,7 @@ namespace Tools
 
         private void UpdateDebugLabel()
         {
-            _debugLabel.Text = string.Join("\n", _debugMessages);
+            // _debugLabel.Text = string.Join("\n", _debugMessages);
         }
     }
 }

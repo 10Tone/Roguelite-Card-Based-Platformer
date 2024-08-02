@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5d3m70kasiym"]
+[gd_scene load_steps=4 format=3 uid="uid://b5d3m70kasiym"]
 
 [ext_resource type="Script" path="res://Source/Game/GameManager.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://6iv7d7igmb8l" path="res://Source/Game/World/world.tscn" id="2_v0txj"]
-[ext_resource type="PackedScene" uid="uid://d2ck1jydgohwf" path="res://Source/Game/World/WorldBuilding/BuildItems/Platforms/PlatformBlue.tscn" id="3_u3iwm"]
 [ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="4_ttnsy"]
-[ext_resource type="PackedScene" uid="uid://c5el1eqpdre2" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.tscn" id="6"]
 
 [node name="Game" type="Node2D"]
 position = Vector2(3, 0)
@@ -13,21 +11,4 @@ _worldGridSize = Vector2i(128, 128)
 
 [node name="World" parent="." instance=ExtResource("2_v0txj")]
 
-[node name="PlatformBlue" parent="World/Platforms" index="0" instance=ExtResource("3_u3iwm")]
-position = Vector2(667, 1742)
-
-[node name="Background" parent="World" index="2"]
-visible = false
-
-[node name="WorldBuilding" parent="World" instance=ExtResource("4_ttnsy")]
-
-[node name="BuildUI" parent="World/WorldBuilding" index="1"]
-visible = false
-
-[node name="GameplayUI" parent="." instance=ExtResource("6")]
-visible = false
-
-[editable path="World"]
-[editable path="World/LevelGoal"]
-[editable path="World/WorldBuilding"]
-[editable path="World/WorldBuilding/BuildUI"]
+[node name="WorldBuilding2" parent="World" instance=ExtResource("4_ttnsy")]
