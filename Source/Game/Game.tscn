@@ -16,12 +16,15 @@ _worldGridSize = Vector2i(128, 128)
 [node name="PlatformBlue" parent="World/Platforms" index="0" instance=ExtResource("3_u3iwm")]
 position = Vector2(667, 1742)
 
-[node name="Background" parent="World" index="2"]
-visible = false
-
 [node name="WorldBuilding" parent="World" instance=ExtResource("4_ttnsy")]
 
+[node name="BuildUI" parent="World/WorldBuilding" index="1"]
+visible = false
+
 [node name="GameplayUI" parent="." instance=ExtResource("6")]
+visible = false
 
 [editable path="World"]
 [editable path="World/LevelGoal"]
+[editable path="World/WorldBuilding"]
+[editable path="World/WorldBuilding/BuildUI"]

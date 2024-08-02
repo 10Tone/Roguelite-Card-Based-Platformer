@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://6iv7d7igmb8l"]
 
 [ext_resource type="Texture2D" uid="uid://dr3tq0mlgnnah" path="res://Content Assets/Sprites/PlatformRed.png" id="1_7203i"]
-[ext_resource type="Texture2D" uid="uid://buwu68a18inkv" path="res://Content Assets/Sprites/Background/Cave_Background.png" id="2_70pr5"]
+[ext_resource type="Texture2D" uid="uid://b6a0ii08lo065" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 2/1.png" id="2_gpi03"]
 [ext_resource type="PackedScene" uid="uid://j7vmgqcomgld" path="res://Source/Game/Entities/Player/Player.tscn" id="3_4al3g"]
 [ext_resource type="PackedScene" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="4_be2hl"]
 
@@ -25,8 +25,7 @@ tile_map_data = PackedByteArray("AAAFAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAFAA4AAAAAAAA
 tile_set = SubResource("TileSet_4at3m")
 
 [node name="Background" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_70pr5")
+texture = ExtResource("2_gpi03")
 centered = false
 
 [node name="Player" parent="." instance=ExtResource("3_4al3g")]
