@@ -81,8 +81,10 @@ public partial class Player : CharacterBody2D, IPlayer
         switch (gameState)
         {
             case GameStates.PlayMode:
+                InputHandler.InputEnabled = true;
                 break;
             case GameStates.BuildMode:
+                InputHandler.InputEnabled = false;
                 MoveBackToStartPosition();
                 break;
             default:
@@ -93,7 +95,7 @@ public partial class Player : CharacterBody2D, IPlayer
     private void MoveBackToStartPosition()
     {
         // TEMP
-        GlobalPosition = new Vector2(640, 1560);
+        GlobalPosition = new Vector2(50, 300);
     }
     
 }

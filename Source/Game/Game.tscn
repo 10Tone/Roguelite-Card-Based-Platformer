@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://c5el1eqpdre2" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.tscn" id="3_orpuk"]
 
 [node name="Game" type="Node2D"]
-position = Vector2(3, 0)
 script = ExtResource("1")
-_worldGridSize = Vector2i(128, 128)
-
-[node name="World" parent="." instance=ExtResource("2_v0txj")]
+_worldGridSize = Vector2i(32, 32)
+metadata/_edit_lock_ = true
 
 [node name="GameplayUI" parent="." instance=ExtResource("3_orpuk")]
+
+[node name="World" parent="." instance=ExtResource("2_v0txj")]

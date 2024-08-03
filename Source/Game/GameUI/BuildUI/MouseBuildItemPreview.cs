@@ -4,13 +4,13 @@ using AutoLoads;
 using Game;
 using Game.WorldBuilding;
 
-public partial class MouseBuildItemPreview : TextureRect
+public partial class MouseBuildItemPreview : Sprite2D
 {
 
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
 
-    private Vector2 _offSet = new Vector2(-16, -16);
+    // private Vector2 _offSet = new Vector2(-16, -16);
 
     public override void _EnterTree()
     {
@@ -21,11 +21,14 @@ public partial class MouseBuildItemPreview : TextureRect
         
         _globalEvents.BuildItemButtonClicked += OnBuildItemButtonClicked;
         _globalEvents.GameStateEntered += ResetTextureToNull;
+        
+        Texture = null;
     }
 
     public override void _Process(double delta)
     {
-      Position = GetViewport().GetMousePosition() + _offSet;
+      // Position = GetViewport().GetMousePosition() + _offSet;
+      Position = GetGlobalMousePosition();
     }
 
     private void OnBuildItemButtonClicked(BuildItemResource buildItemResource)

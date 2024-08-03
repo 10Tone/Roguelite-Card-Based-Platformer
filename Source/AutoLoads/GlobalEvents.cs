@@ -25,7 +25,7 @@ public partial class GlobalEvents : Node
     public delegate void GameStateEnteredEventHandler(GameStates gameState);
 
     [Signal]
-    public delegate void GameModeButtonPressedEventHandler(GameStates gameState);
+    public delegate void GameModeButtonPressedEventHandler();
 
     [Signal]
     public delegate void PlayerFinishedLevelEventHandler();

@@ -52,9 +52,12 @@ public partial class GameManager : Node2D
         _gameStateMachine.CurrentState.PhysicsUpdate(delta);
     }
 
-    private void OnGameModeButtonPressed(GameStates currentGameState)
+    private void OnGameModeButtonPressed()
     {
-        DebugOverlay.Instance.DebugPrint("received signal from UI " + currentGameState);
+        // check if _gameStateMachine.CurrentState is equal to _playModeState or _buildModeState
+
+        GameStates currentGameState = _gameStateMachine.CurrentState is PlayModeState? GameStates.PlayMode : GameStates.BuildMode;
+        
         switch (currentGameState)
         {
             case GameStates.PlayMode:
@@ -66,7 +69,6 @@ public partial class GameManager : Node2D
             default:
                 throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
         }
-        
     }
 
     private void OnPlayerFinishedLevel()

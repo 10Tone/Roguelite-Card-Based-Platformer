@@ -8,7 +8,7 @@ namespace Game.GameplayUI;
 public partial class GameplayUI: CanvasLayer
 {
     [Export()] private NodePath _gameModeButtonPath;
-    [Export()] protected GameStates GameState;
+    private GameStates _gameState;
     private Button _gameModeButton;
     
     private GlobalEvents _globalEvents;
@@ -34,7 +34,6 @@ public partial class GameplayUI: CanvasLayer
             return;
         }
         _gameModeButton.Pressed += OnGameModeButtonPressed;
-        DebugOverlay.Instance.DebugPrint("UI: " + GameState);
     }
 
     private void OnGameStateEntered(GameStates gameState)
@@ -43,11 +42,11 @@ public partial class GameplayUI: CanvasLayer
         {
             case GameStates.PlayMode:
                 _gameModeButton.Text = "Build";
-                GameState = GameStates.PlayMode;
+                _gameState = gameState;
                 break;
             case GameStates.BuildMode:
                 _gameModeButton.Text = "Play";
-                GameState = GameStates.BuildMode;
+                _gameState = gameState;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
@@ -56,6 +55,6 @@ public partial class GameplayUI: CanvasLayer
 
     private void OnGameModeButtonPressed()
     {
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameModeButtonPressed), (int)GameState);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.GameModeButtonPressed));
     }
 }

@@ -19,7 +19,6 @@ public partial class BuildModeState : GameState
     {
         base.Enter();
         DebugOverlay.Instance.DebugPrint("BuildMode entered");
-        GlobalVariables.PlayerInputEnabled = false;
         GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), (int)GameStates.BuildMode);
     }
 

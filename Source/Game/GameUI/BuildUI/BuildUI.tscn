@@ -1,15 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://piu1vtg3qoot"]
+[gd_scene load_steps=6 format=3 uid="uid://piu1vtg3qoot"]
 
 [ext_resource type="PackedScene" uid="uid://py4tqnf1lhbd" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dxtng5bptacpd" path="res://Source/Game/GameUI/BuildUI/mouse_build_item_preview.tscn" id="2_3o8wt"]
 [ext_resource type="Resource" uid="uid://dgl5jqt516ox3" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/BasicPlatform.tres" id="3_hxer8"]
+[ext_resource type="Texture2D" uid="uid://d31a5a1qo3em8" path="res://Content Assets/Sprites/grid_32x.png" id="5_gxw5j"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildUI.cs" id="6"]
 
-[node name="BuildUI" type="CanvasLayer"]
+[node name="BuildUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("6")
 
+[node name="Grid" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.321569)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_gxw5j")
+stretch_mode = 1
+
 [node name="BuildMenu" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5

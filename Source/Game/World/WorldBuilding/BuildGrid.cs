@@ -1,3 +1,4 @@
+using System;
 using AutoLoads;
 using Godot;
 using Godot.Collections;
@@ -14,15 +15,34 @@ public partial class BuildGrid : TileMapLayer
 
     private Dictionary<Vector2, Node2D> _buildedItems = new();
 
+    private bool _buildingEnabled;
+
     public override void _EnterTree()
     {
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
+        
+        _globalEvents.GameStateEntered += OnGameStateEntered;
+    }
+
+    private void OnGameStateEntered(GameStates gamestate)
+    {
+        switch (gamestate)
+        {
+            case GameStates.PlayMode:
+                _buildingEnabled = false;
+                break;
+            case GameStates.BuildMode:
+                _buildingEnabled = true;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(gamestate), gamestate, null);
+        }
     }
 
     public override void _Ready()
     {
-        TileSet.TileSize = _globalVariables.WorldGridSize;
+        TileSet.SetTileSize(_globalVariables.WorldGridSize);
     }
 
 
@@ -30,12 +50,8 @@ public partial class BuildGrid : TileMapLayer
     {
         base._UnhandledInput(@event);
 
-        if (@event is not InputEventMouseButton eventMouseButton)
-        {
-            return;
-        }
-
-        if (!eventMouseButton.Pressed)
+        if (!_buildingEnabled || 
+            @event is not InputEventMouseButton { Pressed: true } eventMouseButton)
         {
             return;
         }
@@ -79,11 +95,8 @@ public partial class BuildGrid : TileMapLayer
                     DebugOverlay.Instance.DebugPrint("BlockInstance is null");
                     return;
                 }
-                var offset = new Vector2(_globalVariables.WorldGridSize.X + (_globalVariables.WorldGridSize.X * 0.0625f),
-                    _globalVariables.WorldGridSize.Y);
-                
-                blockInstance.Position = (ToGlobal(MapToLocal(cellPos)) - offset * 0.5f);
-                AddChild(blockInstance);
+                blockInstance.Position = (ToGlobal(MapToLocal(cellPos))) - new Vector2(16,16);
+                AddChild(blockInstance);    
                 // SetCell(cellPos, 0); // Changed from SetCellv
                 _buildedItems.Add(cellPos, blockInstance);
         

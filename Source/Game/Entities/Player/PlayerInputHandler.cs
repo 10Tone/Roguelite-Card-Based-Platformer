@@ -9,21 +9,16 @@ public partial class PlayerInputHandler : Node
     public float VerticalInput { get; private set; }
     public bool JumpInput { get; private set; }
     public bool JumpInputStop { get; private set; }
+    public bool InputEnabled { get; set; }
 
     [Export()] private float _inputHoldTime = 0.1f;
     private float _jumpInputStartTime;
-    private GlobalVariables _globalVariables;
-
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-        _globalVariables = _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
-    }
+    
 
     public override void _PhysicsProcess (double delta)
     {
         base._PhysicsProcess(delta);
-        if (!_globalVariables.PlayerInputEnabled) return;
+        if (!InputEnabled) return;
         CheckForJumpInput();
         CheckForHorizontalInput();
         CheckForVerticalInput();

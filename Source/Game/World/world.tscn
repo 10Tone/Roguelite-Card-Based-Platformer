@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://j7vmgqcomgld" path="res://Source/Game/Entities/Player/Player.tscn" id="2_v06uo"]
 
 [node name="World" type="Node2D"]
+metadata/_edit_lock_ = true
 
 [node name="WorldBuilding" parent="." instance=ExtResource("2_kyopi")]
 
