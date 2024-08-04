@@ -9,7 +9,6 @@
 [node name="WorldBuilding" type="Node2D"]
 
 [node name="Background" type="Node2D" parent="."]
-modulate = Color(0.571166, 0.278466, 0.120686, 0.8)
 
 [node name="Background" type="Sprite2D" parent="Background"]
 position = Vector2(32, 0)

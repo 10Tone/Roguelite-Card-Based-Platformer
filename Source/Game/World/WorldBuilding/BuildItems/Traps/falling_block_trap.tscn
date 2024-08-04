@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://1fvrdqy6agrb"]
+
+[ext_resource type="Texture2D" uid="uid://dg6em5mmavkh1" path="res://Content Assets/animated-traps-pixel-art-pack/13 Falling block/13.png" id="1_n4670"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7vqs"]
+size = Vector2(40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njq66"]
+atlas = ExtResource("1_n4670")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu16u"]
+atlas = ExtResource("1_n4670")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aguaq"]
+atlas = ExtResource("1_n4670")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0wuh"]
+atlas = ExtResource("1_n4670")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icfex"]
+atlas = ExtResource("1_n4670")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20sfl"]
+atlas = ExtResource("1_n4670")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ox8bg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njq66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu16u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aguaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0wuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icfex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20sfl")
+}],
+"loop": true,
+"name": &"drop",
+"speed": 16.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rggy"]
+size = Vector2(48, 48)
+
+[node name="FallingBlockTrap" type="StaticBody2D"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_n7vqs")
+debug_color = Color(0.783225, 0.322265, 0.741327, 0.42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ox8bg")
+animation = &"drop"
+frame = 5
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_3rggy")

@@ -9,13 +9,14 @@ size = Vector2(32, 16)
 [node name="SpikeTrap" type="Node2D"]
 script = ExtResource("1_f0pky")
 _area2DPath = NodePath("Area2D")
+BuildItemType = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_yxmxp")
-centered = false
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(16, 24)
+position = Vector2(0, 8)
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qte35")

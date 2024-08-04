@@ -4,6 +4,6 @@ namespace Game.WorldBuilding;
 
 public interface IBuildItem
 {
-    public int BuildItemValue { get; set; }
-    public BuildItemTypes BuildItemType { get; set; }
+    [Export] public int BuildItemValue { get; protected set; }
+    [Export] public BuildItemTypes BuildItemType { get; protected set; }
 }

@@ -1,15 +1,27 @@
 using Godot;
 using System;
-using Game.WorldBuilding;
+
+namespace Game.WorldBuilding;
 
 public partial class Trap : Node2D, IBuildItem, IDamage
 {
-	[Export] private NodePath _area2DPath;
-	
-	public int BuildItemValue { get; set; }
-	public BuildItemTypes BuildItemType { get; set; }
-	
-	private Area2D _area2D;
+	[Export] protected NodePath _area2DPath;
+
+	[Export] public int BuildItemValue { get; private set; }
+	int IBuildItem.BuildItemValue
+	{
+		get => BuildItemValue;
+		set => BuildItemValue = value;
+	}
+
+	[Export] public BuildItemTypes BuildItemType { get; private set; }
+	BuildItemTypes IBuildItem.BuildItemType
+	{
+		get => BuildItemType;
+		set => BuildItemType = value;
+	}
+
+	protected Area2D _area2D;
 
 	public override void _EnterTree()
 	{
@@ -22,4 +34,5 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 		GD.Print("Player entered trap!");
 		
 	}
+	
 }

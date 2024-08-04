@@ -99,7 +99,7 @@ public partial class BuildGrid : TileMapLayer
                     DebugOverlay.Instance.DebugPrint("BlockInstance is null");
                     return;
                 }
-                blockInstance.Position = (ToGlobal(MapToLocal(cellPos))) - new Vector2(16,16);
+                blockInstance.Position = (ToGlobal(MapToLocal(cellPos)));
                 AddChild(blockInstance);    
                 // SetCell(cellPos, 0); // Changed from SetCellv
                 _buildedItems.Add(cellPos, blockInstance);
