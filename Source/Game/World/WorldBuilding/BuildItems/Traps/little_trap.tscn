@@ -3,10 +3,6 @@
 [ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/ActiveTrap.cs" id="1_2ykvy"]
 [ext_resource type="Texture2D" uid="uid://dd6r3o5mtpus0" path="res://Content Assets/animated-traps-pixel-art-pack/3 Little trap/3 Little Trap.png" id="2_8oi0c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s0hpm"]
-atlas = ExtResource("2_8oi0c")
-region = Rect2(0, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_l1peo"]
 atlas = ExtResource("2_8oi0c")
 region = Rect2(0, 0, 32, 32)
@@ -19,16 +15,12 @@ region = Rect2(32, 0, 32, 32)
 atlas = ExtResource("2_8oi0c")
 region = Rect2(64, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0hpm"]
+atlas = ExtResource("2_8oi0c")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_gqlfq"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s0hpm")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l1peo")
@@ -36,12 +28,20 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_efyfy")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_mov6c")
 }],
 "loop": false,
-"name": &"snap",
-"speed": 12.0
+"name": &"active",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0hpm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qte35"]
@@ -50,14 +50,16 @@ size = Vector2(32, 16)
 [node name="Little Trap" type="Node2D"]
 script = ExtResource("1_2ykvy")
 _animatedSprite2DPath = NodePath("AnimatedSprite2D")
-_timerPath = NodePath("Timer")
+_idleTimerPath = NodePath("IdleTimer")
+_activeTimerPath = NodePath("ActiveTimer")
+_oneShot = true
 _area2DPath = NodePath("Area2D")
 BuildItemType = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_gqlfq")
-animation = &"idle"
+animation = &"active"
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 8)
@@ -66,6 +68,8 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qte35")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="IdleTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="ActiveTimer" type="Timer" parent="."]

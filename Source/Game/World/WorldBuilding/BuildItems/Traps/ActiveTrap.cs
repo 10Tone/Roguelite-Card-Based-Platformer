@@ -7,10 +7,13 @@ namespace Game.WorldBuilding;
 public partial class ActiveTrap: Trap
 {
     [Export] private NodePath _animatedSprite2DPath;
-    [Export] private NodePath _timerPath;
+    [Export] private NodePath _idleTimerPath;
+    [Export] private NodePath _activeTimerPath;
+    [Export] private bool _oneShot;
     
     private AnimatedSprite2D _animatedSprite;
-    private Timer _timer;
+    private Timer _idleTimer;
+    private Timer _activeTimer;
     
     public override void _EnterTree()
     {
@@ -21,8 +24,21 @@ public partial class ActiveTrap: Trap
         _area2D = GetNode<Area2D>(_area2DPath);
         _area2D.BodyEntered += OnPlayerEntered;
         
-        _timer = GetNode<Timer>(_timerPath);
-        _timer.Timeout += OnTimerTimeout;
+        _idleTimer = GetNode<Timer>(_idleTimerPath);
+        _activeTimer = GetNode<Timer>(_activeTimerPath);
+        _idleTimer.Timeout += OnIdleTimerTimeout;
+        _activeTimer.Timeout += OnActiveTimerTimeout;
+    }
+
+    private void OnActiveTimerTimeout()
+    {
+        if (_oneShot)
+        {
+            return;}
+        GD.Print("active timer finished!");
+        _animatedSprite.Play("idle");   
+        _animatedSprite.Stop();
+        _idleTimer.Start();
     }
 
     public override void _Ready()
@@ -32,17 +48,24 @@ public partial class ActiveTrap: Trap
 
     private void OnAnimationFinished()
     {
+        if (!_oneShot)
+        {
+            return;}
+        GD.Print("animation finished!");
         _animatedSprite.Play("idle");
-        _timer.Start(5f);
+        _animatedSprite.Stop();
+        _idleTimer.Start();
     }
 
     private new void OnPlayerEntered(Node2D player)
     {
-        throw new NotImplementedException();
+        
     }
 
-    private void OnTimerTimeout()
+    private void OnIdleTimerTimeout()
     {
-        _animatedSprite.Play("snap");
+        GD.Print("idle timer finished!");
+        _animatedSprite.Play("active");
+        _activeTimer.Start();
     }
 }
