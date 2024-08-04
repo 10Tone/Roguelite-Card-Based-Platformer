@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvxh337xfcpvd"]
+
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/Trap.cs" id="1_f0pky"]
+[ext_resource type="Texture2D" uid="uid://bis2bgojvbttc" path="res://Content Assets/animated-traps-pixel-art-pack/5 Spikes/5.png" id="2_yxmxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qte35"]
+size = Vector2(32, 16)
+
+[node name="SpikeTrap" type="Node2D"]
+script = ExtResource("1_f0pky")
+_area2DPath = NodePath("Area2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yxmxp")
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(16, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qte35")

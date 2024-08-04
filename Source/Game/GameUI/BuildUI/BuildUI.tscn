@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://piu1vtg3qoot"]
+[gd_scene load_steps=7 format=3 uid="uid://piu1vtg3qoot"]
 
 [ext_resource type="PackedScene" uid="uid://py4tqnf1lhbd" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dxtng5bptacpd" path="res://Source/Game/GameUI/BuildUI/mouse_build_item_preview.tscn" id="2_3o8wt"]
 [ext_resource type="Resource" uid="uid://dgl5jqt516ox3" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/BasicPlatform.tres" id="3_hxer8"]
 [ext_resource type="Texture2D" uid="uid://d31a5a1qo3em8" path="res://Content Assets/Sprites/grid_32x.png" id="5_gxw5j"]
+[ext_resource type="Resource" uid="uid://cfrak8om1x8nv" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/SpikeTrap.tres" id="5_h7i7o"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildUI.cs" id="6"]
 
 [node name="BuildUI" type="Control"]
@@ -72,5 +73,9 @@ layout_mode = 2
 [node name="BuildItemButton" parent="BuildMenu/VBoxContainer/GridContainer" instance=ExtResource("2")]
 layout_mode = 2
 _buildItemResource = ExtResource("3_hxer8")
+
+[node name="BuildItemButton2" parent="BuildMenu/VBoxContainer/GridContainer" instance=ExtResource("2")]
+layout_mode = 2
+_buildItemResource = ExtResource("5_h7i7o")
 
 [node name="MouseBuildItemPreview" parent="." instance=ExtResource("2_3o8wt")]
