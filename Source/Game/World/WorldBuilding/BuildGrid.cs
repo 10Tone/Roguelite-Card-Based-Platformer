@@ -8,7 +8,7 @@ namespace Game.WorldBuilding;
 
 public partial class BuildGrid : TileMapLayer
 {
-    [Export()] private PackedScene _buildingBlockPath;
+    // [Export()] private PackedScene _buildingBlockPath;
 
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;

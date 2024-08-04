@@ -2,5 +2,5 @@ namespace Game.WorldBuilding;
 
 public enum BuildItemTypes
 {
-    Platforms, MovingPlatforms, Enemies
+    Platforms, MovingPlatforms, Enemies, Traps
 }
