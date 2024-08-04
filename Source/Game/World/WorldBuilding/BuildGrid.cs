@@ -59,7 +59,13 @@ public partial class BuildGrid : TileMapLayer
         var mousePos = GetGlobalMousePosition();
         var localPos = ToLocal(mousePos);
         var cellPos = LocalToMap(localPos);
-        var tileData = GetCellTileData(cellPos);
+        // var tileData = GetCellTileData(cellPos);
+        
+        if (cellPos.Y == 0)
+        {
+            DebugOverlay.Instance.DebugPrint("Cannot build in the first row");
+            return;
+        }
         
         DebugOverlay.Instance.DebugPrint(cellPos.ToString());
         
