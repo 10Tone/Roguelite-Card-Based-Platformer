@@ -8,6 +8,9 @@ namespace Game.WorldBuilding;
 
 public partial class BuildGrid : TileMapLayer
 {
+    [Signal]
+    public delegate void PlacementRequestedEventHandler(Vector2I tilePosition);
+
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
     private Dictionary<Vector2, Node2D> _buildedItems = new();
@@ -94,8 +97,7 @@ public partial class BuildGrid : TileMapLayer
             return;
         }
 
-        CheckSurroundingCells(cellPos);
-        PlaceBlock(cellPos);
+        RequestPlacement((Vector2I)cellPos);
     }
 
     private void RemoveBlock(Vector2 cellPos)
@@ -146,5 +148,21 @@ public partial class BuildGrid : TileMapLayer
 
         var item = (IBuildItem)blockInstance;
         _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
+    }
+
+    private void RequestPlacement(Vector2I tilePosition)
+    {
+        EmitSignal(SignalName.PlacementRequested, tilePosition);
+    }
+
+    public void ConfirmPlacement(Vector2I tilePosition)
+    {
+        CheckSurroundingCells(tilePosition);
+        PlaceBlock(tilePosition);
+    }
+
+    public void CancelPlacement(Vector2I tilePosition)
+    {
+        DebugOverlay.Instance.DebugPrint("Placement at " + tilePosition + " is not allowed.");
     }
 }

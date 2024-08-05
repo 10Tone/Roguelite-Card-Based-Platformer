@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=4 uid="uid://dv7k102vwgnv0"]
+[gd_scene load_steps=9 format=4 uid="uid://dv7k102vwgnv0"]
 
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/WorldBuilding.cs" id="1_7w1vu"]
 [ext_resource type="Texture2D" uid="uid://vw20ckbspvxw" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/1.png" id="1_ax0sq"]
 [ext_resource type="Texture2D" uid="uid://c774tjrt28753" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/2.png" id="2_syxyd"]
 [ext_resource type="Texture2D" uid="uid://eye6yn5ayq8n" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/4.png" id="3_kcrjw"]
@@ -9,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://d30525pa3kch4" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="7_38gb4"]
 
 [node name="WorldBuilding" type="Node2D"]
+script = ExtResource("1_7w1vu")
+_buildGridPath = NodePath("BuildGrid")
+_staticWorldBlocksPath = NodePath("StaticWorldBlocks")
 
 [node name="Background" type="Node2D" parent="."]
 

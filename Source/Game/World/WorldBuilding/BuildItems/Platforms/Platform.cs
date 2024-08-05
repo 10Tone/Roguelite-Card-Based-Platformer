@@ -1,7 +1,6 @@
-using AutoLoads;
 using Godot;
 
-namespace Game.WorldBuilding.Platforms;
+namespace Game.WorldBuilding;
 
 public partial class Platform : StaticBody2D, IBuildItem
 {
