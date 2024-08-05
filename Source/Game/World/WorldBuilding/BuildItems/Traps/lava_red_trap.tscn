@@ -39,6 +39,7 @@ animations = [{
 z_index = 1
 script = ExtResource("1_htacf")
 _area2DPath = NodePath("Area2D")
+BuildItemValue = 1
 BuildItemType = 3
 
 [node name="Area2D" type="Area2D" parent="."]

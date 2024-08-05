@@ -73,6 +73,7 @@ public partial class GameManager : Node2D
 
     private void OnPlayerFinishedLevel()
     {
-        _gameStateMachine.ChangeState(_buildModeState);
+        GD.Print("Player finished level!");
+        // _gameStateMachine.ChangeState(_buildModeState);
     }
 }
