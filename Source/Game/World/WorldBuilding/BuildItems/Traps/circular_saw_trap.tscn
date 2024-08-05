@@ -79,7 +79,7 @@ BuildItemType = 3
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gqlfq")
 animation = &"active"
-frame_progress = 0.554072
+frame_progress = 0.794472
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 8)

@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://jtfhxq8w0yr2"]
+
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/Trap.cs" id="1_htacf"]
+[ext_resource type="Texture2D" uid="uid://bypikhfeoe27d" path="res://Content Assets/animated-traps-pixel-art-pack/15 Lava/15 Lava Red.png" id="2_k0bih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qte35"]
+size = Vector2(32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6ivm"]
+atlas = ExtResource("2_k0bih")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3afa"]
+atlas = ExtResource("2_k0bih")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56ugt"]
+atlas = ExtResource("2_k0bih")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lhw8j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6ivm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3afa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56ugt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LavaRedTrap" type="Node2D"]
+z_index = 1
+script = ExtResource("1_htacf")
+_area2DPath = NodePath("Area2D")
+BuildItemType = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 8)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qte35")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lhw8j")
+autoplay = "default"
+frame_progress = 0.952612
