@@ -10,17 +10,35 @@ public partial class BuildGrid : TileMapLayer
 {
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
-
     private Dictionary<Vector2, Node2D> _buildedItems = new();
-
     private bool _buildingEnabled;
 
     public override void _EnterTree()
     {
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
-        
         _globalEvents.GameStateEntered += OnGameStateEntered;
+    }
+
+    public override void _Ready()
+    {
+        TileSet.SetTileSize(_globalVariables.WorldGridSize);
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (!ShouldHandleInput(@event, out var eventMouseButton, out var cellPos))
+            return;
+
+        switch (eventMouseButton.ButtonIndex)
+        {
+            case MouseButton.Right:
+                HandleRightClick(cellPos);
+                break;
+            case MouseButton.Left:
+                HandleLeftClick(cellPos);
+                break;
+        }
     }
 
     private void OnGameStateEntered(GameStates gamestate)
@@ -38,77 +56,95 @@ public partial class BuildGrid : TileMapLayer
         }
     }
 
-    public override void _Ready()
+    private bool ShouldHandleInput(InputEvent @event, out InputEventMouseButton eventMouseButton, out Vector2 cellPos)
     {
-        TileSet.SetTileSize(_globalVariables.WorldGridSize);
-    }
+        eventMouseButton = null;
+        cellPos = Vector2.Zero;
 
+        if (!_buildingEnabled || @event is not InputEventMouseButton { Pressed: true } mouseButton)
+            return false;
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        base._UnhandledInput(@event);
-
-        if (!_buildingEnabled || 
-            @event is not InputEventMouseButton { Pressed: true } eventMouseButton)
-        {
-            return;
-        }
-
+        eventMouseButton = mouseButton;
         var mousePos = GetGlobalMousePosition();
         var localPos = ToLocal(mousePos);
-        var cellPos = LocalToMap(localPos);
-        // var tileData = GetCellTileData(cellPos);
-        
+        cellPos = LocalToMap(localPos);
+
         if (cellPos.Y == 0)
         {
             DebugOverlay.Instance.DebugPrint("Cannot build in the first row");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void HandleRightClick(Vector2 cellPos)
+    {
+        if (!_buildedItems.ContainsKey(cellPos))
+            return;
+
+        RemoveBlock(cellPos);
+    }
+
+    private void HandleLeftClick(Vector2 cellPos)
+    {
+        if (_buildedItems.ContainsKey(cellPos))
+        {
+            DebugOverlay.Instance.DebugPrint("Cell is already occupied " + cellPos);
             return;
         }
-        
-        DebugOverlay.Instance.DebugPrint(cellPos.ToString());
-        
-        switch (eventMouseButton.ButtonIndex)
+
+        CheckSurroundingCells(cellPos);
+        PlaceBlock(cellPos);
+    }
+
+    private void RemoveBlock(Vector2 cellPos)
+    {
+        DebugOverlay.Instance.DebugPrint("Removing block at position " + cellPos);
+        var blockInstance = _buildedItems[cellPos];
+        blockInstance.QueueFree();
+        _buildedItems.Remove(cellPos);
+
+        var item = (IBuildItem)blockInstance;
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
+    }
+
+    private void CheckSurroundingCells(Vector2 cellPos)
+    {
+        Vector2[] surroundingCells = new Vector2[]
         {
-            // Changed from 2 to MouseButton.Right
-            case MouseButton.Right when !_buildedItems.ContainsKey(cellPos):
-                return;
-            case MouseButton.Right:
+            new Vector2(-1, 0), new Vector2(1, 0),
+            new Vector2(0, -1), new Vector2(0, 1),
+            new Vector2(-1, -1), new Vector2(1, -1),
+            new Vector2(-1, 1), new Vector2(1, 1)
+        };
+
+        foreach (var offset in surroundingCells)
+        {
+            var neighborPos = cellPos + offset;
+            if (_buildedItems.TryGetValue(neighborPos, out var neighborNode))
             {
-                DebugOverlay.Instance.DebugPrint("Removing block at position " + cellPos);
-                var blockInstance = _buildedItems[cellPos];
-                blockInstance.QueueFree();
-                _buildedItems.Remove(cellPos);
-                // SetCell(tilePos); // Changed from SetCellv
-                //
-                var item = (IBuildItem)blockInstance;
-                _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
-                break;
-            }
-            // Changed from 1 to MouseButton.Left
-            // check if a key in local dictionary _buildItems exists based on the cellPos value
-            case MouseButton.Left when _buildedItems.ContainsKey(cellPos):
-                DebugOverlay.Instance.DebugPrint("Cell is already occupied " + cellPos);
-                return;
-            case MouseButton.Left:
-            {
-                var blockInstance =
-                    _globalVariables.SelectedBuildItem?.Scene
-                        .Instantiate() as Node2D; // Changed from Instance to Instantiate
-                if (blockInstance is null)
+                if (neighborNode is IBuildItem neighborItem)
                 {
-                    DebugOverlay.Instance.DebugPrint("BlockInstance is null");
-                    return;
+                    DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighborItem.BuildItemType}");
                 }
-                blockInstance.Position = (ToGlobal(MapToLocal(cellPos)));
-                AddChild(blockInstance);    
-                // SetCell(cellPos, 0); // Changed from SetCellv
-                _buildedItems.Add(cellPos, blockInstance);
-        
-                var item = (IBuildItem)blockInstance;
-                _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
-                break;
             }
         }
     }
-    
+
+    private void PlaceBlock(Vector2 cellPos)
+    {
+        var blockInstance = _globalVariables.SelectedBuildItem?.Scene.Instantiate() as Node2D;
+        if (blockInstance is null)
+        {
+            DebugOverlay.Instance.DebugPrint("BlockInstance is null");
+            return;
+        }
+        blockInstance.Position = ToGlobal(MapToLocal((Vector2I)cellPos));
+        AddChild(blockInstance);
+        _buildedItems.Add(cellPos, blockInstance);
+
+        var item = (IBuildItem)blockInstance;
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
+    }
 }
