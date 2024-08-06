@@ -15,6 +15,8 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 	}
 
 	[Export] public BuildItemTypes BuildItemType { get; private set; }
+	[Export] public Resource BuildItemResource { get; set; }
+
 	BuildItemTypes IBuildItem.BuildItemType
 	{
 		get => BuildItemType;
