@@ -10,7 +10,6 @@ size = Vector2(32, 32)
 collision_layer = 2
 input_pickable = true
 script = ExtResource("1_7jm0t")
-BuildItemValue = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_bhk41")

@@ -108,7 +108,7 @@ public partial class BuildGrid : TileMapLayer
         _buildedItems.Remove(cellPos);
 
         var item = (IBuildItem)blockInstance;
-        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
+        // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
     }
 
     private void CheckSurroundingCells(Vector2 cellPos)
@@ -128,7 +128,7 @@ public partial class BuildGrid : TileMapLayer
             {
                 if (neighborNode is IBuildItem neighborItem)
                 {
-                    DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighborItem.BuildItemType}");
+                    // DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighborItem.BuildItemType}");
                 }
             }
         }
@@ -147,7 +147,7 @@ public partial class BuildGrid : TileMapLayer
         _buildedItems.Add(cellPos, blockInstance);
 
         var item = (IBuildItem)blockInstance;
-        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
+        // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
     }
 
     private void RequestPlacement(Vector2I tilePosition)
