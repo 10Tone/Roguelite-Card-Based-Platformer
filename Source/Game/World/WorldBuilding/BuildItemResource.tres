@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BuildItemResource" load_steps=2 format=3 uid="uid://cldlhit3hbqw1"]
+
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItemResources/BuildItemResource.cs" id="1_wl816"]
+
+[resource]
+script = ExtResource("1_wl816")
+Name = ""
+BuildItemType = 0
+BuildItemValue = 0

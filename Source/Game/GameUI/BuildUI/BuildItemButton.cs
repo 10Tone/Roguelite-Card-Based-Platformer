@@ -7,7 +7,7 @@ namespace Game;
 
 public partial class BuildItemButton : TextureRect
 {
-    [Export()] private BuildItemResource _buildItemResource;
+    private BuildItemResource _buildItemResource;
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
 
@@ -19,10 +19,19 @@ public partial class BuildItemButton : TextureRect
 
     public override void _Ready()
     {
-        Texture = _buildItemResource.Icon;
-        
+        UpdateButtonTexture();
     }
-    
+
+    private void UpdateButtonTexture()
+    {
+        if(_buildItemResource == null)
+        {
+            return;
+        }
+
+        Texture = _buildItemResource.Icon;
+    }
+
 
     public void _on_BuildItemButton_gui_input(InputEvent @event)
     {

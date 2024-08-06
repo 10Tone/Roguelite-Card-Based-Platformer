@@ -38,6 +38,10 @@ public partial class GameManager : Node2D
         
         _gameStateMachine.Initialize((_playModeState));
         
+        foreach (var item in _globalVariables.BuildItemResources)
+        {
+            GD.Print(item.Name);
+        }
     }
 
     public override void _Process(double delta)

@@ -1,22 +1,27 @@
+using AutoLoads;
 using Godot;
 
 namespace Game;
 
 public partial class BuildMenu : Control
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
+    [Export] private NodePath _buildButtonsPath;
+    [Export] private PackedScene _buildItemButtonScene;
+    
+    private GridContainer _buildButtonsContainer;
+    private GlobalEvents _globalEvents;
+    private GlobalVariables _globalVariables;
     public override void _Ready()
     {
+        _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
+        _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
+        _buildButtonsContainer = GetNode<GridContainer>(_buildButtonsPath);
         
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    private void CreateBuildButtons()
+    {
+        
+        
+    }
 }

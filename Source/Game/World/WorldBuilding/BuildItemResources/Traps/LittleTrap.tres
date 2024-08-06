@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bbf5pby0h7u8k" path="res://Content Assets/animated-traps-pixel-art-pack/3 Little trap/3 Little Trap Icon.png" id="1_rtlmd"]
 [ext_resource type="PackedScene" uid="uid://cr15ixo13dhvd" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/little_trap.tscn" id="2_4xpcf"]
-[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItemResources/BuildItemResource.cs" id="3_2qedi"]
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItemResource.cs" id="3_2qedi"]
 
 [resource]
 script = ExtResource("3_2qedi")

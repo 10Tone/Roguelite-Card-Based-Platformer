@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d4ej4ynekxdqo" path="res://Content Assets/free-swamp-game-tileset-pixel-art/1 Tiles/Tile_31.png" id="1_g2t4c"]
 [ext_resource type="PackedScene" uid="uid://ub4jkyhy3mqr" path="res://Source/Game/World/WorldBuilding/BuildItems/Platforms/BasicPlatform.tscn" id="2_x512w"]
-[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItemResources/BuildItemResource.cs" id="3"]
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItemResource.cs" id="3"]
 
 [resource]
 script = ExtResource("3")

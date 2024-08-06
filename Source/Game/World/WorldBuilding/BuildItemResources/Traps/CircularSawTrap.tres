@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://djmwpxllfnpp1" path="res://Content Assets/animated-traps-pixel-art-pack/11 Circular saw/11 Circular Saw Icon.png" id="1_cilxf"]
 [ext_resource type="PackedScene" uid="uid://cf4vnylb02t5y" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/circular_saw_trap.tscn" id="2_ji5gn"]
-[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItemResources/BuildItemResource.cs" id="3_ne7m8"]
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItemResource.cs" id="3_ne7m8"]
 
 [resource]
 script = ExtResource("3_ne7m8")
