@@ -9,3 +9,4 @@ script = ExtResource("1")
 Name = "SpikeTrap"
 Icon = ExtResource("1_80p4r")
 Scene = ExtResource("2_evs85")
+BuildItemType = 3

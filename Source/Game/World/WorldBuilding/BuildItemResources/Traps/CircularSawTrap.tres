@@ -9,3 +9,4 @@ script = ExtResource("3_ne7m8")
 Name = "CircularSawTrap"
 Icon = ExtResource("1_cilxf")
 Scene = ExtResource("2_ji5gn")
+BuildItemType = 3

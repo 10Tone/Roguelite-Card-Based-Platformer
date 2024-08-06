@@ -9,3 +9,4 @@ script = ExtResource("3_0qe7q")
 Name = "LavaRedTrap"
 Icon = ExtResource("1_xivfk")
 Scene = ExtResource("2_drljq")
+BuildItemType = 3
