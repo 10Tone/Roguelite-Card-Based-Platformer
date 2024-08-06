@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 namespace Game.WorldBuilding;
-
+[GlobalClass]
 public partial class BuildItemResource : Resource
 {
   [Export()] public String Name { get; set; }
