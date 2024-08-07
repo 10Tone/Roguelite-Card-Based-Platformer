@@ -10,7 +10,8 @@ public partial class GlobalVariables: Node
     public BuildItemResource SelectedBuildItem { get; set; }
     public GameStates GameState { get; set; }
     public Vector2I WorldGridSize { get; set; }
-    
+    public Godot.Collections.Dictionary<Vector2, Node2D> BuildedItems { get; set; }
+
     private List<BuildItemResource> _buildItemResources;
     
     public List<BuildItemResource> BuildItemResources
@@ -25,6 +26,11 @@ public partial class GlobalVariables: Node
             }
             return _buildItemResources;
         }
+    }
+
+    public override void _EnterTree()
+    {
+        BuildedItems = new Godot.Collections.Dictionary<Vector2, Node2D>();
     }
 
     private void LoadResourcesFromDirectory(string dirPath)

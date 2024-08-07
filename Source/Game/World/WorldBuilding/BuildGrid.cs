@@ -11,7 +11,15 @@ public partial class BuildGrid : TileMapLayer
     [Signal]
     public delegate void PlacementRequestedEventHandler(Vector2I tilePosition);
 
-    private Dictionary<Vector2, Node2D> _buildedItems = new();
+    private Dictionary<Vector2, Node2D> _buildedItems
+    {
+        get => _globalVariables.BuildedItems;
+        set
+        {
+            _globalVariables.BuildedItems = value;
+        }
+    }
+    
     private bool _buildingEnabled;
 
     private GlobalEvents _globalEvents;
