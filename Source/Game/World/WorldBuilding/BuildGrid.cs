@@ -94,7 +94,7 @@ public partial class BuildGrid : TileMapLayer
     {
         if (_buildedItems.ContainsKey(cellPos))
         {
-            DebugOverlay.Instance.DebugPrint("Cell is already occupied " + cellPos);
+            // DebugOverlay.Instance.DebugPrint("Cell is already occupied " + cellPos);
             return;
         }
 
@@ -103,13 +103,34 @@ public partial class BuildGrid : TileMapLayer
 
     private void RemoveBlock(Vector2 cellPos)
     {
-        DebugOverlay.Instance.DebugPrint("Removing block at position " + cellPos);
+        // DebugOverlay.Instance.DebugPrint("Removing block at position " + cellPos);
         var blockInstance = _buildedItems[cellPos];
         blockInstance.QueueFree();
         _buildedItems.Remove(cellPos);
 
         var item = (IBuildItem)blockInstance;
         // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
+
+        // Check if the removed block is a platform
+        if (item.BuildItemResource.BuildItemType == BuildItemTypes.Platforms)
+        {
+            // Check surrounding cells for traps above the removed platform
+            var (neighbors, _) = CheckSurroundingCells(cellPos);
+            foreach (var neighbor in neighbors)
+            {
+                var neighborPos = neighbor.Key;
+                var neighborNode = neighbor.Value;
+                if (neighborNode is IBuildItem neighborItem &&
+                    neighborItem.BuildItemResource.BuildItemType == BuildItemTypes.Traps &&
+                    neighborPos == cellPos + new Vector2(0, -1)) // Check if the trap is directly above
+                {
+                    // DebugOverlay.Instance.DebugPrint("Removing trap at position " + neighborPos);
+                    neighborNode.QueueFree();
+                    _buildedItems.Remove(neighborPos);
+                    // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), neighborItem.BuildItemValue);
+                }
+            }
+        }
     }
 
     private (Dictionary<Vector2, Node2D> neighbors, bool isPlatformBelow) CheckSurroundingCells(Vector2 cellPos)
@@ -135,8 +156,6 @@ public partial class BuildGrid : TileMapLayer
                     neighbor.BuildItemResource.BuildItemType == BuildItemTypes.Platforms)
                 {
                     if (offset == new Vector2(0, 1)) isPlatformBelow = true;
-                    // GD.Print(neighbor.BuildItemResource.BuildItemType);
-                    // DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighbor.BuildItemResource.BuildItemType}");
                 }
             }
         }
