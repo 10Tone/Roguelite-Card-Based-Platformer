@@ -10,6 +10,7 @@ public partial class Player : CharacterBody2D, IPlayer
 {
     [Export()] private PlayerData _playerData;
     [Export()] private NodePath _inputHandlerPath;
+    [Export] private NodePath _animatedSprite2DPath;
 
     public PlayerStateMachine PlayerStateMachine { get; set; }
     public PlayerData PlayerData { get; set; }
@@ -29,6 +30,8 @@ public partial class Player : CharacterBody2D, IPlayer
     private IdleState _idleState;
     private MoveState _moveState;
     private JumpState _jumpState;
+    
+    private AnimatedSprite2D _animatedSprite2D;
 
     public override void _EnterTree()
     {
@@ -48,7 +51,7 @@ public partial class Player : CharacterBody2D, IPlayer
         if(PlayerData is null) {GD.PushWarning("PlayerData is null!");}
         InputHandler = GetNode(_inputHandlerPath) as PlayerInputHandler;
         if(InputHandler is null) {GD.PushWarning("InputHandler is null!");}
-       
+        _animatedSprite2D = GetNode(_animatedSprite2DPath) as AnimatedSprite2D;
         AddStates();
     }
     

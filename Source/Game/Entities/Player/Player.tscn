@@ -1,26 +1,70 @@
-[gd_scene load_steps=6 format=3 uid="uid://j7vmgqcomgld"]
+[gd_scene load_steps=12 format=3 uid="uid://j7vmgqcomgld"]
 
 [ext_resource type="Script" path="res://Source/Game/Entities/Player/Player.cs" id="1"]
 [ext_resource type="Resource" uid="uid://csrynsk4vbjx2" path="res://Source/Game/Entities/Player/Data/PlayerData.tres" id="2"]
 [ext_resource type="Script" path="res://Source/Game/Entities/Player/PlayerInputHandler.cs" id="4"]
 [ext_resource type="Texture2D" uid="uid://75ags6ahlh60" path="res://Content Assets/free-pixel-art-tiny-hero-sprites/2 Owlet_Monster/Owlet_Monster.png" id="4_cx872"]
+[ext_resource type="Texture2D" uid="uid://8ofmy7d4rhgl" path="res://Content Assets/free-pixel-art-tiny-hero-sprites/2 Owlet_Monster/Owlet_Monster_Idle_4.png" id="5_vvc6x"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 8.0
 height = 26.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3iyj7"]
+atlas = ExtResource("5_vvc6x")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut48l"]
+atlas = ExtResource("5_vvc6x")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tilt1"]
+atlas = ExtResource("5_vvc6x")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr763"]
+atlas = ExtResource("5_vvc6x")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4jnr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3iyj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut48l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tilt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr763")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1")
 _playerData = ExtResource("2")
 _inputHandlerPath = NodePath("InputHandler")
+_animatedSprite2DPath = NodePath("AnimatedSprite2D")
 
 [node name="InputHandler" type="Node" parent="."]
 script = ExtResource("4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("4_cx872")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 3)
+position = Vector2(0, 3)
 shape = SubResource("1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4jnr5")
+autoplay = "default"
+frame_progress = 0.446153
