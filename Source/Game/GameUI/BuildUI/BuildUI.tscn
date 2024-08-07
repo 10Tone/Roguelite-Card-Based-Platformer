@@ -72,19 +72,4 @@ grow_vertical = 2
 [node name="BuildButtons" type="GridContainer" parent="BuildMenu/VBoxContainer"]
 layout_mode = 2
 
-[node name="BuildItemButton" parent="BuildMenu/VBoxContainer/BuildButtons" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="BuildItemButton2" parent="BuildMenu/VBoxContainer/BuildButtons" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="BuildItemButton3" parent="BuildMenu/VBoxContainer/BuildButtons" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="BuildItemButton4" parent="BuildMenu/VBoxContainer/BuildButtons" instance=ExtResource("2")]
-layout_mode = 2
-
-[node name="BuildItemButton5" parent="BuildMenu/VBoxContainer/BuildButtons" instance=ExtResource("2")]
-layout_mode = 2
-
 [node name="MouseBuildItemPreview" parent="." instance=ExtResource("2_3o8wt")]

@@ -12,15 +12,13 @@ public partial class GlobalVariables: Node
     public Vector2I WorldGridSize { get; set; }
     
     private List<BuildItemResource> _buildItemResources;
-
-    // Load BuildItemResources in a public property, loaded from a folder in the project
+    
     public List<BuildItemResource> BuildItemResources
     {
         get
         {
             if (_buildItemResources == null)
             {
-                GD.Print("Loading BuildItemResources...");
                 _buildItemResources = new List<BuildItemResource>();
                 string dirPath = "res://Source/Game/World/WorldBuilding/BuildItemResources/";
                 LoadResourcesFromDirectory(dirPath);
@@ -32,7 +30,11 @@ public partial class GlobalVariables: Node
     private void LoadResourcesFromDirectory(string dirPath)
     {
         var dir = DirAccess.Open(dirPath);
-        if (dir != null)
+
+        if(dir == null)
+        {GD.PushWarning("BuildItemResources folder is empty or not found");}
+        
+        else
         {
             dir.ListDirBegin();
             string fileName = dir.GetNext();

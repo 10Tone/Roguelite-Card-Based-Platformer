@@ -16,18 +16,16 @@ public partial class BuildItemButton : TextureRect
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
     }
+    
 
-    public override void _Ready()
+    public void LoadButtonWithData(BuildItemResource buildItemResource)
     {
-        UpdateButtonTexture();
-    }
-
-    private void UpdateButtonTexture()
-    {
-        if(_buildItemResource == null)
+        if(buildItemResource == null)
         {
             return;
         }
+        
+        _buildItemResource = buildItemResource;
 
         Texture = _buildItemResource.Icon;
     }

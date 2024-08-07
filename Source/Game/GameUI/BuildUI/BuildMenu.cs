@@ -16,12 +16,17 @@ public partial class BuildMenu : Control
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
         _buildButtonsContainer = GetNode<GridContainer>(_buildButtonsPath);
-        
+        CreateBuildButtons();
     }
 
     private void CreateBuildButtons()
     {
-        
+        foreach (var item in _globalVariables.BuildItemResources)
+        {
+            var buildItemButton = (BuildItemButton)_buildItemButtonScene.Instantiate();
+            buildItemButton.LoadButtonWithData(item);
+            _buildButtonsContainer.AddChild(buildItemButton);
+        }
         
     }
 }
