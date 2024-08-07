@@ -10,6 +10,7 @@ size = Vector2(32, 32)
 collision_layer = 2
 input_pickable = true
 script = ExtResource("1_7jm0t")
+ResourcePath = "res://Source/Game/World/WorldBuilding/BuildItemResources/Platforms/BasicPlatform.tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_bhk41")

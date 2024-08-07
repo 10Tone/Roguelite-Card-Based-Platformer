@@ -128,6 +128,7 @@ public partial class BuildGrid : TileMapLayer
             {
                 if (neighborNode is IBuildItem neighborItem)
                 {
+                    GD.Print(neighborItem.BuildItemResource.BuildItemType);
                     // DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighborItem.BuildItemType}");
                 }
             }
@@ -157,7 +158,7 @@ public partial class BuildGrid : TileMapLayer
 
     public void ConfirmPlacement(Vector2I tilePosition)
     {
-        CheckSurroundingCells(tilePosition);
+        // CheckSurroundingCells(tilePosition);
         PlaceBlock(tilePosition);
     }
 

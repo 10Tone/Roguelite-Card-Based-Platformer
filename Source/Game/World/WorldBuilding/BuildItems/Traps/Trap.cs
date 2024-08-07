@@ -6,7 +6,15 @@ namespace Game.WorldBuilding;
 public partial class Trap : Node2D, IBuildItem, IDamage
 {
 	[Export] protected NodePath _area2DPath;
-	[Export] public Resource BuildItemResource { get; set; }
+
+	BuildItemResource IBuildItem.BuildItemResource
+	{
+		get => _buildItemResource;
+		set => _buildItemResource = value;
+	}
+
+	Resource BuildItemResource { get; set; }
+	[Export] public string ResourcePath { get; set; }
 	// [Export] public int BuildItemValue { get; private set; }
 	// int IBuildItem.BuildItemValue
 	// {
@@ -24,6 +32,7 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 	// }
 
 	protected Area2D _area2D;
+	private BuildItemResource _buildItemResource;
 
 	public override void _EnterTree()
 	{

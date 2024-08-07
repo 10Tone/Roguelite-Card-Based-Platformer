@@ -37,11 +37,6 @@ public partial class GameManager : Node2D
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
         
         _gameStateMachine.Initialize((_playModeState));
-        
-        foreach (var item in _globalVariables.BuildItemResources)
-        {
-            GD.Print(item.Name);
-        }
     }
 
     public override void _Process(double delta)

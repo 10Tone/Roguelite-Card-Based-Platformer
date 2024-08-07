@@ -74,8 +74,7 @@ _animatedSprite2DPath = NodePath("AnimatedSprite2D")
 _idleTimerPath = NodePath("IdleTimer")
 _activeTimerPath = NodePath("ActiveTimer")
 _area2DPath = NodePath("Area2D")
-BuildItemValue = 3
-BuildItemType = 3
+ResourcePath = "res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/CircularSawTrap.tres"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gqlfq")

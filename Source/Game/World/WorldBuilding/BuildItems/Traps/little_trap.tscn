@@ -54,8 +54,7 @@ _idleTimerPath = NodePath("IdleTimer")
 _activeTimerPath = NodePath("ActiveTimer")
 _oneShot = true
 _area2DPath = NodePath("Area2D")
-BuildItemValue = 2
-BuildItemType = 3
+ResourcePath = "res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/LittleTrap.tres"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
