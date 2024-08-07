@@ -11,10 +11,11 @@ public partial class BuildGrid : TileMapLayer
     [Signal]
     public delegate void PlacementRequestedEventHandler(Vector2I tilePosition);
 
-    private GlobalEvents _globalEvents;
-    private GlobalVariables _globalVariables;
     private Dictionary<Vector2, Node2D> _buildedItems = new();
     private bool _buildingEnabled;
+
+    private GlobalEvents _globalEvents;
+    private GlobalVariables _globalVariables;
 
     public override void _EnterTree()
     {
@@ -111,28 +112,36 @@ public partial class BuildGrid : TileMapLayer
         // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
     }
 
-    private void CheckSurroundingCells(Vector2 cellPos)
+    private (Dictionary<Vector2, Node2D> neighbors, bool isPlatformBelow) CheckSurroundingCells(Vector2 cellPos)
     {
-        Vector2[] surroundingCells = new Vector2[]
+        Vector2[] surroundingCells =
         {
-            new Vector2(-1, 0), new Vector2(1, 0),
-            new Vector2(0, -1), new Vector2(0, 1),
-            new Vector2(-1, -1), new Vector2(1, -1),
-            new Vector2(-1, 1), new Vector2(1, 1)
+            new(-1, 0), new(1, 0),
+            new(0, -1), new(0, 1),
+            new(-1, -1), new(1, -1),
+            new(-1, 1), new(1, 1)
         };
+
+        var neighbors = new Dictionary<Vector2, Node2D>();
+        var isPlatformBelow = false;
 
         foreach (var offset in surroundingCells)
         {
             var neighborPos = cellPos + offset;
             if (_buildedItems.TryGetValue(neighborPos, out var neighborNode))
             {
-                if (neighborNode is IBuildItem neighbor)
+                neighbors[neighborPos] = neighborNode;
+                if (neighborNode is IBuildItem neighbor &&
+                    neighbor.BuildItemResource.BuildItemType == BuildItemTypes.Platforms)
                 {
-                    GD.Print(neighbor.BuildItemResource.BuildItemType);
+                    if (offset == new Vector2(0, 1)) isPlatformBelow = true;
+                    // GD.Print(neighbor.BuildItemResource.BuildItemType);
                     // DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighbor.BuildItemResource.BuildItemType}");
                 }
             }
         }
+
+        return (neighbors, isPlatformBelow);
     }
 
     private void PlaceBlock(Vector2 cellPos)
@@ -143,6 +152,7 @@ public partial class BuildGrid : TileMapLayer
             DebugOverlay.Instance.DebugPrint("BlockInstance is null");
             return;
         }
+
         blockInstance.Position = ToGlobal(MapToLocal((Vector2I)cellPos));
         AddChild(blockInstance);
         _buildedItems.Add(cellPos, blockInstance);
@@ -158,7 +168,12 @@ public partial class BuildGrid : TileMapLayer
 
     public void ConfirmPlacement(Vector2I tilePosition)
     {
-        CheckSurroundingCells(tilePosition);
+        if (_globalVariables.SelectedBuildItem.BuildItemType == BuildItemTypes.Traps &&
+            !CheckSurroundingCells(tilePosition)
+                .isPlatformBelow)
+        {
+            return;}
+        // GD.Print(CheckSurroundingCells(tilePosition));
         PlaceBlock(tilePosition);
     }
 
