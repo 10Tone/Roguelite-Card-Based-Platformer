@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://b64rn8mx85c6o"]
+[gd_resource type="Resource" script_class="BuildItemResource" load_steps=4 format=3 uid="uid://b64rn8mx85c6o"]
 
 [ext_resource type="Texture2D" uid="uid://bbf5pby0h7u8k" path="res://Content Assets/animated-traps-pixel-art-pack/3 Little trap/3 Little Trap Icon.png" id="1_rtlmd"]
 [ext_resource type="PackedScene" uid="uid://cr15ixo13dhvd" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/little_trap.tscn" id="2_4xpcf"]
@@ -10,3 +10,4 @@ Name = "LittleTrap"
 Icon = ExtResource("1_rtlmd")
 Scene = ExtResource("2_4xpcf")
 BuildItemType = 3
+BuildItemValue = 1

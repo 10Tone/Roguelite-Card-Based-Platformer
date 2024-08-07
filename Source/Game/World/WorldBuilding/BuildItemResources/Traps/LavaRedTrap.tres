@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://ch0k6soeuwgal"]
+[gd_resource type="Resource" script_class="BuildItemResource" load_steps=4 format=3 uid="uid://ch0k6soeuwgal"]
 
 [ext_resource type="Texture2D" uid="uid://cinid3oejf81b" path="res://Content Assets/animated-traps-pixel-art-pack/15 Lava/15 Lava Red Icon.png" id="1_xivfk"]
 [ext_resource type="PackedScene" uid="uid://jtfhxq8w0yr2" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/lava_red_trap.tscn" id="2_drljq"]
@@ -10,3 +10,4 @@ Name = "LavaRedTrap"
 Icon = ExtResource("1_xivfk")
 Scene = ExtResource("2_drljq")
 BuildItemType = 3
+BuildItemValue = 2

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dpfc7lhtla151"]
+[gd_resource type="Resource" script_class="BuildItemResource" load_steps=4 format=3 uid="uid://dpfc7lhtla151"]
 
 [ext_resource type="Texture2D" uid="uid://djmwpxllfnpp1" path="res://Content Assets/animated-traps-pixel-art-pack/11 Circular saw/11 Circular Saw Icon.png" id="1_cilxf"]
 [ext_resource type="PackedScene" uid="uid://cf4vnylb02t5y" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/circular_saw_trap.tscn" id="2_ji5gn"]
@@ -10,3 +10,4 @@ Name = "CircularSawTrap"
 Icon = ExtResource("1_cilxf")
 Scene = ExtResource("2_ji5gn")
 BuildItemType = 3
+BuildItemValue = 3

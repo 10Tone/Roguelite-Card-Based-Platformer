@@ -105,17 +105,18 @@ public partial class BuildGrid : TileMapLayer
     {
         // DebugOverlay.Instance.DebugPrint("Removing block at position " + cellPos);
         var blockInstance = _buildedItems[cellPos];
+        var (neighbors, _) = CheckSurroundingCells(cellPos);
         blockInstance.QueueFree();
         _buildedItems.Remove(cellPos);
 
         var item = (IBuildItem)blockInstance;
-        // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemValue);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemResource, neighbors);
 
         // Check if the removed block is a platform
         if (item.BuildItemResource.BuildItemType == BuildItemTypes.Platforms)
         {
             // Check surrounding cells for traps above the removed platform
-            var (neighbors, _) = CheckSurroundingCells(cellPos);
+            
             foreach (var neighbor in neighbors)
             {
                 var neighborPos = neighbor.Key;
@@ -127,7 +128,7 @@ public partial class BuildGrid : TileMapLayer
                     // DebugOverlay.Instance.DebugPrint("Removing trap at position " + neighborPos);
                     neighborNode.QueueFree();
                     _buildedItems.Remove(neighborPos);
-                    // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), neighborItem.BuildItemValue);
+                    _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), neighborItem.BuildItemResource, neighbors);
                 }
             }
         }
@@ -163,7 +164,7 @@ public partial class BuildGrid : TileMapLayer
         return (neighbors, isPlatformBelow);
     }
 
-    private void PlaceBlock(Vector2 cellPos)
+    private void PlaceBlock(Vector2 cellPos, Dictionary<Vector2, Node2D> neighbors)
     {
         var blockInstance = _globalVariables.SelectedBuildItem?.Scene.Instantiate() as Node2D;
         if (blockInstance is null)
@@ -177,7 +178,7 @@ public partial class BuildGrid : TileMapLayer
         _buildedItems.Add(cellPos, blockInstance);
 
         var item = (IBuildItem)blockInstance;
-        // _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemValue);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemResource, neighbors);
     }
 
     private void RequestPlacement(Vector2I tilePosition)
@@ -187,13 +188,14 @@ public partial class BuildGrid : TileMapLayer
 
     public void ConfirmPlacement(Vector2I tilePosition)
     {
+        var neighborData = CheckSurroundingCells(tilePosition);
         if (_globalVariables.SelectedBuildItem.BuildItemType == BuildItemTypes.Traps &&
-            !CheckSurroundingCells(tilePosition)
+            !neighborData
                 .isPlatformBelow)
         {
             return;}
         // GD.Print(CheckSurroundingCells(tilePosition));
-        PlaceBlock(tilePosition);
+        PlaceBlock(tilePosition, neighborData.neighbors);
     }
 
     public void CancelPlacement(Vector2I tilePosition)

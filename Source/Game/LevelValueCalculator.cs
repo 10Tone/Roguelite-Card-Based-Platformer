@@ -1,5 +1,7 @@
 using AutoLoads;
+using Game.WorldBuilding;
 using Godot;
+using Godot.Collections;
 using Tools;
 
 namespace Game;
@@ -23,16 +25,16 @@ public partial class LevelValueCalculator: Node
         _globalEvents.ItemRemoved += OnItemRemoved;
     }
 
-    private void OnItemBuild(int value)
+    private void OnItemBuild(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors)
     {
-        UpdateLevelValue(value);
+        UpdateLevelValue(buildItemResource.BuildItemValue);
     }
-
-    private void OnItemRemoved(int value)
+    
+    private void OnItemRemoved(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors)
     {
-        UpdateLevelValue(-value);
+        UpdateLevelValue(-buildItemResource.BuildItemValue);
     }
-
+    
     private void UpdateLevelValue(int value)
     {
         _levelValue += value;

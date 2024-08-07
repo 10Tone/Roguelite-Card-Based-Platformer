@@ -1,6 +1,7 @@
 using Game;
 using Game.WorldBuilding;
 using Godot;
+using Godot.Collections;
 
 namespace AutoLoads;
 
@@ -13,10 +14,10 @@ public partial class GlobalEvents : Node
     public delegate void BuildItemButtonClickedEventHandler(BuildItemResource buildItemResource);
 
     [Signal]
-    public delegate void ItemBuildEventHandler(int value);
+    public delegate void ItemBuildEventHandler(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors);
 
     [Signal]
-    public delegate void ItemRemovedEventHandler(int value);
+    public delegate void ItemRemovedEventHandler(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors);
 
     [Signal]
     public delegate void LevelValueUpdatedEventHandler(int value);
