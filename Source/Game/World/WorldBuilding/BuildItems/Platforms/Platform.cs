@@ -16,10 +16,10 @@ public partial class Platform : StaticBody2D, IBuildItem
         set => _buildItemResource = value;
     }
 
-    Resource BuildItemResource { get; set; }
+    BuildItemResource BuildItemResource { get; set; }
 
     public override void _Ready()
     {
-        BuildItemResource = GD.Load<Resource>(ResourcePath);
+        _buildItemResource = GD.Load<BuildItemResource>(ResourcePath);
     }
 }

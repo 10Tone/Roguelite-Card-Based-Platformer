@@ -126,10 +126,10 @@ public partial class BuildGrid : TileMapLayer
             var neighborPos = cellPos + offset;
             if (_buildedItems.TryGetValue(neighborPos, out var neighborNode))
             {
-                if (neighborNode is IBuildItem neighborItem)
+                if (neighborNode is IBuildItem neighbor)
                 {
-                    GD.Print(neighborItem.BuildItemResource.BuildItemType);
-                    // DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighborItem.BuildItemType}");
+                    GD.Print(neighbor.BuildItemResource.BuildItemType);
+                    // DebugOverlay.Instance.DebugPrint($"Neighbor at {neighborPos}: {neighbor.BuildItemResource.BuildItemType}");
                 }
             }
         }
@@ -158,7 +158,7 @@ public partial class BuildGrid : TileMapLayer
 
     public void ConfirmPlacement(Vector2I tilePosition)
     {
-        // CheckSurroundingCells(tilePosition);
+        CheckSurroundingCells(tilePosition);
         PlaceBlock(tilePosition);
     }
 

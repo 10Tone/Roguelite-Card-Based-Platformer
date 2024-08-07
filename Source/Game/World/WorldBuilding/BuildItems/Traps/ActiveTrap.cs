@@ -35,23 +35,19 @@ public partial class ActiveTrap: Trap
         if (_oneShot)
         {
             return;}
-        GD.Print("active timer finished!");
+        // GD.Print("active timer finished!");
         _animatedSprite.Play("idle");   
         _animatedSprite.Stop();
         _idleTimer.Start();
     }
-
-    public override void _Ready()
-    {
-
-    }
+    
 
     private void OnAnimationFinished()
     {
         if (!_oneShot)
         {
             return;}
-        GD.Print("animation finished!");
+        // GD.Print("animation finished!");
         _animatedSprite.Play("idle");
         _animatedSprite.Stop();
         _idleTimer.Start();
@@ -64,7 +60,7 @@ public partial class ActiveTrap: Trap
 
     private void OnIdleTimerTimeout()
     {
-        GD.Print("idle timer finished!");
+        // GD.Print("idle timer finished!");
         _animatedSprite.Play("active");
         _activeTimer.Start();
     }

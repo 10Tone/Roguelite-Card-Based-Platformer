@@ -53,7 +53,7 @@ public partial class GlobalVariables: Node
                         if (resource != null)
                         {
                             _buildItemResources.Add(resource);
-                            GD.Print($"Loaded BuildItemResource: {resource.Name}");
+                            // GD.Print($"Loaded BuildItemResource: {resource.Name}");
                         }
                     }
                 }
