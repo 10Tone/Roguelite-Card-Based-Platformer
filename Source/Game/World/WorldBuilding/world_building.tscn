@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dv7k102vwgnv0"]
+[gd_scene load_steps=8 format=4 uid="uid://dv7k102vwgnv0"]
 
 [ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/WorldBuilding.cs" id="1_7w1vu"]
 [ext_resource type="Texture2D" uid="uid://vw20ckbspvxw" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/1.png" id="1_ax0sq"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://eye6yn5ayq8n" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/4.png" id="3_kcrjw"]
 [ext_resource type="PackedScene" uid="uid://dc4wmgeq2usoy" path="res://Source/Game/World/WorldBuilding/build_grid.tscn" id="4_jdurm"]
 [ext_resource type="PackedScene" uid="uid://d1mv137od1sir" path="res://Source/Game/World/WorldBuilding/static_world_blocks.tscn" id="5_7wra6"]
-[ext_resource type="PackedScene" uid="uid://ccdkouw2y622e" path="res://Source/Game/level_value_calculator.tscn" id="6_3kcdb"]
 [ext_resource type="PackedScene" uid="uid://d30525pa3kch4" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="7_38gb4"]
 
 [node name="WorldBuilding" type="Node2D"]
@@ -35,8 +34,6 @@ centered = false
 tile_map_data = PackedByteArray("AAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAEAAAAAAAcAAAACAAEAAAAAAAgAAAACAAEAAAAAAAkAAAACAAEAAAAAAAoAAAACAAEAAAAAAAAAAAACAAEAAAD//wAAAAAFAAEAAAD//wEAAAAFAAEAAAD//wIAAAAFAAEAAAD//wMAAAAFAAEAAAD//wQAAAAFAAEAAAD//wUAAAAFAAEAAAD//wYAAAAFAAEAAAD//wcAAAAFAAEAAAD//wgAAAAFAAEAAAD//wkAAAAFAAEAAAD//woAAAAFAAEAAAATAAAAAAABAAEAAAATAAEAAAABAAEAAAATAAIAAAABAAEAAAATAAMAAAABAAEAAAATAAQAAAABAAEAAAATAAUAAAABAAEAAAATAAYAAAABAAEAAAATAAcAAAABAAEAAAATAAgAAAABAAEAAAATAAkAAAABAAEAAAATAAoAAAABAAEAAAATAAsAAAABAAEAAAD//wsAAAAHAAMAAAAUAAAAAAACAAEAAAAUAAEAAAACAAEAAAAUAAIAAAACAAEAAAAUAAMAAAACAAEAAAAUAAQAAAACAAEAAAAUAAUAAAACAAEAAAAUAAYAAAACAAEAAAAUAAcAAAACAAEAAAAUAAgAAAACAAEAAAAUAAkAAAACAAEAAAAUAAoAAAACAAEAAAAUAAsAAAACAAEAAAAAAAsAAAACAAUAAAABAAsAAAACAAMAAAACAAsAAAADAAMAAAARAAIAAAAGAAEAAAASAAIAAAABAAEAAAASAAcAAAABAAEAAAASAAgAAAABAAEAAAASAAsAAAABAAEAAAASAAoAAAABAAEAAAASAAkAAAABAAEAAAASAAYAAAABAAEAAAASAAUAAAABAAEAAAASAAQAAAABAAEAAAASAAMAAAABAAEAAAASAAEAAAABAAEAAAASAAAAAAABAAEAAAAQAAIAAAACAAMAAAARAAMAAAAAAAEAAAARAAQAAAAAAAEAAAARAAUAAAAAAAEAAAARAAYAAAAAAAEAAAARAAcAAAAAAAEAAAARAAgAAAAAAAEAAAARAAkAAAAAAAEAAAARAAoAAAAAAAEAAAARAAsAAAAAAAEAAAARAAwAAAAAAAEAAAARAAEAAAAAAAEAAAARAAAAAAAAAAEAAAAPAAIAAAABAAMAAAA=")
 
 [node name="BuildGrid" parent="." instance=ExtResource("4_jdurm")]
-
-[node name="LevelValueCalculator" parent="." instance=ExtResource("6_3kcdb")]
 
 [node name="LevelGoal" parent="." instance=ExtResource("7_38gb4")]
 position = Vector2(496, 48)
