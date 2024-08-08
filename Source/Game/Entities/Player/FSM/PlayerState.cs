@@ -14,13 +14,14 @@ public partial class PlayerState:State
         Player = player;
         this.AnimName = animName;
     }
+    
 
     public override void Enter()
     {
         base.Enter();
         // DebugOverlay.Instance.DebugPrint(AnimName + " state entered");
         // player.AnimationFinished = false;
-        // player.Animator.Play(animName);
+        Player.AnimatedSprite.Play(AnimName);
     }
 
     public override void PhysicsUpdate(double delta)

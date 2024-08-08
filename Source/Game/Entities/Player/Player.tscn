@@ -42,8 +42,18 @@ animations = [{
 "texture": SubResource("AtlasTexture_fr763")
 }],
 "loop": true,
-"name": &"default",
+"name": &"Idle",
 "speed": 6.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Move",
+"speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -66,5 +76,5 @@ shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4jnr5")
-autoplay = "default"
-frame_progress = 0.446153
+animation = &"Jump"
+autoplay = "Idle"

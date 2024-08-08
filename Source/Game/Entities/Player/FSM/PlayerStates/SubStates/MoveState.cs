@@ -22,6 +22,7 @@ public partial class MoveState: GroundedState
         {
             Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.Idle]);
         }
+        Player.CheckIfShouldFlip(Player.InputHandler.HorizontalInput);
         Move(delta);
     }
     

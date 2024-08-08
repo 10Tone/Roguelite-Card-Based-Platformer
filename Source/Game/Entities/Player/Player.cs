@@ -17,7 +17,9 @@ public partial class Player : CharacterBody2D, IPlayer
     public PlayerInputHandler InputHandler { get; set; }
     public Vector2 Motion { get; set; }
     public bool IsGrounded { get; set; }
-    
+    public int FacingDirection { get; private set; }
+    public AnimatedSprite2D AnimatedSprite { get; set; }
+
     public Vector2 PlayerVelocity
     {
         get => Velocity;
@@ -52,6 +54,8 @@ public partial class Player : CharacterBody2D, IPlayer
         InputHandler = GetNode(_inputHandlerPath) as PlayerInputHandler;
         if(InputHandler is null) {GD.PushWarning("InputHandler is null!");}
         _animatedSprite2D = GetNode(_animatedSprite2DPath) as AnimatedSprite2D;
+        FacingDirection = 1;
+        AnimatedSprite = _animatedSprite2D;
         AddStates();
     }
     
@@ -99,6 +103,25 @@ public partial class Player : CharacterBody2D, IPlayer
     {
         // TEMP
         GlobalPosition = new Vector2(50, 300);
+    }
+    
+    private void Flip()
+    {
+        FacingDirection *= -1;
+        _animatedSprite2D.FlipH = FacingDirection switch
+        {
+            1 => false,
+            -1 => true,
+            _ => _animatedSprite2D.FlipH
+        };
+    }
+    
+    public void CheckIfShouldFlip(float horizontalInput)
+    {
+        if (horizontalInput != 0 && Convert.ToInt32(horizontalInput) != FacingDirection)
+        {
+            Flip();
+        }
     }
     
 }
