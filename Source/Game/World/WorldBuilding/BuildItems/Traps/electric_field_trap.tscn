@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://77q3nocdwm5k"]
+
+[ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/ActiveTrap.cs" id="1_t8snx"]
+[ext_resource type="Texture2D" uid="uid://bpchi81vnaw5k" path="res://Content Assets/animated-traps-pixel-art-pack/11 Circular saw/11 Circular Saw.png" id="2_3n6v5"]
+[ext_resource type="Texture2D" uid="uid://ctsv6e6pj6l62" path="res://Content Assets/animated-traps-pixel-art-pack/14 Electric field/14 Electric field.png" id="2_542cf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loe1s"]
+atlas = ExtResource("2_542cf")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wggop"]
+atlas = ExtResource("2_542cf")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghj0y"]
+atlas = ExtResource("2_542cf")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ea56"]
+atlas = ExtResource("2_542cf")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcjmj"]
+atlas = ExtResource("2_542cf")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dx85"]
+atlas = ExtResource("2_542cf")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5ibd"]
+atlas = ExtResource("2_3n6v5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqlfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loe1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wggop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghj0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ea56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcjmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dx85")
+}],
+"loop": true,
+"name": &"active",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5ibd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qte35"]
+size = Vector2(32, 32)
+
+[node name="ElectricFieldTrap" type="Node2D"]
+script = ExtResource("1_t8snx")
+_animatedSprite2DPath = NodePath("AnimatedSprite2D")
+_idleTimerPath = NodePath("IdleTimer")
+_activeTimerPath = NodePath("ActiveTimer")
+_oneShot = true
+_area2DPath = NodePath("Area2D")
+ResourcePath = "res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/CircularSawTrap.tres"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gqlfq")
+animation = &"active"
+frame_progress = 0.137114
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 8)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qte35")
+
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="ActiveTimer" type="Timer" parent="."]
+wait_time = 8.0
