@@ -5,11 +5,11 @@
 [resource]
 script = ExtResource("1")
 Acceleration = 32.0
-AirResistance = 0.02
-AmountOfJumps = 2
-CoyoteTime = 0.2
-Friction = 0.4
-Gravity = 640.0
-JumpForce = 320.0
+AirResistance = 0.04
+AmountOfJumps = 1
+CoyoteTime = 0.8
+Friction = 0.6
+Gravity = 632.0
+JumpForce = 328.0
 MaxSpeed = 128.0
 VariableJumpHeightMultiplier = 0.1
