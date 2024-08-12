@@ -93,6 +93,7 @@ public partial class Player : CharacterBody2D, IPlayer
         else
         {
             InputHandler.InputEnabled = false;
+            Velocity = Vector2.Zero;
             MoveBackToStartPosition();
         }
         

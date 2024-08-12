@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwvimqls6dlaq"]
+
+[ext_resource type="Script" path="res://Source/Game/Interactables/DeadBox/DeadBox.cs" id="1_b0ivv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gpd5e"]
+size = Vector2(800, 20)
+
+[node name="DeadBox" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_b0ivv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(320, 388)
+shape = SubResource("RectangleShape2D_gpd5e")
