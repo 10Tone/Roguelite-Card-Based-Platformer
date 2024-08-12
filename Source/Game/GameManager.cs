@@ -66,18 +66,25 @@ public partial class GameManager : Node2D
     private void OnGameModeButtonPressed()
     {
         var currentGameState = _globalVariables.GameStates.Keys.FirstOrDefault(x => _globalVariables.GameStates[x].GetType() == _gameStateMachine.CurrentState.GetType());
+        
+        if (currentGameState == "PlayModeState")
+            _gameStateMachine.ChangeState(_buildModeState);
+        else if (currentGameState == "BuildModeState")
+            _gameStateMachine.ChangeState(_playModeState);
 
-        switch (currentGameState)
-        {
-            case "PlayModeState":
-                _gameStateMachine.ChangeState(_buildModeState);
-                break;
-            case "BuildModeState":
-                _gameStateMachine.ChangeState(_playModeState);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
-        }
+        
+        //
+        // switch (currentGameState)
+        // {
+        //     case "PlayModeState":
+        //         _gameStateMachine.ChangeState(_buildModeState);
+        //         break;
+        //     case "BuildModeState":
+        //         _gameStateMachine.ChangeState(_playModeState);
+        //         break;
+        //     default:
+        //         throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
+        // }
     }
 
     private void OnPlayerFinishedLevel()

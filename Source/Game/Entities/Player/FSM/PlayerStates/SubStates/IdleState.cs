@@ -16,6 +16,7 @@ public partial class IdleState: GroundedState
     public override void PhysicsUpdate(double delta)
     {
         base.PhysicsUpdate(delta);
+
         if (Player.InputHandler.HorizontalInput != 0f)
         {
             Player.PlayerStateMachine.ChangeState(Player.PlayerStateMachine.States[PlayerStates.Move]);

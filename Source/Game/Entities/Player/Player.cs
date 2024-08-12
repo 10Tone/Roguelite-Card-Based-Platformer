@@ -67,6 +67,7 @@ public partial class Player : CharacterBody2D, IPlayer
 
     public override void _PhysicsProcess(double delta)
     {
+        if(!InputHandler.InputEnabled) { return; }
         PlayerStateMachine.CurrentState.PhysicsUpdate(delta);
         IsGrounded = IsOnFloor();
         var velocity = Velocity;
@@ -84,7 +85,7 @@ public partial class Player : CharacterBody2D, IPlayer
         
     }
 
-    private void OnGameStateEntered(GameState gameState)
+    private async void OnGameStateEntered(GameState gameState)
     {
         if (gameState == _globalVariables.GameStates["PlayModeState"])
         {
@@ -93,10 +94,9 @@ public partial class Player : CharacterBody2D, IPlayer
         else
         {
             InputHandler.InputEnabled = false;
-            Velocity = Vector2.Zero;
+            PlayerStateMachine.ChangeState(_idleState);
             MoveBackToStartPosition();
         }
-        
     }
 
     private void MoveBackToStartPosition()
