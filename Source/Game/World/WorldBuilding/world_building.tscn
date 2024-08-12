@@ -1,39 +1,15 @@
-[gd_scene load_steps=8 format=4 uid="uid://dv7k102vwgnv0"]
+[gd_scene load_steps=4 format=4 uid="uid://dv7k102vwgnv0"]
 
 [ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/WorldBuilding.cs" id="1_7w1vu"]
-[ext_resource type="Texture2D" uid="uid://vw20ckbspvxw" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/1.png" id="1_ax0sq"]
-[ext_resource type="Texture2D" uid="uid://c774tjrt28753" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/2.png" id="2_syxyd"]
-[ext_resource type="Texture2D" uid="uid://eye6yn5ayq8n" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/4.png" id="3_kcrjw"]
 [ext_resource type="PackedScene" uid="uid://dc4wmgeq2usoy" path="res://Source/Game/World/WorldBuilding/build_grid.tscn" id="4_jdurm"]
 [ext_resource type="PackedScene" uid="uid://d1mv137od1sir" path="res://Source/Game/World/WorldBuilding/static_world_blocks.tscn" id="5_7wra6"]
-[ext_resource type="PackedScene" uid="uid://d30525pa3kch4" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="7_38gb4"]
 
 [node name="WorldBuilding" type="Node2D"]
 script = ExtResource("1_7w1vu")
 _buildGridPath = NodePath("BuildGrid")
 _staticWorldBlocksPath = NodePath("StaticWorldBlocks")
 
-[node name="Background" type="Node2D" parent="."]
-
-[node name="Background" type="Sprite2D" parent="Background"]
-position = Vector2(32, 0)
-texture = ExtResource("1_ax0sq")
-centered = false
-
-[node name="Background2" type="Sprite2D" parent="Background"]
-position = Vector2(32, 64)
-texture = ExtResource("2_syxyd")
-centered = false
-
-[node name="Background3" type="Sprite2D" parent="Background"]
-position = Vector2(32, 64)
-texture = ExtResource("3_kcrjw")
-centered = false
-
 [node name="StaticWorldBlocks" parent="." instance=ExtResource("5_7wra6")]
 tile_map_data = PackedByteArray("AAAAAAEAAAACAAEAAAAAAAIAAAACAAEAAAAAAAMAAAACAAEAAAAAAAQAAAACAAEAAAAAAAUAAAACAAEAAAAAAAYAAAACAAEAAAAAAAcAAAACAAEAAAAAAAgAAAACAAEAAAAAAAkAAAACAAEAAAAAAAoAAAACAAEAAAAAAAAAAAACAAEAAAD//wAAAAAFAAEAAAD//wEAAAAFAAEAAAD//wIAAAAFAAEAAAD//wMAAAAFAAEAAAD//wQAAAAFAAEAAAD//wUAAAAFAAEAAAD//wYAAAAFAAEAAAD//wcAAAAFAAEAAAD//wgAAAAFAAEAAAD//wkAAAAFAAEAAAD//woAAAAFAAEAAAATAAAAAAABAAEAAAATAAEAAAABAAEAAAATAAIAAAABAAEAAAATAAMAAAABAAEAAAATAAQAAAABAAEAAAATAAUAAAABAAEAAAATAAYAAAABAAEAAAATAAcAAAABAAEAAAATAAgAAAABAAEAAAATAAkAAAABAAEAAAATAAoAAAABAAEAAAATAAsAAAABAAEAAAD//wsAAAAHAAMAAAAUAAAAAAACAAEAAAAUAAEAAAACAAEAAAAUAAIAAAACAAEAAAAUAAMAAAACAAEAAAAUAAQAAAACAAEAAAAUAAUAAAACAAEAAAAUAAYAAAACAAEAAAAUAAcAAAACAAEAAAAUAAgAAAACAAEAAAAUAAkAAAACAAEAAAAUAAoAAAACAAEAAAAUAAsAAAACAAEAAAAAAAsAAAACAAUAAAABAAsAAAACAAMAAAACAAsAAAADAAMAAAARAAIAAAAGAAEAAAASAAIAAAABAAEAAAASAAcAAAABAAEAAAASAAgAAAABAAEAAAASAAsAAAABAAEAAAASAAoAAAABAAEAAAASAAkAAAABAAEAAAASAAYAAAABAAEAAAASAAUAAAABAAEAAAASAAQAAAABAAEAAAASAAMAAAABAAEAAAASAAEAAAABAAEAAAASAAAAAAABAAEAAAAQAAIAAAACAAMAAAARAAMAAAAAAAEAAAARAAQAAAAAAAEAAAARAAUAAAAAAAEAAAARAAYAAAAAAAEAAAARAAcAAAAAAAEAAAARAAgAAAAAAAEAAAARAAkAAAAAAAEAAAARAAoAAAAAAAEAAAARAAsAAAAAAAEAAAARAAwAAAAAAAEAAAARAAEAAAAAAAEAAAARAAAAAAAAAAEAAAAPAAIAAAABAAMAAAA=")
 
 [node name="BuildGrid" parent="." instance=ExtResource("4_jdurm")]
-
-[node name="LevelGoal" parent="." instance=ExtResource("7_38gb4")]
-position = Vector2(496, 48)
