@@ -11,10 +11,7 @@ public partial class LevelFinishedModeState: GameState
     public override void Enter()
     {
         base.Enter();
-        if (GlobalEvents != null)
-        {
-            GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), this);
-        }
+        GlobalEvents?.EmitSignal(nameof(GlobalEvents.GameStateEntered), this);
         if (DebugOverlay.Instance != null)
         {
             DebugOverlay.Instance.DebugPrint(GetType().Name + " entered");

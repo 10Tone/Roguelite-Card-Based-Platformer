@@ -85,18 +85,16 @@ public partial class Player : CharacterBody2D, IPlayer
 
     private void OnGameStateEntered(GameState gameState)
     {
-        switch (gameState)
+        if (gameState == _globalVariables.GameStates["PlayModeState"])
         {
-            case var _ when gameState == _globalVariables.GameStates["PlayModeState"]:
-                InputHandler.InputEnabled = true;
-                break;
-            case var _ when gameState == _globalVariables.GameStates["BuildModeState"]:
-                InputHandler.InputEnabled = false;
-                MoveBackToStartPosition();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+            InputHandler.InputEnabled = true;
         }
+        else
+        {
+            InputHandler.InputEnabled = false;
+            MoveBackToStartPosition();
+        }
+        
     }
 
     private void MoveBackToStartPosition()

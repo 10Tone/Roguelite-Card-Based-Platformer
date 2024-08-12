@@ -65,7 +65,7 @@ public partial class GameManager : Node2D
 
     private void OnGameModeButtonPressed()
     {
-        string currentGameState = _globalVariables.GameStates.Keys.FirstOrDefault(x => _globalVariables.GameStates[x].GetType() == _gameStateMachine.CurrentState.GetType());
+        var currentGameState = _globalVariables.GameStates.Keys.FirstOrDefault(x => _globalVariables.GameStates[x].GetType() == _gameStateMachine.CurrentState.GetType());
 
         switch (currentGameState)
         {

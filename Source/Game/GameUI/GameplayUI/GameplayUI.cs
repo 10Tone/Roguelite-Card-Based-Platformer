@@ -53,10 +53,10 @@ public partial class GameplayUI: CanvasLayer
         {
             _gameModeButton.Text = "Play";
         }
-        else
-        {
-            GD.PushWarning($"Unhandled game state: {gameState.GetType().Name}");
-        }
+        // else
+        // {
+        //     GD.PushWarning($"Unhandled game state: {gameState.GetType().Name}");
+        // }
     }
     
 
