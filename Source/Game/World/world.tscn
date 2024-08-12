@@ -10,6 +10,6 @@ metadata/_edit_lock_ = true
 [node name="WorldBuilding" parent="." instance=ExtResource("2_kyopi")]
 
 [node name="Player" parent="." instance=ExtResource("2_v06uo")]
-position = Vector2(64, 295)
+position = Vector2(48, 336)
 
 [node name="LevelValueCalculator" parent="." instance=ExtResource("3_kvjc0")]

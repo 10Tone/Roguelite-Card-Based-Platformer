@@ -48,6 +48,7 @@ public partial class Player : CharacterBody2D, IPlayer
 
     public override void _Ready()
     {
+        _globalVariables.StartPosition = GlobalPosition;
         AddToGroup("Player");
         PlayerData = _playerData;
         if(PlayerData is null) {GD.PushWarning("PlayerData is null!");}
@@ -100,7 +101,7 @@ public partial class Player : CharacterBody2D, IPlayer
     private void MoveBackToStartPosition()
     {
         // TEMP
-        GlobalPosition = new Vector2(50, 300);
+        GlobalPosition = _globalVariables.StartPosition;
     }
     
     private void Flip()
