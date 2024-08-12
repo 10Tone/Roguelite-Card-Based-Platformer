@@ -7,8 +7,9 @@ namespace AutoLoads;
 
 public partial class GlobalVariables: Node
 {
+    public Vector2 StartPosition { get; set; }
     public BuildItemResource SelectedBuildItem { get; set; }
-    public GameStates GameState { get; set; }
+    public Dictionary<string, GameState> GameStates { get; set; }
     public Vector2I WorldGridSize { get; set; }
     public Godot.Collections.Dictionary<Vector2, Node2D> BuildedItems { get; set; }
 
@@ -31,6 +32,7 @@ public partial class GlobalVariables: Node
     public override void _EnterTree()
     {
         BuildedItems = new Godot.Collections.Dictionary<Vector2, Node2D>();
+        GameStates = new Dictionary<string, GameState>();
     }
 
     private void LoadResourcesFromDirectory(string dirPath)

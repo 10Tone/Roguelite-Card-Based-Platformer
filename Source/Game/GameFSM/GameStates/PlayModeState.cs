@@ -16,8 +16,15 @@ public partial class PlayModeState: GameState
     public override void Enter()
     {
         base.Enter();
-        DebugOverlay.Instance.DebugPrint("PlayMode entered");
-        GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), (int)GameStates.PlayMode);
+        if (GlobalEvents != null)
+        {
+            GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), this);
+        }
+        if (DebugOverlay.Instance != null)
+        {
+            DebugOverlay.Instance.DebugPrint(GetType().Name + " entered");
+        }
+        
     }
 
     // public override void Exit()

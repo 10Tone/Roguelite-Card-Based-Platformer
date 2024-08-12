@@ -8,7 +8,7 @@ namespace Game.GameplayUI;
 public partial class GameplayUI: CanvasLayer
 {
     [Export()] private NodePath _gameModeButtonPath;
-    private GameStates _gameState;
+    // private GameStates _gameState;
     private Button _gameModeButton;
     
     private GlobalEvents _globalEvents;
@@ -35,23 +35,31 @@ public partial class GameplayUI: CanvasLayer
         }
         _gameModeButton.Pressed += OnGameModeButtonPressed;
     }
-
-    private void OnGameStateEntered(GameStates gameState)
+    
+    
+    private void OnGameStateEntered(GameState gameState)
     {
-        switch (gameState)
+        if (_globalVariables?.GameStates == null)
         {
-            case GameStates.PlayMode:
-                _gameModeButton.Text = "Build";
-                _gameState = gameState;
-                break;
-            case GameStates.BuildMode:
-                _gameModeButton.Text = "Play";
-                _gameState = gameState;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+            GD.PushWarning("GameStates dictionary is null or not initialized");
+            return;
         }
+
+        if (gameState == _globalVariables.GameStates["PlayModeState"])
+        {
+            _gameModeButton.Text = "Build";
+        }
+        else if (gameState == _globalVariables.GameStates["BuildModeState"])
+        {
+            _gameModeButton.Text = "Play";
+        }
+        // else
+        // {
+        //     GD.PushWarning($"Unhandled game state: {gameState.GetType().Name}");
+        // }
     }
+    
+
 
     private void OnGameModeButtonPressed()
     {

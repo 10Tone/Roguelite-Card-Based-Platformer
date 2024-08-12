@@ -13,4 +13,14 @@ public partial class GameState: State
       GlobalEvents = globalEvents;
       GlobalVariables = globalVariables;
    }
+
+   public GameState()
+   {
+   }
+
+   public override void Enter()
+   {
+      base.Enter();
+
+   }
 }

@@ -16,18 +16,16 @@ public partial class BuildUI: Control
     }
     
     
-    private void OnGameStateEntered(GameStates gameState)
+    
+    private void OnGameStateEntered(GameState gameState)
     {
-        switch (gameState)
+        if (gameState == _globalVariables.GameStates["PlayModeState"])
         {
-            case GameStates.PlayMode:
-                Visible = false;
-                break;
-            case GameStates.BuildMode:
-                Visible = true;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+            Visible = false;
+        }
+        else if (gameState == _globalVariables.GameStates["BuildModeState"])
+        {
+            Visible = true;
         }
     }
 }

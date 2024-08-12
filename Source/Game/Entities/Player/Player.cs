@@ -48,6 +48,7 @@ public partial class Player : CharacterBody2D, IPlayer
 
     public override void _Ready()
     {
+        _globalVariables.StartPosition = GlobalPosition;
         AddToGroup("Player");
         PlayerData = _playerData;
         if(PlayerData is null) {GD.PushWarning("PlayerData is null!");}
@@ -66,6 +67,7 @@ public partial class Player : CharacterBody2D, IPlayer
 
     public override void _PhysicsProcess(double delta)
     {
+        if(!InputHandler.InputEnabled) { return; }
         PlayerStateMachine.CurrentState.PhysicsUpdate(delta);
         IsGrounded = IsOnFloor();
         var velocity = Velocity;
@@ -83,26 +85,24 @@ public partial class Player : CharacterBody2D, IPlayer
         
     }
 
-    private void OnGameStateEntered(GameStates gameState)
+    private async void OnGameStateEntered(GameState gameState)
     {
-        switch (gameState)
+        if (gameState == _globalVariables.GameStates["PlayModeState"])
         {
-            case GameStates.PlayMode:
-                InputHandler.InputEnabled = true;
-                break;
-            case GameStates.BuildMode:
-                InputHandler.InputEnabled = false;
-                MoveBackToStartPosition();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+            InputHandler.InputEnabled = true;
+        }
+        else
+        {
+            InputHandler.InputEnabled = false;
+            PlayerStateMachine.ChangeState(_idleState);
+            MoveBackToStartPosition();
         }
     }
 
     private void MoveBackToStartPosition()
     {
         // TEMP
-        GlobalPosition = new Vector2(50, 300);
+        GlobalPosition = _globalVariables.StartPosition;
     }
     
     private void Flip()

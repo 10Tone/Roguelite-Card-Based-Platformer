@@ -18,8 +18,14 @@ public partial class BuildModeState : GameState
     public override void Enter()
     {
         base.Enter();
-        DebugOverlay.Instance.DebugPrint("BuildMode entered");
-        GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), (int)GameStates.BuildMode);
+        if (GlobalEvents != null)
+        {
+            GlobalEvents.EmitSignal(nameof(GlobalEvents.GameStateEntered), this);
+        }
+        if (DebugOverlay.Instance != null)
+        {
+            DebugOverlay.Instance.DebugPrint(GetType().Name + " entered");
+        }
     }
 
     // Remove redundant overrides
