@@ -8,6 +8,6 @@ public partial class LevelGoal : Interactable
     protected override void BodyEnteredAction(IPlayer player)
     {
         base.BodyEnteredAction(player);
-        GlobalEvents.EmitSignal(nameof(GlobalEvents.PlayerFinishedLevel));
+        GlobalEvents.EmitSignal(nameof(GlobalEvents.StageFinished));
     }
 }

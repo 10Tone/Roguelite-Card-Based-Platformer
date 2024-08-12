@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3yo07eq8ogin"]
+
+[ext_resource type="Script" path="res://Source/Game/LevelSystem/Level.cs" id="1_0k8q6"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_0k8q6")
+_stages = Array[Object]([])

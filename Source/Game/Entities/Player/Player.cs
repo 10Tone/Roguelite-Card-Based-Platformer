@@ -85,7 +85,7 @@ public partial class Player : CharacterBody2D, IPlayer
         
     }
 
-    private async void OnGameStateEntered(GameState gameState)
+    private void OnGameStateEntered(GameState gameState)
     {
         if (gameState == _globalVariables.GameStates["PlayModeState"])
         {

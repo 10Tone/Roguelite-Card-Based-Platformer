@@ -29,7 +29,10 @@ public partial class GlobalEvents : Node
     public delegate void GameModeButtonPressedEventHandler();
 
     [Signal]
-    public delegate void PlayerFinishedLevelEventHandler();
+    public delegate void LevelFinishedEventHandler();
+    
+    [Signal]
+    public delegate void StageFinishedEventHandler();
     
     [Signal]
     public delegate void PlayerDeathEventHandler();

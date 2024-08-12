@@ -30,7 +30,7 @@ public partial class GameManager : Node2D
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
         _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
-        _globalEvents.PlayerFinishedLevel += OnPlayerFinishedLevel;
+        _globalEvents.LevelFinished += OnLevelFinished;
         _globalEvents.PlayerDeath += OnPlayerDeath;
     }
 
@@ -87,7 +87,7 @@ public partial class GameManager : Node2D
         // }
     }
 
-    private void OnPlayerFinishedLevel()
+    private void OnLevelFinished()
     {
         _gameStateMachine.ChangeState(_levelFinishedModeState);
     }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5d3m70kasiym"]
+[gd_scene load_steps=5 format=3 uid="uid://b5d3m70kasiym"]
 
 [ext_resource type="Script" path="res://Source/Game/GameManager.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://6iv7d7igmb8l" path="res://Source/Game/World/world.tscn" id="2_v0txj"]
 [ext_resource type="PackedScene" uid="uid://c5el1eqpdre2" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.tscn" id="3_orpuk"]
+[ext_resource type="PackedScene" uid="uid://bc3bwdf1e3qor" path="res://Source/Game/LevelSystem/level_manager.tscn" id="4_f7kpd"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
@@ -12,3 +13,5 @@ metadata/_edit_lock_ = true
 [node name="GameplayUI" parent="." instance=ExtResource("3_orpuk")]
 
 [node name="World" parent="." instance=ExtResource("2_v0txj")]
+
+[node name="LevelManager" parent="." instance=ExtResource("4_f7kpd")]
