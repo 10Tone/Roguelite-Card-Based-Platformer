@@ -30,4 +30,7 @@ public partial class GlobalEvents : Node
 
     [Signal]
     public delegate void PlayerFinishedLevelEventHandler();
+    
+    [Signal]
+    public delegate void PlayerDeathEventHandler();
 }

@@ -15,6 +15,8 @@ public partial class GameManager : Node2D
 
     private PlayModeState _playModeState;
     private BuildModeState _buildModeState;
+    private DeathState _deathState;
+    private LevelFinishedState _levelFinishedState;
 
     public override void _EnterTree()
     {
@@ -27,6 +29,7 @@ public partial class GameManager : Node2D
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
         _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
         _globalEvents.PlayerFinishedLevel += OnPlayerFinishedLevel;
+        _globalEvents.PlayerDeath += OnPlayerDeath;
     }
 
     public override void _Ready()
@@ -35,6 +38,8 @@ public partial class GameManager : Node2D
 
         _playModeState = new PlayModeState(_globalEvents, _globalVariables);
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
+        _deathState = new DeathState(_globalEvents, _globalVariables);
+        _levelFinishedState = new LevelFinishedState(_globalEvents, _globalVariables);
         
         _gameStateMachine.Initialize((_playModeState));
     }
@@ -72,7 +77,11 @@ public partial class GameManager : Node2D
 
     private void OnPlayerFinishedLevel()
     {
-        GD.Print("Player finished level!");
-        // _gameStateMachine.ChangeState(_buildModeState);
+        _gameStateMachine.ChangeState(_levelFinishedState);
+    }
+
+    private void OnPlayerDeath()
+    {
+        _gameStateMachine.ChangeState(_deathState);
     }
 }

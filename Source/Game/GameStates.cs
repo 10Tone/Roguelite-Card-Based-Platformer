@@ -2,6 +2,6 @@ namespace Game;
 
 public enum GameStates
 {
-    PlayMode, BuildMode
+    PlayMode, BuildMode, DeathMode, LevelFinishedMode
 }
 
