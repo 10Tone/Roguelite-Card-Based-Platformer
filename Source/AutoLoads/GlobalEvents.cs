@@ -23,7 +23,7 @@ public partial class GlobalEvents : Node
     public delegate void LevelValueUpdatedEventHandler(int value);
 
     [Signal]
-    public delegate void GameStateEnteredEventHandler(GameStates gameState);
+    public delegate void GameStateEnteredEventHandler(GameState gameState);
 
     [Signal]
     public delegate void GameModeButtonPressedEventHandler();

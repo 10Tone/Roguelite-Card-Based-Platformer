@@ -52,19 +52,20 @@ public partial class BuildGrid : TileMapLayer
                 break;
         }
     }
-
-    private void OnGameStateEntered(GameStates gamestate)
+    
+    
+    private void OnGameStateEntered(GameState gameState)
     {
-        switch (gamestate)
+        switch (gameState)
         {
-            case GameStates.PlayMode:
+            case var _ when gameState == _globalVariables.GameStates["PlayModeState"]:
                 _buildingEnabled = false;
                 break;
-            case GameStates.BuildMode:
+            case var _ when gameState == _globalVariables.GameStates["BuildModeState"]:
                 _buildingEnabled = true;
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(gamestate), gamestate, null);
+                throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
         }
     }
 

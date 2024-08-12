@@ -7,7 +7,7 @@ namespace Game;
 
 public partial class GameUIBase : CanvasLayer
 {
-    [Export()] protected GameStates GameState;
+    // [Export()] protected GameStates GameState;
     
     protected GlobalEvents _globalEvents;
     protected GlobalVariables _globalVariables;
@@ -23,7 +23,7 @@ public partial class GameUIBase : CanvasLayer
     }
     
 
-    protected virtual void OnGameStateEntered(GameStates gameState)
+    protected virtual void OnGameStateEntered(GameState gameState)
     {
 
     }

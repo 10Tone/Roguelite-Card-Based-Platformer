@@ -83,14 +83,14 @@ public partial class Player : CharacterBody2D, IPlayer
         
     }
 
-    private void OnGameStateEntered(GameStates gameState)
+    private void OnGameStateEntered(GameState gameState)
     {
         switch (gameState)
         {
-            case GameStates.PlayMode:
+            case var _ when gameState == _globalVariables.GameStates["PlayModeState"]:
                 InputHandler.InputEnabled = true;
                 break;
-            case GameStates.BuildMode:
+            case var _ when gameState == _globalVariables.GameStates["BuildModeState"]:
                 InputHandler.InputEnabled = false;
                 MoveBackToStartPosition();
                 break;

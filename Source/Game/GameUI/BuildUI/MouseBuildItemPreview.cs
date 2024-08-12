@@ -36,7 +36,7 @@ public partial class MouseBuildItemPreview : Sprite2D
         Texture = buildItemResource.Icon;
     }
 
-    private void ResetTextureToNull(GameStates gameState)
+    private void ResetTextureToNull(Tools.State gameState)
     {
         Texture = null;
     }
