@@ -2,11 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using LevelSystem;
+using LevelData = Game.LevelSystem.LevelData;
 
 public partial class ProgressManager : Node
 {
-	private List<Level> _unlockedLevels;
-	private Level _currentLevel;
+	private List<LevelData> _unlockedLevels;
+	private LevelData _currentLevelData;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

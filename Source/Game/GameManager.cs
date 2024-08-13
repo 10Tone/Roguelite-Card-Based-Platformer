@@ -10,6 +10,7 @@ namespace Game;
 public partial class GameManager : Node2D
 {
     [Export] private Vector2I _worldGridSize;
+    [Export] private PackedScene[] _levelScenes;
     
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
@@ -71,20 +72,12 @@ public partial class GameManager : Node2D
             _gameStateMachine.ChangeState(_buildModeState);
         else if (currentGameState == "BuildModeState")
             _gameStateMachine.ChangeState(_playModeState);
-
         
-        //
-        // switch (currentGameState)
-        // {
-        //     case "PlayModeState":
-        //         _gameStateMachine.ChangeState(_buildModeState);
-        //         break;
-        //     case "BuildModeState":
-        //         _gameStateMachine.ChangeState(_playModeState);
-        //         break;
-        //     default:
-        //         throw new ArgumentOutOfRangeException(nameof(currentGameState), currentGameState, null);
-        // }
+    }
+    
+    private void LoadNextLevel()
+    {
+		
     }
 
     private void OnLevelFinished()

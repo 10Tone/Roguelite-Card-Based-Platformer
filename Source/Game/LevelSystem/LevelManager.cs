@@ -4,23 +4,46 @@ using System;
 namespace LevelSystem;
 public partial class LevelManager : Node
 {
-	[Export] private PackedScene[] _levelScenes;
+	[Export] public Game.LevelSystem.LevelData LevelData { get; private set; }
+
 	public override void _Ready()
 	{
+		
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	private void OnStageFinished()
 	{
+		LevelData.LevelScore += LevelData.CurrentStage.SurplusScore;
+		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)
+		{
+			LevelData.CurrentStageIndex++;
+		}
+		else
+		{
+			FinalStageFinished();
+		}
+		
 	}
 
-	private void LoadNextLevel()
+	private void FinalStageFinished()
 	{
 		
 	}
 
-	private void OnLevelFinished()
+	private void LoadCurrentStage()
 	{
 		
 	}
+
+	private void LoadNextStage()
+	{
+		
+	}
+
+	private void OnPlayerDeath()
+	{
+		
+	}
+	
+
 }
