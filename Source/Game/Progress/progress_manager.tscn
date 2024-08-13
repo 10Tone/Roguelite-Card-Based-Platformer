@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d324r0rwl5x7r"]
+
+[ext_resource type="Script" path="res://Source/Game/Progress/ProgressManager.cs" id="1_bgkfh"]
+
+[node name="ProgressManager" type="Node"]
+script = ExtResource("1_bgkfh")
