@@ -1,10 +1,9 @@
 using Godot;
-using System;
 
-namespace LevelSystem;
+namespace Game.LevelSystem;
 public partial class LevelManager : Node
 {
-	[Export] public Game.LevelSystem.LevelData LevelData { get; private set; }
+	[Export] public LevelData LevelData { get; private set; }
 
 	public override void _Ready()
 	{
@@ -16,7 +15,7 @@ public partial class LevelManager : Node
 		LevelData.LevelScore += LevelData.CurrentStage.SurplusScore;
 		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)
 		{
-			LevelData.CurrentStageIndex++;
+			LevelData.SetCurrentStageIndex(LevelData.CurrentStageIndex + 1);
 		}
 		else
 		{
