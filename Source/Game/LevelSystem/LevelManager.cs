@@ -29,20 +29,7 @@ public partial class LevelManager : Node
 	{
 		LoadNextStage();
 	}
-
-	private void OnStageFinished()
-	{
-		LevelData.LevelScore += LevelData.CurrentStage.SurplusScore;
-		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)
-		{
-			LevelData.CurrentStageIndex++;
-		}
-		else
-		{
-			FinalStageFinished();
-		}
-		
-	}
+	
 
 	private void FinalStageFinished()
 	{
@@ -56,7 +43,18 @@ public partial class LevelManager : Node
 
 	private void LoadNextStage()
 	{
-		DebugOverlay.Instance.DebugPrint("Loading next stage...");
+		// LevelData.CurrentStage.SurplusScore = LevelValue - LevelData.CurrentStage.MinScoreToAdvance
+		LevelData.LevelScore += LevelData.CurrentStage.SurplusScore;
+		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)
+		{
+			LevelData.CurrentStageIndex++;
+			LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
+			//emit signal with updated game data
+		}
+		else
+		{
+			FinalStageFinished();
+		}
 	}
 
 	private void OnPlayerDeath()
