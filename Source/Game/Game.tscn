@@ -1,17 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5d3m70kasiym"]
+[gd_scene load_steps=6 format=3 uid="uid://b5d3m70kasiym"]
 
 [ext_resource type="Script" path="res://Source/Game/GameManager.cs" id="1"]
-[ext_resource type="PackedScene" uid="uid://6iv7d7igmb8l" path="res://Source/Game/World/world.tscn" id="2_v0txj"]
+[ext_resource type="PackedScene" uid="uid://2b78alxh057v" path="res://Source/Game/LevelSystem/Levels/level_01.tscn" id="2_mkot1"]
+[ext_resource type="PackedScene" uid="uid://b5rmfmhw4wvvf" path="res://Source/Game/LevelSystem/Levels/level_02.tscn" id="3_ddo2q"]
 [ext_resource type="PackedScene" uid="uid://c5el1eqpdre2" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.tscn" id="3_orpuk"]
 [ext_resource type="PackedScene" uid="uid://d324r0rwl5x7r" path="res://Source/Game/Progress/progress_manager.tscn" id="5_mi3vu"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
 _worldGridSize = Vector2i(32, 32)
+_levelScenes = Array[PackedScene]([ExtResource("2_mkot1"), ExtResource("3_ddo2q")])
 metadata/_edit_lock_ = true
 
 [node name="GameplayUI" parent="." instance=ExtResource("3_orpuk")]
-
-[node name="World" parent="." instance=ExtResource("2_v0txj")]
 
 [node name="ProgressManager" parent="." instance=ExtResource("5_mi3vu")]

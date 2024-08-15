@@ -1,0 +1,75 @@
+[gd_scene load_steps=16 format=3 uid="uid://b5rmfmhw4wvvf"]
+
+[ext_resource type="Script" path="res://Source/Game/LevelSystem/LevelManager.cs" id="1_bxrus"]
+[ext_resource type="Script" path="res://Source/Game/LevelSystem/StageData.cs" id="2_uxy3w"]
+[ext_resource type="Script" path="res://Source/Game/LevelSystem/LevelData.cs" id="3_0bg4v"]
+[ext_resource type="Texture2D" uid="uid://b6a0ii08lo065" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 2/1.png" id="4_bf7s6"]
+[ext_resource type="Texture2D" uid="uid://6crhh0twgy6q" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 2/3.png" id="5_eusiy"]
+[ext_resource type="Texture2D" uid="uid://kwvb7m8k8e0o" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 2/4.png" id="6_y03t5"]
+[ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="7_hsf1p"]
+[ext_resource type="PackedScene" uid="uid://d30525pa3kch4" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="8_ba678"]
+[ext_resource type="PackedScene" uid="uid://j7vmgqcomgld" path="res://Source/Game/Entities/Player/Player.tscn" id="9_xgbj8"]
+[ext_resource type="PackedScene" uid="uid://ccdkouw2y622e" path="res://Source/Game/World/LevelValue/level_value_calculator.tscn" id="10_voyo3"]
+[ext_resource type="PackedScene" uid="uid://bwvimqls6dlaq" path="res://Source/Game/Interactables/DeadBox/dead_box.tscn" id="11_d7wid"]
+
+[sub_resource type="Resource" id="Resource_b7hl5"]
+script = ExtResource("2_uxy3w")
+StageNumber = 1
+MinScoreToAdvance = 35
+MaxPlaceablePlatforms = 5
+
+[sub_resource type="Resource" id="Resource_hhlvs"]
+script = ExtResource("2_uxy3w")
+StageNumber = 2
+MinScoreToAdvance = 40
+MaxPlaceablePlatforms = 3
+
+[sub_resource type="Resource" id="Resource_ooik6"]
+script = ExtResource("2_uxy3w")
+StageNumber = 3
+MinScoreToAdvance = 50
+MaxPlaceablePlatforms = 3
+
+[sub_resource type="Resource" id="Resource_ht7sw"]
+script = ExtResource("3_0bg4v")
+LevelName = "Level 02"
+LevelNumber = 2
+IsLocked = true
+Stages = Array[Object]([SubResource("Resource_b7hl5"), SubResource("Resource_hhlvs"), SubResource("Resource_ooik6")])
+
+[node name="LevelScene" type="Node2D"]
+script = ExtResource("1_bxrus")
+LevelData = SubResource("Resource_ht7sw")
+_levelGoalPath = NodePath("LevelGoal")
+
+[node name="World" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="WorldBackground" type="Node2D" parent="World"]
+
+[node name="Background" type="Sprite2D" parent="World/WorldBackground"]
+position = Vector2(32, 0)
+texture = ExtResource("4_bf7s6")
+centered = false
+
+[node name="Background2" type="Sprite2D" parent="World/WorldBackground"]
+position = Vector2(32, 64)
+texture = ExtResource("5_eusiy")
+centered = false
+
+[node name="Background3" type="Sprite2D" parent="World/WorldBackground"]
+position = Vector2(32, 64)
+texture = ExtResource("6_y03t5")
+centered = false
+
+[node name="WorldBuilding" parent="World" instance=ExtResource("7_hsf1p")]
+
+[node name="Player" parent="World" instance=ExtResource("9_xgbj8")]
+position = Vector2(48, 336)
+
+[node name="LevelValueCalculator" parent="World" instance=ExtResource("10_voyo3")]
+
+[node name="DeadBox" parent="World" instance=ExtResource("11_d7wid")]
+
+[node name="LevelGoal" parent="." instance=ExtResource("8_ba678")]
+position = Vector2(496, 48)

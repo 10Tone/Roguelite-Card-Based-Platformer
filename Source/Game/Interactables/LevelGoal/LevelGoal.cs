@@ -5,9 +5,10 @@ using Game;
 
 public partial class LevelGoal : Interactable
 {
+    [Signal] public delegate void LevelGoalReachedEventHandler();
     protected override void BodyEnteredAction(IPlayer player)
     {
         base.BodyEnteredAction(player);
-        GlobalEvents.EmitSignal(nameof(GlobalEvents.StageFinished));
+        EmitSignal(nameof(LevelGoalReached));
     }
 }

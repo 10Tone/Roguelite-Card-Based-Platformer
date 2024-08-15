@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoLoads;
+using Game.LevelSystem;
 using Godot;
 using Tools;
 
@@ -21,6 +22,8 @@ public partial class GameManager : Node2D
     private DeathModeState _deathModeState;
     private LevelFinishedModeState _levelFinishedModeState;
 
+    private LevelManager _currentLevel;
+
     public override void _EnterTree()
     {
         _gameStateMachine = new GameStateMachine();
@@ -37,18 +40,21 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
         _playModeState = new PlayModeState(_globalEvents, _globalVariables);
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
         _deathModeState = new DeathModeState(_globalEvents, _globalVariables);
         _levelFinishedModeState = new LevelFinishedModeState(_globalEvents, _globalVariables);
-        
-        
+
+
         _globalVariables.GameStates.Add("PlayModeState", _playModeState);
         _globalVariables.GameStates.Add("BuildModeState", _buildModeState);
         _globalVariables.GameStates.Add("DeathModeState", _deathModeState);
         _globalVariables.GameStates.Add("LevelFinishedModeState", _levelFinishedModeState);
-        
+
+
+        _currentLevel = (LevelManager)_levelScenes[0].Instantiate();
+        AddChild(_currentLevel);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
         _gameStateMachine.Initialize(_playModeState);
     }
 
