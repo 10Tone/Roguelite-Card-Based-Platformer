@@ -67,11 +67,11 @@ centered = false
 [node name="Player" parent="World" instance=ExtResource("9_jxhdh")]
 position = Vector2(48, 336)
 
-[node name="LevelValueCalculator" parent="World" instance=ExtResource("10_q0kee")]
-
 [node name="DeadBox" parent="World" instance=ExtResource("11_wvouv")]
 
 [node name="LevelGoal" parent="." instance=ExtResource("8_6vyfk")]
 position = Vector2(496, 48)
+
+[node name="LevelValueCalculator" parent="." instance=ExtResource("10_q0kee")]
 
 [editable path="World/WorldBuilding"]

@@ -8,6 +8,8 @@ namespace Game;
 
 public partial class LevelValueCalculator : Node
 {
+    //TODO Move to level scope, move out of global scope
+    
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
     private int _levelValue = 0;
