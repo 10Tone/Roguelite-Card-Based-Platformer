@@ -1,8 +1,10 @@
+using System;
 using Godot;
 
 namespace Game.WorldBuilding;
 
 public interface IDamage
 {
-    void OnPlayerEntered(Node2D player);
+    event EventHandler PlayerEnteredIDamage;
+    void AddToIDamageGroup();
 }

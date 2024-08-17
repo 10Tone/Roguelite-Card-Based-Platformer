@@ -35,8 +35,6 @@ public partial class GameManager : Node2D
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
         _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
-        _globalEvents.LevelFinished += OnLevelFinished;
-        _globalEvents.PlayerDeath += OnPlayerDeath;
     }
 
     public override void _Ready()
@@ -57,17 +55,6 @@ public partial class GameManager : Node2D
         LoadLevel(_currentLevelIndex);
     }
 
-    private async void LoadLevel(int levelIndex)
-    {
-        _currentLevel = (LevelManager)_levelScenes[levelIndex].Instantiate();
-        AddChild(_currentLevel);
-        await ToSignal(_currentLevel, "ready");
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
-        
-        if(_gameStateMachine.CurrentState != _playModeState)
-        {_gameStateMachine.ChangeState(_playModeState);}
-    }
-
     public override void _Process(double delta)
     {
         base._Process(delta);
@@ -78,6 +65,28 @@ public partial class GameManager : Node2D
     {
         base._PhysicsProcess(delta);
         _gameStateMachine.CurrentState.PhysicsUpdate(delta);
+    }
+
+    private async void LoadLevel(int levelIndex)
+    {
+        _currentLevel?.QueueFree();
+        
+        _currentLevel = (LevelManager)_levelScenes[levelIndex].Instantiate();
+        AddChild(_currentLevel);
+        _currentLevel.LevelFinished += OnLevelFinished;
+        _currentLevel.StageFinished += OnStageFinished;
+        _currentLevel.PlayerDeath += OnPlayerDeath;
+        
+        await ToSignal(_currentLevel, "ready");
+        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
+        
+        if(_gameStateMachine.CurrentState != _playModeState)
+        {_gameStateMachine.ChangeState(_playModeState);}
+    }
+
+    private void OnStageFinished()
+    {
+        throw new NotImplementedException();
     }
 
     private void OnGameModeButtonPressed()
@@ -100,6 +109,7 @@ public partial class GameManager : Node2D
     private void OnLevelFinished()
     {
         _gameStateMachine.ChangeState(_levelFinishedModeState);
+        LoadNextLevel();
     }
 
     private void OnPlayerDeath()

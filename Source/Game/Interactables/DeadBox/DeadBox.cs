@@ -1,13 +1,30 @@
 using Godot;
 using System;
 using Game;
+using Game.WorldBuilding;
+using Tools;
 
-public partial class DeadBox : Interactable
+public partial class DeadBox : Interactable, IDamage
 {
-	// Called when the node enters the scene tree for the first time.
+	public event EventHandler PlayerEnteredIDamage;
+
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		AddToIDamageGroup();
+	}
+
+	public void AddToIDamageGroup()
+	{
+		AddToGroup("IDamageGroup");
+	}
+
 	protected override void BodyEnteredAction(IPlayer player)
 	{
 		base.BodyEnteredAction(player);
-		GlobalEvents.EmitSignal(nameof(GlobalEvents.PlayerDeath));
+		
+		PlayerEnteredIDamage?.Invoke(this, EventArgs.Empty);
 	}
+
+
 }

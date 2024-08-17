@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using AutoLoads;
+using Game.WorldBuilding;
 using Godot;
 using Tools;
 
@@ -12,6 +15,15 @@ public partial class LevelManager : Node
 	
 	private GlobalEvents _globalEvents;
 	private GlobalVariables _globalVariables;
+	
+	[Signal]
+	public delegate void LevelFinishedEventHandler();
+    
+	[Signal]
+	public delegate void StageFinishedEventHandler();
+    
+	[Signal]
+	public delegate void PlayerDeathEventHandler();
 
 	public override void _EnterTree()
 	{
@@ -23,6 +35,19 @@ public partial class LevelManager : Node
 	{
 		_levelGoal = GetNode<LevelGoal>(_levelGoalPath);
 		_levelGoal.LevelGoalReached += OnLevelGoalReached;
+		
+		// most Idamge intsantiate when block is build
+		var damageableChildren = GetTree().GetNodesInGroup("IDamageGroup");
+        foreach (var damageable in damageableChildren)
+        {
+	        DebugOverlay.Instance.DebugPrint(damageable.Name);
+	        if (damageable is IDamage iDamage)
+	        {
+		        iDamage.PlayerEnteredIDamage += OnPlayerEnteredIDamage;
+		        
+	        }
+        }
+        
 	}
 
 	private void OnLevelGoalReached()
@@ -57,9 +82,9 @@ public partial class LevelManager : Node
 		}
 	}
 
-	private void OnPlayerDeath()
+	private void OnPlayerEnteredIDamage(object sender, EventArgs e)
 	{
-		
+		DebugOverlay.Instance.DebugPrint("Player entered IDamage");
 	}
 	
 	
