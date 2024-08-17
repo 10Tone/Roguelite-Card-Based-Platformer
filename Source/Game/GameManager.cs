@@ -23,6 +23,7 @@ public partial class GameManager : Node2D
     private LevelFinishedModeState _levelFinishedModeState;
 
     private LevelManager _currentLevel;
+    private int _currentLevelIndex;
 
     public override void _EnterTree()
     {
@@ -50,12 +51,21 @@ public partial class GameManager : Node2D
         _globalVariables.GameStates.Add("BuildModeState", _buildModeState);
         _globalVariables.GameStates.Add("DeathModeState", _deathModeState);
         _globalVariables.GameStates.Add("LevelFinishedModeState", _levelFinishedModeState);
-
-
-        _currentLevel = (LevelManager)_levelScenes[0].Instantiate();
-        AddChild(_currentLevel);
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
+        
         _gameStateMachine.Initialize(_playModeState);
+        
+        LoadLevel(_currentLevelIndex);
+    }
+
+    private async void LoadLevel(int levelIndex)
+    {
+        _currentLevel = (LevelManager)_levelScenes[levelIndex].Instantiate();
+        AddChild(_currentLevel);
+        await ToSignal(_currentLevel, "ready");
+        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
+        
+        if(_gameStateMachine.CurrentState != _playModeState)
+        {_gameStateMachine.ChangeState(_playModeState);}
     }
 
     public override void _Process(double delta)
@@ -83,7 +93,8 @@ public partial class GameManager : Node2D
     
     private void LoadNextLevel()
     {
-		
+		_currentLevelIndex++;
+        LoadLevel(_currentLevelIndex);
     }
 
     private void OnLevelFinished()
