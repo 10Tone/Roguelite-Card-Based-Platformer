@@ -34,4 +34,9 @@ public partial class WorldBuilding: Node2D
             _buildGrid.CancelPlacement(tilePosition);
         }
     }
+
+    public void OnStageFinished()
+    {
+        _buildGrid?.ClearBuildGrid();
+    }
 }

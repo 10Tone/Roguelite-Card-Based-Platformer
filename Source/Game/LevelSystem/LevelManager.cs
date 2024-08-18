@@ -10,9 +10,10 @@ namespace Game.LevelSystem;
 public partial class LevelManager : Node
 {
 	[Export] public LevelData LevelData { get; private set; }
-	[Export] private NodePath _levelGoalPath;
+	[Export] private NodePath _levelGoalPath, _worldManagerPath;
 	
 	private LevelGoal _levelGoal;
+	private WorldManager _worldManager;
 	
 	private GlobalEvents _globalEvents;
 	private GlobalVariables _globalVariables;
@@ -35,12 +36,16 @@ public partial class LevelManager : Node
 	public override void _Ready()
 	{
 		_levelGoal = GetNode<LevelGoal>(_levelGoalPath);
+		_worldManager = GetNode<WorldManager>(_worldManagerPath);
+		
 		_levelGoal.LevelGoalReached += OnLevelGoalReached;
 		
 		_globalEvents.ItemBuild += OnItemBuild;
 		_globalEvents.ItemRemoved += OnItemRemoved;
 		
+		LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
 		ScanForDamageableNodes();
+		
 	}
 
 	private void ScanForDamageableNodes()
@@ -93,6 +98,7 @@ public partial class LevelManager : Node
 
 	private void LoadNextStage()
 	{
+		_worldManager?.OnStageFinished();
 		// LevelData.CurrentStage.SurplusScore = LevelValue - LevelData.CurrentStage.MinScoreToAdvance
 		LevelData.LevelScore += LevelData.CurrentStage.SurplusScore;
 		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)

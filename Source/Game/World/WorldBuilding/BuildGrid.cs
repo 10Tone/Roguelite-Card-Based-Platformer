@@ -208,4 +208,15 @@ public partial class BuildGrid : TileMapLayer
     {
         DebugOverlay.Instance.DebugPrint("Placement at " + tilePosition + " is not allowed.");
     }
+
+    public void ClearBuildGrid()
+    {
+        foreach (var (key, value) in _buildedItems)
+        {
+            value.QueueFree();
+        }
+        _buildedItems.Clear();
+        _globalVariables.BuildedItems = _buildedItems;
+    }
+    
 }
