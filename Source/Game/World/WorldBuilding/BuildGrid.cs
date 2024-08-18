@@ -184,7 +184,7 @@ public partial class BuildGrid : TileMapLayer
         _buildedItems.Add(cellPos, blockInstance);
 
         var item = (IBuildItem)blockInstance;
-        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemResource, neighbors);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemBuild), item.BuildItemResource, blockInstance, neighbors);
     }
 
     private void RequestPlacement(Vector2I tilePosition)

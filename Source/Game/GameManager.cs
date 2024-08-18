@@ -49,10 +49,9 @@ public partial class GameManager : Node2D
         _globalVariables.GameStates.Add("BuildModeState", _buildModeState);
         _globalVariables.GameStates.Add("DeathModeState", _deathModeState);
         _globalVariables.GameStates.Add("LevelFinishedModeState", _levelFinishedModeState);
-        
-        _gameStateMachine.Initialize(_playModeState);
-        
+
         LoadLevel(_currentLevelIndex);
+        _gameStateMachine.Initialize(_playModeState);
     }
 
     public override void _Process(double delta)

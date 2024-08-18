@@ -66,7 +66,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qte35"]
-size = Vector2(32, 16)
+size = Vector2(32, 32)
 
 [node name="CircularSawTrap" type="Node2D"]
 script = ExtResource("1_6ktb8")
@@ -86,6 +86,7 @@ position = Vector2(0, 8)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_qte35")
 
 [node name="IdleTimer" type="Timer" parent="."]

@@ -3,6 +3,7 @@ using System.Linq;
 using AutoLoads;
 using Game.WorldBuilding;
 using Godot;
+using Godot.Collections;
 using Tools;
 
 namespace Game.LevelSystem;
@@ -36,18 +37,42 @@ public partial class LevelManager : Node
 		_levelGoal = GetNode<LevelGoal>(_levelGoalPath);
 		_levelGoal.LevelGoalReached += OnLevelGoalReached;
 		
-		// most Idamge intsantiate when block is build
+		_globalEvents.ItemBuild += OnItemBuild;
+		_globalEvents.ItemRemoved += OnItemRemoved;
+		
+		ScanForDamageableNodes();
+	}
+
+	private void ScanForDamageableNodes()
+	{
 		var damageableChildren = GetTree().GetNodesInGroup("IDamageGroup");
-        foreach (var damageable in damageableChildren)
-        {
-	        DebugOverlay.Instance.DebugPrint(damageable.Name);
-	        if (damageable is IDamage iDamage)
-	        {
-		        iDamage.PlayerEnteredIDamage += OnPlayerEnteredIDamage;
+		foreach (var damageable in damageableChildren)
+		{
+			DebugOverlay.Instance.DebugPrint(damageable.Name);
+			if (damageable is IDamage iDamage)
+			{
+				iDamage.PlayerEnteredIDamage += OnPlayerEnteredIDamage;
 		        
-	        }
+			}
+		}
+	}
+
+	private void OnItemBuild(BuildItemResource builditemresource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
+	{
+		// check if item implements IDamage interface, if so connect to PlayerEneteredIDamage event
+		
+		if (item is IDamage iDamage)
+        {
+            iDamage.PlayerEnteredIDamage += OnPlayerEnteredIDamage;
         }
-        
+	}
+
+	private void OnItemRemoved(BuildItemResource builditemresource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
+	{
+		if (item is IDamage iDamage)
+		{
+			iDamage.PlayerEnteredIDamage -= OnPlayerEnteredIDamage;
+		}
 	}
 
 	private void OnLevelGoalReached()

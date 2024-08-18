@@ -25,12 +25,12 @@ public partial class LevelValueCalculator : Node
         _globalEvents.ItemRemoved += OnItemRemoved;
     }
 
-    private void OnItemBuild(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors)
+    private void OnItemBuild(BuildItemResource buildItemResource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
     {
         RecalculateBuildItemValues();
     }
     
-    private void OnItemRemoved(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors)
+    private void OnItemRemoved(BuildItemResource buildItemResource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
     {
         RecalculateBuildItemValues();
     }

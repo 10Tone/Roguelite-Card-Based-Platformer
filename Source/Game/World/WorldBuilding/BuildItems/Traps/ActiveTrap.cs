@@ -17,12 +17,10 @@ public partial class ActiveTrap: Trap
     
     public override void _EnterTree()
     {
+        base._EnterTree();
         _animatedSprite = GetNode<AnimatedSprite2D>(_animatedSprite2DPath);
         _animatedSprite.AnimationFinished += OnAnimationFinished;
         _animatedSprite.Play("idle");
-        
-        _area2D = GetNode<Area2D>(_area2DPath);
-        _area2D.BodyEntered += OnPlayerEntered;
         
         _idleTimer = GetNode<Timer>(_idleTimerPath);
         _activeTimer = GetNode<Timer>(_activeTimerPath);
@@ -51,11 +49,6 @@ public partial class ActiveTrap: Trap
         _animatedSprite.Play("idle");
         _animatedSprite.Stop();
         _idleTimer.Start();
-    }
-
-    private new void OnPlayerEntered(Node2D player)
-    {
-        
     }
 
     private void OnIdleTimerTimeout()

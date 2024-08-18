@@ -14,10 +14,10 @@ public partial class GlobalEvents : Node
     public delegate void BuildItemButtonClickedEventHandler(BuildItemResource buildItemResource);
 
     [Signal]
-    public delegate void ItemBuildEventHandler(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors);
+    public delegate void ItemBuildEventHandler(BuildItemResource buildItemResource, Node2D item, Dictionary<Vector2, Node2D> neighbors);
 
     [Signal]
-    public delegate void ItemRemovedEventHandler(BuildItemResource buildItemResource, Dictionary<Vector2, Node2D> neighbors);
+    public delegate void ItemRemovedEventHandler(BuildItemResource buildItemResource, Node2D item, Dictionary<Vector2, Node2D> neighbors);
 
     [Signal]
     public delegate void LevelValueUpdatedEventHandler(int value);
