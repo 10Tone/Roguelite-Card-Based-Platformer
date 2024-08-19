@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://piu1vtg3qoot"]
+[gd_scene load_steps=6 format=3 uid="uid://piu1vtg3qoot"]
 
 [ext_resource type="PackedScene" uid="uid://py4tqnf1lhbd" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dxtng5bptacpd" path="res://Source/Game/GameUI/BuildUI/mouse_build_item_preview.tscn" id="2_3o8wt"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildMenu.cs" id="3_xubfb"]
 [ext_resource type="Texture2D" uid="uid://d31a5a1qo3em8" path="res://Content Assets/Sprites/grid_32x.png" id="5_gxw5j"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildUI.cs" id="6"]
-[ext_resource type="Theme" uid="uid://o11cooy3oyu2" path="res://Content Assets/Themes/main_theme.tres" id="6_0lo0u"]
-[ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/LevelPointsDisplay.cs" id="6_y610a"]
 
 [node name="BuildUI" type="Control"]
 layout_mode = 3
@@ -30,6 +28,7 @@ offset_right = -32.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(4, 4)
 mouse_filter = 2
 texture = ExtResource("5_gxw5j")
 stretch_mode = 1
@@ -75,34 +74,3 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="MouseBuildItemPreview" parent="." instance=ExtResource("2_3o8wt")]
-
-[node name="LevelPointsDisplay" type="Control" parent="."]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -64.0
-offset_bottom = 16.0
-grow_horizontal = 0
-script = ExtResource("6_y610a")
-_levelPointsLabelNodePath = NodePath("HBoxContainer/LevelPointsLabel")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelPointsDisplay"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="Label" parent="LevelPointsDisplay/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme = ExtResource("6_0lo0u")
-text = "Level Points"
-
-[node name="LevelPointsLabel" type="Label" parent="LevelPointsDisplay/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_0lo0u")
-text = "0000"

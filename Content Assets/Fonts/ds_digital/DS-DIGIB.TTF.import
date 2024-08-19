@@ -2,27 +2,27 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c2s8tvvqe3btv"
-path="res://.godot/imported/Roboto-Condensed.ttf-cd4fcf602ad99c05e088bf3e854b44bf.fontdata"
+uid="uid://cixu8li7g1xjr"
+path="res://.godot/imported/DS-DIGIB.TTF-eb232cc318589c7ae0c5993a3900f15c.fontdata"
 
 [deps]
 
-source_file="res://Content Assets/Fonts/roboto/Roboto-Condensed.ttf"
-dest_files=["res://.godot/imported/Roboto-Condensed.ttf-cd4fcf602ad99c05e088bf3e854b44bf.fontdata"]
+source_file="res://Content Assets/Fonts/ds_digital/DS-DIGIB.TTF"
+dest_files=["res://.godot/imported/DS-DIGIB.TTF-eb232cc318589c7ae0c5993a3900f15c.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=0
 generate_mipmaps=false
-disable_embedded_bitmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
-subpixel_positioning=1
+hinting=0
+subpixel_positioning=3
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

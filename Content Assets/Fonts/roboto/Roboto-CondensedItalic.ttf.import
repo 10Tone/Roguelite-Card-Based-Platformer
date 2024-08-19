@@ -13,9 +13,9 @@ dest_files=["res://.godot/imported/Roboto-CondensedItalic.ttf-f6b480508b045dce82
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
-disable_embedded_bitmaps=true
+disable_embedded_bitmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

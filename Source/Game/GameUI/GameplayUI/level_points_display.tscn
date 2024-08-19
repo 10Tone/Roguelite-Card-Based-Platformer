@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c886744k8yqrs"]
+
+[ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/LevelPointsDisplay.cs" id="1_e87aj"]
+[ext_resource type="Theme" uid="uid://o11cooy3oyu2" path="res://Content Assets/Themes/main_theme.tres" id="2_8wwnc"]
+
+[node name="LevelPointsDisplay" type="Control"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 16.0
+grow_horizontal = 0
+script = ExtResource("1_e87aj")
+_levelPointsLabelNodePath = NodePath("HBoxContainer/LevelPointsLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("2_8wwnc")
+text = "Level Points"
+
+[node name="LevelPointsLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_8wwnc")
+text = "0000"

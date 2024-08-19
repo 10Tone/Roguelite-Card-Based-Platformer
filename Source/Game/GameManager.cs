@@ -12,6 +12,7 @@ public partial class GameManager : Node2D
 {
     [Export] private Vector2I _worldGridSize;
     [Export] private PackedScene[] _levelScenes;
+    [Export] private NodePath _SubViewportNodePath;
     
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
@@ -23,6 +24,7 @@ public partial class GameManager : Node2D
     private LevelFinishedModeState _levelFinishedModeState;
 
     private LevelManager _currentLevel;
+    private SubViewport _subViewport;
     private int _currentLevelIndex;
 
     public override void _EnterTree()
@@ -31,7 +33,8 @@ public partial class GameManager : Node2D
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
         _globalVariables.WorldGridSize = _worldGridSize;
-
+        
+        _subViewport = GetNode<SubViewport>(_SubViewportNodePath);
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
         _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
@@ -71,7 +74,7 @@ public partial class GameManager : Node2D
         _currentLevel?.QueueFree();
         
         _currentLevel = (LevelManager)_levelScenes[levelIndex].Instantiate();
-        AddChild(_currentLevel);
+        _subViewport?.AddChild(_currentLevel);
         _currentLevel.LevelFinished += OnLevelFinished;
         _currentLevel.StageFinished += OnStageFinished;
         _currentLevel.PlayerDeath += OnPlayerDeath;

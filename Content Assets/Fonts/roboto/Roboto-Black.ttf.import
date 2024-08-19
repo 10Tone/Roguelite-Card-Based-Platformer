@@ -13,9 +13,9 @@ dest_files=["res://.godot/imported/Roboto-Black.ttf-5ae7dffd3478f8b24c9b96a1ba56
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
-disable_embedded_bitmaps=true
+disable_embedded_bitmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

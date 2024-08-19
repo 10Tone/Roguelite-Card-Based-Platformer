@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5el1eqpdre2"]
+[gd_scene load_steps=5 format=3 uid="uid://c5el1eqpdre2"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.cs" id="1"]
 [ext_resource type="Theme" uid="uid://o11cooy3oyu2" path="res://Content Assets/Themes/main_theme.tres" id="2_5j1up"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_tbu2t"]
+[ext_resource type="PackedScene" uid="uid://c886744k8yqrs" path="res://Source/Game/GameUI/GameplayUI/level_points_display.tscn" id="4_vwcbu"]
 
 [node name="GameplayUI" type="CanvasLayer"]
 layer = 0
@@ -46,3 +47,5 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("2_5j1up")
 text = "Build"
+
+[node name="LevelPointsDisplay" parent="." instance=ExtResource("4_vwcbu")]

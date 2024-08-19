@@ -10,8 +10,23 @@
 script = ExtResource("1")
 _worldGridSize = Vector2i(32, 32)
 _levelScenes = Array[PackedScene]([ExtResource("2_mkot1"), ExtResource("3_ddo2q")])
+_SubViewportNodePath = NodePath("SubViewportContainer/SubViewport")
 metadata/_edit_lock_ = true
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+scale = Vector2(4, 4)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
 [node name="GameplayUI" parent="." instance=ExtResource("3_orpuk")]
+layer = 1
 
 [node name="ProgressManager" parent="." instance=ExtResource("5_mi3vu")]
