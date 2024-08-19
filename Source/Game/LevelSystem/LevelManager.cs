@@ -10,13 +10,16 @@ namespace Game.LevelSystem;
 public partial class LevelManager : Node
 {
 	[Export] public LevelData LevelData { get; private set; }
-	[Export] private NodePath _levelGoalPath, _worldManagerPath;
+	[Export] private NodePath _levelGoalPath, _worldManagerPath, _levelValueCalculatorPath;
 	
 	private LevelGoal _levelGoal;
 	private WorldManager _worldManager;
+	private LevelValueCalculator _levelValueCalculator;
 	
 	private GlobalEvents _globalEvents;
 	private GlobalVariables _globalVariables;
+	
+	private bool _minimumStageValueReached = false;
 	
 	[Signal]
 	public delegate void LevelFinishedEventHandler();
@@ -37,6 +40,7 @@ public partial class LevelManager : Node
 	{
 		_levelGoal = GetNode<LevelGoal>(_levelGoalPath);
 		_worldManager = GetNode<WorldManager>(_worldManagerPath);
+		_levelValueCalculator = GetNode<LevelValueCalculator>(_levelValueCalculatorPath);
 		
 		_levelGoal.LevelGoalReached += OnLevelGoalReached;
 		
@@ -53,7 +57,7 @@ public partial class LevelManager : Node
 		var damageableChildren = GetTree().GetNodesInGroup("IDamageGroup");
 		foreach (var damageable in damageableChildren)
 		{
-			DebugOverlay.Instance.DebugPrint(damageable.Name);
+			// DebugOverlay.Instance.DebugPrint(damageable.Name);
 			if (damageable is IDamage iDamage)
 			{
 				iDamage.PlayerEnteredIDamage += OnPlayerEnteredIDamage;
@@ -64,7 +68,7 @@ public partial class LevelManager : Node
 
 	private void OnItemBuild(BuildItemResource builditemresource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
 	{
-		// check if item implements IDamage interface, if so connect to PlayerEneteredIDamage event
+		_minimumStageValueReached = MinimumStageValueReached();
 		
 		if (item is IDamage iDamage)
         {
@@ -74,14 +78,22 @@ public partial class LevelManager : Node
 
 	private void OnItemRemoved(BuildItemResource builditemresource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
 	{
+		_minimumStageValueReached = MinimumStageValueReached();
+		
 		if (item is IDamage iDamage)
 		{
 			iDamage.PlayerEnteredIDamage -= OnPlayerEnteredIDamage;
 		}
 	}
 
+	private bool MinimumStageValueReached()
+	{
+		return _levelValueCalculator.CurrentStageValue >= LevelData.CurrentStage.MinScoreToAdvance;
+	}
+
 	private void OnLevelGoalReached()
 	{
+		if(!_minimumStageValueReached) {return;}
 		LoadNextStage();
 	}
 	
@@ -100,7 +112,6 @@ public partial class LevelManager : Node
 	{
 		_worldManager?.OnStageFinished();
 		// LevelData.CurrentStage.SurplusScore = LevelValue - LevelData.CurrentStage.MinScoreToAdvance
-		LevelData.LevelScore += LevelData.CurrentStage.SurplusScore;
 		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)
 		{
 			LevelData.CurrentStageIndex++;
@@ -115,7 +126,7 @@ public partial class LevelManager : Node
 
 	private void OnPlayerEnteredIDamage(object sender, EventArgs e)
 	{
-		DebugOverlay.Instance.DebugPrint("Player entered IDamage");
+		// DebugOverlay.Instance.DebugPrint("Player entered IDamage");
 	}
 	
 	

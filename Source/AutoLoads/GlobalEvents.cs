@@ -21,6 +21,9 @@ public partial class GlobalEvents : Node
 
     [Signal]
     public delegate void LevelValueUpdatedEventHandler(int value);
+    
+    [Signal]
+    public delegate void StageValueUpdatedEventHandler(int value);
 
     [Signal]
     public delegate void GameStateEnteredEventHandler(GameState gameState);

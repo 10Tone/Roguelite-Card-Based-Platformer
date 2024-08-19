@@ -81,7 +81,7 @@ public partial class BuildGrid : TileMapLayer
 
         if (cellPos.Y == 0)
         {
-            DebugOverlay.Instance.DebugPrint("Cannot build in the first row");
+            // DebugOverlay.Instance.DebugPrint("Cannot build in the first row");
             return false;
         }
 
@@ -116,7 +116,7 @@ public partial class BuildGrid : TileMapLayer
         _buildedItems.Remove(cellPos);
 
         var item = (IBuildItem)blockInstance;
-        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemResource, neighbors);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved),item.BuildItemResource, blockInstance, neighbors);
 
         // Check if the removed block is a platform
         if (item.BuildItemResource.BuildItemType == BuildItemTypes.Platforms)
@@ -134,7 +134,7 @@ public partial class BuildGrid : TileMapLayer
                     // DebugOverlay.Instance.DebugPrint("Removing trap at position " + neighborPos);
                     neighborNode.QueueFree();
                     _buildedItems.Remove(neighborPos);
-                    _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), neighborItem.BuildItemResource, neighbors);
+                    _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved),neighborItem.BuildItemResource, neighborNode, neighbors);
                 }
             }
         }

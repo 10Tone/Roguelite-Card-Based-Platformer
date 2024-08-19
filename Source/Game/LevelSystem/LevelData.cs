@@ -10,9 +10,8 @@ public partial class LevelData : Resource
     [Export] public bool IsLocked { get; set; }
 	[Export] public StageData[] Stages { get; private set; }
 	public StageData CurrentStage { get; set; }
-	public int CurrentStageIndex = 0;
-	public StageData[] CompletedStages = Array.Empty<StageData>();
-	public int LevelScore = 0;
+	public int CurrentStageIndex { get; set; }
+	public StageData[] CompletedStages { get; set; }
 
 }
  

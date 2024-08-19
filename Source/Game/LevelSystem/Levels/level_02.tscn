@@ -43,6 +43,7 @@ script = ExtResource("1_bxrus")
 LevelData = SubResource("Resource_ht7sw")
 _levelGoalPath = NodePath("LevelGoal")
 _worldManagerPath = NodePath("World")
+_levelValueCalculatorPath = NodePath("LevelValueCalculator")
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("4_awq2l")

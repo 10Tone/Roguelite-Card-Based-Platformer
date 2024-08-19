@@ -8,11 +8,11 @@ namespace Game;
 
 public partial class LevelValueCalculator : Node
 {
-    //TODO Move to level scope, move out of global scope
+   [Export] private bool _useBonusValues = false;
     
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
-    private int _levelValue = 0;
+    public int CurrentStageValue { get; private set; }
     
     private Dictionary<Vector2, int> _bonusValues = new Dictionary<Vector2, int>();
 
@@ -32,14 +32,15 @@ public partial class LevelValueCalculator : Node
     
     private void OnItemRemoved(BuildItemResource buildItemResource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
     {
+        DebugOverlay.Instance.DebugPrint("OnItemRemoved");
         RecalculateBuildItemValues();
     }
     
-    private void UpdateLevelValue(int valueChange)
+    private void UpdateStageValue(int valueChange)
     {
-        _levelValue += valueChange;
-        DebugOverlay.Instance.DebugPrint(_levelValue.ToString());
-        _globalEvents.EmitSignal(nameof(GlobalEvents.LevelValueUpdated), _levelValue);
+        CurrentStageValue += valueChange;
+        DebugOverlay.Instance.DebugPrint(CurrentStageValue.ToString());
+        _globalEvents.EmitSignal(nameof(GlobalEvents.StageValueUpdated), CurrentStageValue);
     }
 
     private void RecalculateBuildItemValues()
@@ -59,13 +60,21 @@ public partial class LevelValueCalculator : Node
             }
 
             int baseValue = resource.BuildItemValue;
-            int bonus = CalculateBonus(position, buildedItems);
-            _bonusValues[position] = bonus;
-            int newValue = baseValue + bonus;
-            newTotalValue += newValue;
+            if (_useBonusValues)
+            {
+                int bonus = CalculateBonus(position, buildedItems);
+                _bonusValues[position] = bonus;
+                int newValue = baseValue + bonus;
+                newTotalValue += newValue;
+            }
+            else
+            {
+                newTotalValue += baseValue;
+            }
+            
         }
 
-        UpdateLevelValue(newTotalValue - _levelValue);
+        UpdateStageValue(newTotalValue - CurrentStageValue);
     }
 
     private int CalculateBonus(Vector2 position, Dictionary<Vector2, Node2D> buildedItems)
