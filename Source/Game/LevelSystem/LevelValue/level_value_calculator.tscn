@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccdkouw2y622e"]
+
+[ext_resource type="Script" path="res://Source/Game/LevelSystem/LevelValue/LevelValueCalculator.cs" id="1_2bnqr"]
+
+[node name="LevelValueCalculator" type="Node"]
+script = ExtResource("1_2bnqr")

@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="7_hsf1p"]
 [ext_resource type="PackedScene" uid="uid://d30525pa3kch4" path="res://Source/Game/Interactables/LevelGoal/LevelGoal.tscn" id="8_ba678"]
 [ext_resource type="PackedScene" uid="uid://j7vmgqcomgld" path="res://Source/Game/Entities/Player/Player.tscn" id="9_xgbj8"]
-[ext_resource type="PackedScene" uid="uid://ccdkouw2y622e" path="res://Source/Game/World/LevelValue/level_value_calculator.tscn" id="10_voyo3"]
 [ext_resource type="PackedScene" uid="uid://bwvimqls6dlaq" path="res://Source/Game/Interactables/DeadBox/dead_box.tscn" id="11_d7wid"]
+[ext_resource type="PackedScene" uid="uid://ccdkouw2y622e" path="res://Source/Game/LevelSystem/LevelValue/level_value_calculator.tscn" id="12_vp0up"]
 
 [sub_resource type="Resource" id="Resource_b7hl5"]
 script = ExtResource("2_uxy3w")
@@ -77,4 +77,4 @@ position = Vector2(48, 336)
 [node name="LevelGoal" parent="." instance=ExtResource("8_ba678")]
 position = Vector2(496, 48)
 
-[node name="LevelValueCalculator" parent="." instance=ExtResource("10_voyo3")]
+[node name="LevelValueCalculator" parent="." instance=ExtResource("12_vp0up")]
