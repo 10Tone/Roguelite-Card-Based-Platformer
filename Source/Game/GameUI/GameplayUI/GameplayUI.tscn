@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5el1eqpdre2"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.cs" id="1"]
-[ext_resource type="Theme" uid="uid://o11cooy3oyu2" path="res://Content Assets/Themes/main_theme.tres" id="2_5j1up"]
+[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="3_sco8p"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_tbu2t"]
 
 [node name="GameplayUI" type="CanvasLayer"]
@@ -44,5 +44,6 @@ offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme = ExtResource("2_5j1up")
+theme_override_fonts/font = ExtResource("3_sco8p")
+theme_override_font_sizes/font_size = 8
 text = "Build"

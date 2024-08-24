@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://3o2kyl5q7ei3"
-path="res://.godot/imported/Roboto-CondensedItalic.ttf-f6b480508b045dce82acdcbdf9edac6e.fontdata"
+uid="uid://cye8sknvo7fpg"
+path="res://.godot/imported/pixelmix.ttf-e1feb761ff0b2e2bbfd53f7f9bb3b0f1.fontdata"
 
 [deps]
 
-source_file="res://Content Assets/Fonts/roboto/Roboto-CondensedItalic.ttf"
-dest_files=["res://.godot/imported/Roboto-CondensedItalic.ttf-f6b480508b045dce82acdcbdf9edac6e.fontdata"]
+source_file="res://Content Assets/Fonts/pixelmix/pixelmix.ttf"
+dest_files=["res://.godot/imported/pixelmix.ttf-e1feb761ff0b2e2bbfd53f7f9bb3b0f1.fontdata"]
 
 [params]
 
