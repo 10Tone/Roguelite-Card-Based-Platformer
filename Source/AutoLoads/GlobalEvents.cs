@@ -1,4 +1,5 @@
 using Game;
+using Game.LevelSystem;
 using Game.WorldBuilding;
 using Godot;
 using Godot.Collections;
@@ -23,7 +24,7 @@ public partial class GlobalEvents : Node
     public delegate void LevelValueUpdatedEventHandler(int value);
     
     [Signal]
-    public delegate void StageValueUpdatedEventHandler(int value);
+    public delegate void StageValueUpdatedEventHandler(int buildValue, StageData stageData);
 
     [Signal]
     public delegate void GameStateEnteredEventHandler(GameState gameState);

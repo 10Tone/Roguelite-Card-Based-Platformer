@@ -68,6 +68,7 @@ public partial class LevelManager : Node
 
 	private void OnItemBuild(BuildItemResource builditemresource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
 	{
+		_levelValueCalculator.OnItemBuild(LevelData.CurrentStage);
 		_minimumStageValueReached = MinimumStageValueReached();
 		
 		if (item is IDamage iDamage)
@@ -78,6 +79,7 @@ public partial class LevelManager : Node
 
 	private void OnItemRemoved(BuildItemResource builditemresource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
 	{
+		_levelValueCalculator.OnItemRemoved(LevelData.CurrentStage);
 		_minimumStageValueReached = MinimumStageValueReached();
 		
 		if (item is IDamage iDamage)

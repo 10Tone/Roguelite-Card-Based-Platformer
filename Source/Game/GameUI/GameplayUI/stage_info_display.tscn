@@ -1,7 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsgksdmuge5ud"]
+[gd_scene load_steps=9 format=3 uid="uid://dsgksdmuge5ud"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/StageInfoDisplay.cs" id="1_isatv"]
-[ext_resource type="PackedScene" uid="uid://c88w6w6p2eee8" path="res://Source/Game/GameUI/GameplayUI/value_display.tscn" id="2_yh28j"]
+[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="2_b7rqr"]
+[ext_resource type="FontFile" uid="uid://02yqloqbfurx" path="res://Content Assets/Fonts/pixelmix/pixelmix_bold.ttf" id="3_8a18x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0hngr"]
+font = ExtResource("2_b7rqr")
+font_size = 8
+font_color = Color(1, 1, 0.0980392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bxbx"]
+font = ExtResource("3_8a18x")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_aq1lw"]
+font = ExtResource("3_8a18x")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_ext5q"]
+font = ExtResource("3_8a18x")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_a6u81"]
+font = ExtResource("3_8a18x")
+font_size = 8
 
 [node name="StageInfoDisplay" type="Control"]
 custom_minimum_size = Vector2(64, 0)
@@ -18,6 +40,8 @@ _stageNumberLabelPath = NodePath("HBoxContainer/Stage/ValueLabel")
 _minValueToAdvanceLabelPath = NodePath("HBoxContainer/MinimumValue/ValueLabel")
 _currentBuildValueLabelPath = NodePath("HBoxContainer/BuildValue/ValueLabel")
 _maxPlaceablePlatformsLabelPath = NodePath("HBoxContainer/MaxPlatforms/ValueLabel")
+_negativeColor = Color(0.733333, 0, 0, 1)
+_positiveColor = Color(0, 0.658824, 0, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -29,43 +53,62 @@ offset_right = 307.0
 offset_bottom = 4.0
 grow_vertical = 2
 
-[node name="Stage" parent="HBoxContainer" instance=ExtResource("2_yh28j")]
+[node name="Stage" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="NameLabel" parent="HBoxContainer/Stage" index="0"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/Stage"]
+layout_mode = 2
+size_flags_horizontal = 8
 text = "Stage"
+label_settings = SubResource("LabelSettings_0hngr")
 
-[node name="ValueLabel" parent="HBoxContainer/Stage" index="1"]
+[node name="ValueLabel" type="Label" parent="HBoxContainer/Stage"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
 text = "00"
+label_settings = SubResource("LabelSettings_3bxbx")
 
-[node name="MinimumValue" parent="HBoxContainer" instance=ExtResource("2_yh28j")]
+[node name="MinimumValue" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="NameLabel" parent="HBoxContainer/MinimumValue" index="0"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/MinimumValue"]
+layout_mode = 2
+size_flags_horizontal = 8
 text = "Min Value"
+label_settings = SubResource("LabelSettings_0hngr")
 
-[node name="ValueLabel" parent="HBoxContainer/MinimumValue" index="1"]
+[node name="ValueLabel" type="Label" parent="HBoxContainer/MinimumValue"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
 text = "000"
+label_settings = SubResource("LabelSettings_aq1lw")
 
-[node name="BuildValue" parent="HBoxContainer" instance=ExtResource("2_yh28j")]
+[node name="BuildValue" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="NameLabel" parent="HBoxContainer/BuildValue" index="0"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/BuildValue"]
+layout_mode = 2
+size_flags_horizontal = 8
 text = "Build Value"
+label_settings = SubResource("LabelSettings_0hngr")
 
-[node name="ValueLabel" parent="HBoxContainer/BuildValue" index="1"]
+[node name="ValueLabel" type="Label" parent="HBoxContainer/BuildValue"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
 text = "000"
+label_settings = SubResource("LabelSettings_ext5q")
 
-[node name="MaxPlatforms" parent="HBoxContainer" instance=ExtResource("2_yh28j")]
+[node name="MaxPlatforms" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="NameLabel" parent="HBoxContainer/MaxPlatforms" index="0"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/MaxPlatforms"]
+layout_mode = 2
+size_flags_horizontal = 8
 text = "Max Platforms"
+label_settings = SubResource("LabelSettings_0hngr")
 
-[node name="ValueLabel" parent="HBoxContainer/MaxPlatforms" index="1"]
+[node name="ValueLabel" type="Label" parent="HBoxContainer/MaxPlatforms"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
 text = "000"
-
-[editable path="HBoxContainer/Stage"]
-[editable path="HBoxContainer/MinimumValue"]
-[editable path="HBoxContainer/BuildValue"]
-[editable path="HBoxContainer/MaxPlatforms"]
+label_settings = SubResource("LabelSettings_a6u81")

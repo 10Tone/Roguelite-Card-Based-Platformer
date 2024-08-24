@@ -1,4 +1,5 @@
 using AutoLoads;
+using Game.LevelSystem;
 using Game.WorldBuilding;
 using Godot;
 using Godot.Collections;
@@ -15,24 +16,26 @@ public partial class LevelValueCalculator : Node
     public int CurrentStageValue { get; private set; }
     
     private Dictionary<Vector2, int> _bonusValues = new Dictionary<Vector2, int>();
+    private StageData _currentStage;
 
     public override void _EnterTree()
     {
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
-        
-        _globalEvents.ItemBuild += OnItemBuild;
-        _globalEvents.ItemRemoved += OnItemRemoved;
+        //
+        // _globalEvents.ItemBuild += OnItemBuild;
+        // _globalEvents.ItemRemoved += OnItemRemoved;
     }
 
-    private void OnItemBuild(BuildItemResource buildItemResource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
+    public void OnItemBuild(StageData stageData)
     {
+        _currentStage = stageData;
         RecalculateBuildItemValues();
     }
     
-    private void OnItemRemoved(BuildItemResource buildItemResource, Node2D item, Dictionary<Vector2, Node2D> neighbors)
+    public void OnItemRemoved(StageData stageData)
     {
-        DebugOverlay.Instance.DebugPrint("OnItemRemoved");
+        _currentStage = stageData;
         RecalculateBuildItemValues();
     }
     
@@ -40,7 +43,7 @@ public partial class LevelValueCalculator : Node
     {
         CurrentStageValue += valueChange;
         DebugOverlay.Instance.DebugPrint(CurrentStageValue.ToString());
-        _globalEvents.EmitSignal(nameof(GlobalEvents.StageValueUpdated), CurrentStageValue);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.StageValueUpdated), CurrentStageValue, _currentStage);
     }
 
     private void RecalculateBuildItemValues()
