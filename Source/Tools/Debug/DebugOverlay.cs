@@ -11,6 +11,7 @@ namespace Tools
         private Label _debugLabel;
         private List<string> _debugMessages = new List<string>();
         private const int MaxMessages = 30;
+        private bool _showDebugOverlay;
 
         public override void _EnterTree()
         {
@@ -28,16 +29,25 @@ namespace Tools
         {
             _debugLabel = new Label();
             // _debugLabel.Modulate = new Color(231, 221, 0);
-            _debugLabel.Position = new Vector2(8, 8);
+            _debugLabel.Position = new Vector2(16, 8);
             var settings = new LabelSettings();
             settings.FontColor = new Color(231, 221, 0);
             settings.FontSize = 8;
-            var font = GD.Load("res://Content Assets/Fonts/roboto.tres") as Godot.Font;
+            var font = GD.Load("res://Content Assets/Fonts/pixelmix/pixelmix.ttf") as Godot.Font;
             settings.Font = font;
             _debugLabel.LabelSettings = settings;
             // _debugLabel.AddThemeFontSizeOverride("font_size", 6);
             AddChild(_debugLabel);
+            _debugLabel.Visible = _showDebugOverlay;
         }
+
+        public override void _Input(InputEvent @event)
+        {
+            if (!@event.IsActionPressed("DebugOverlay")) return;
+            _showDebugOverlay = !_showDebugOverlay;
+            _debugLabel.Visible = _showDebugOverlay;
+        }
+
 
         public void DebugPrint(string message)
         {
@@ -73,7 +83,7 @@ namespace Tools
 
         private void UpdateDebugLabel()
         {
-            // _debugLabel.Text = string.Join("\n", _debugMessages);
+            _debugLabel.Text = string.Join("\n", _debugMessages);
         }
     }
 }
