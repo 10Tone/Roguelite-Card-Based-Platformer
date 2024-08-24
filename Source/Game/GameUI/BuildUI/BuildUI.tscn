@@ -1,20 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://piu1vtg3qoot"]
+[gd_scene load_steps=4 format=3 uid="uid://piu1vtg3qoot"]
 
 [ext_resource type="PackedScene" uid="uid://py4tqnf1lhbd" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://dxtng5bptacpd" path="res://Source/Game/GameUI/BuildUI/mouse_build_item_preview.tscn" id="2_3o8wt"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildMenu.cs" id="3_xubfb"]
-[ext_resource type="Texture2D" uid="uid://d31a5a1qo3em8" path="res://Content Assets/Sprites/grid_32x.png" id="5_gxw5j"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildUI.cs" id="6"]
-[ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/LevelPointsDisplay.cs" id="6_y610a"]
-[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="7_2icga"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_0hngr"]
-font = ExtResource("7_2icga")
-font_size = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_0pgov"]
-font = ExtResource("7_2icga")
-font_size = 8
 
 [node name="BuildUI" type="Control"]
 layout_mode = 3
@@ -24,23 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6")
-
-[node name="Grid" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.101961)
-custom_minimum_size = Vector2(576, 340)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = -32.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("5_gxw5j")
-stretch_mode = 1
 
 [node name="BuildMenu" type="Control" parent="."]
 layout_mode = 1
@@ -81,38 +52,3 @@ grow_vertical = 2
 
 [node name="BuildButtons" type="GridContainer" parent="BuildMenu/VBoxContainer"]
 layout_mode = 2
-
-[node name="MouseBuildItemPreview" parent="." instance=ExtResource("2_3o8wt")]
-
-[node name="LevelPointsDisplay" type="Control" parent="."]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -64.0
-offset_bottom = 16.0
-grow_horizontal = 0
-script = ExtResource("6_y610a")
-_levelPointsLabelNodePath = NodePath("HBoxContainer/LevelPointsLabel")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelPointsDisplay"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_right = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="Label" parent="LevelPointsDisplay/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-text = "Level Points"
-label_settings = SubResource("LabelSettings_0hngr")
-
-[node name="LevelPointsLabel" type="Label" parent="LevelPointsDisplay/HBoxContainer"]
-layout_mode = 2
-text = "0000"
-label_settings = SubResource("LabelSettings_0pgov")
