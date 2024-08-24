@@ -5,6 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_0hngr"]
 font = ExtResource("1_qxnlv")
 font_size = 8
+font_color = Color(1, 1, 0.0980392, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0pgov"]
 font = ExtResource("1_qxnlv")
