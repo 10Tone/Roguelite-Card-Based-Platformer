@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5el1eqpdre2"]
+[gd_scene load_steps=6 format=3 uid="uid://c5el1eqpdre2"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://d1a5yw1vrma7h" path="res://Source/Game/GameUI/GameplayUI/level_points_display.tscn" id="2_1qjoq"]
-[ext_resource type="PackedScene" uid="uid://ddt7rqhh0hn6a" path="res://Source/Game/GameUI/GameplayUI/game_mode_button.tscn" id="2_qtil1"]
+[ext_resource type="PackedScene" uid="uid://dsgksdmuge5ud" path="res://Source/Game/GameUI/GameplayUI/stage_info_display.tscn" id="3_aur0n"]
+[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="3_sco8p"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_tbu2t"]
 
 [node name="GameplayUI" type="CanvasLayer"]
 layer = 0
 script = ExtResource("1")
-_gameModeButtonPath = NodePath("Control/HBoxContainer/TopBar/HBoxContainer/GameModeButton/VBoxContainer/TextureRect/Button")
+_gameModeButtonPath = NodePath("Control/HBoxContainer/TopBar/HBoxContainer/Button")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -28,9 +29,25 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TopBar" type="Control" parent="Control/HBoxContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/TopBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/HBoxContainer/TopBar/MarginContainer"]
+layout_mode = 2
+color = Color(0.207843, 0.207843, 0.207843, 0.6)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/TopBar"]
 layout_mode = 1
@@ -40,12 +57,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Control" type="Control" parent="Control/HBoxContainer/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="LevelPointsDisplay" parent="Control/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("2_1qjoq")]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="GameModeButton" parent="Control/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("2_qtil1")]
+[node name="StageInfoDisplay" parent="Control/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("3_aur0n")]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Control/HBoxContainer/TopBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_sco8p")
+theme_override_font_sizes/font_size = 8
+text = "Build"
 
 [node name="BuildUI" parent="Control/HBoxContainer" instance=ExtResource("3_tbu2t")]
 layout_mode = 2

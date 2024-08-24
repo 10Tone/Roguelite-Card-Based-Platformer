@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c88w6w6p2eee8"]
+
+[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="1_qxnlv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0hngr"]
+font = ExtResource("1_qxnlv")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_0pgov"]
+font = ExtResource("1_qxnlv")
+font_size = 8
+
+[node name="ValueDisplay" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Level Points"
+label_settings = SubResource("LabelSettings_0hngr")
+
+[node name="ValueLabel" type="Label" parent="."]
+layout_mode = 2
+text = "0000"
+label_settings = SubResource("LabelSettings_0pgov")

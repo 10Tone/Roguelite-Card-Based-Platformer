@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsgksdmuge5ud"]
+
+[ext_resource type="PackedScene" uid="uid://c88w6w6p2eee8" path="res://Source/Game/GameUI/GameplayUI/value_display.tscn" id="2_yh28j"]
+
+[node name="StageInfoDisplay" type="Control"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stage" parent="HBoxContainer" instance=ExtResource("2_yh28j")]
+layout_mode = 2
+
+[node name="NameLabel" parent="HBoxContainer/Stage" index="0"]
+text = "Stage"
+
+[node name="ValueLabel" parent="HBoxContainer/Stage" index="1"]
+text = "00"
+
+[node name="MinimumValue" parent="HBoxContainer" instance=ExtResource("2_yh28j")]
+layout_mode = 2
+
+[node name="NameLabel" parent="HBoxContainer/MinimumValue" index="0"]
+text = ""
+
+[node name="ValueLabel" parent="HBoxContainer/MinimumValue" index="1"]
+text = "000"
+
+[node name="BuildValue" parent="HBoxContainer" instance=ExtResource("2_yh28j")]
+layout_mode = 2
+
+[node name="NameLabel" parent="HBoxContainer/BuildValue" index="0"]
+text = ""
+
+[node name="ValueLabel" parent="HBoxContainer/BuildValue" index="1"]
+text = "000"
+
+[editable path="HBoxContainer/Stage"]
+[editable path="HBoxContainer/MinimumValue"]
+[editable path="HBoxContainer/BuildValue"]
