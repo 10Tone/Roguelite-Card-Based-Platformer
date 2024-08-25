@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Game.LevelSystem;
 using Game.WorldBuilding;
 
 public partial class WorldManager : Node2D
@@ -17,6 +18,11 @@ public partial class WorldManager : Node2D
     public void OnStageFinished()
     {
         _worldBuilding?.OnStageFinished();
+    }
+
+    public void SetCurrentStage(StageData stageData)
+    {
+        _worldBuilding?.SetCurrentStage(stageData);
     }
     
 }

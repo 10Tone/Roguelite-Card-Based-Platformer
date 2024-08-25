@@ -48,6 +48,7 @@ public partial class LevelManager : Node
 		_globalEvents.ItemRemoved += OnItemRemoved;
 		
 		LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
+		_worldManager.SetCurrentStage(LevelData.CurrentStage);
 		ScanForDamageableNodes();
 		
 	}

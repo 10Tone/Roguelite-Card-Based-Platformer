@@ -1,5 +1,6 @@
 using System;
 using AutoLoads;
+using Game.LevelSystem;
 using Godot;
 using Godot.Collections;
 using Tools;
@@ -14,16 +15,16 @@ public partial class BuildGrid : TileMapLayer
     private Dictionary<Vector2, Node2D> _buildedItems
     {
         get => _globalVariables.BuildedItems;
-        set
-        {
-            _globalVariables.BuildedItems = value;
-        }
+        set { _globalVariables.BuildedItems = value; }
     }
-    
+
     private bool _buildingEnabled;
 
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
+
+    private StageData _currentStageData;
+
 
     public override void _EnterTree()
     {
@@ -52,8 +53,8 @@ public partial class BuildGrid : TileMapLayer
                 break;
         }
     }
-    
-    
+
+
     private void OnGameStateEntered(GameState gameState)
     {
         if (gameState == _globalVariables.GameStates["PlayModeState"])
@@ -116,13 +117,13 @@ public partial class BuildGrid : TileMapLayer
         _buildedItems.Remove(cellPos);
 
         var item = (IBuildItem)blockInstance;
-        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved),item.BuildItemResource, blockInstance, neighbors);
+        _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), item.BuildItemResource, blockInstance, neighbors);
 
         // Check if the removed block is a platform
         if (item.BuildItemResource.BuildItemType == BuildItemTypes.Platforms)
         {
             // Check surrounding cells for traps above the removed platform
-            
+
             foreach (var neighbor in neighbors)
             {
                 var neighborPos = neighbor.Key;
@@ -134,7 +135,8 @@ public partial class BuildGrid : TileMapLayer
                     // DebugOverlay.Instance.DebugPrint("Removing trap at position " + neighborPos);
                     neighborNode.QueueFree();
                     _buildedItems.Remove(neighborPos);
-                    _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved),neighborItem.BuildItemResource, neighborNode, neighbors);
+                    _globalEvents.EmitSignal(nameof(GlobalEvents.ItemRemoved), neighborItem.BuildItemResource,
+                        neighborNode, neighbors);
                 }
             }
         }
@@ -199,8 +201,26 @@ public partial class BuildGrid : TileMapLayer
             !neighborData
                 .isPlatformBelow)
         {
-            return;}
-        // GD.Print(CheckSurroundingCells(tilePosition));
+            return;
+        }
+
+        if (_globalVariables.SelectedBuildItem.BuildItemType == BuildItemTypes.Platforms)
+        {
+            var platformCount = 0;
+            foreach (var item in _buildedItems.Values)
+            {
+                if (((IBuildItem)item).BuildItemResource.BuildItemType == BuildItemTypes.Platforms)
+                {
+                    platformCount++;
+                }
+            }
+
+            if (platformCount >= _currentStageData.MaxPlaceablePlatforms )
+            {
+                return;
+            }
+        }
+
         PlaceBlock(tilePosition, neighborData.neighbors);
     }
 
@@ -215,8 +235,13 @@ public partial class BuildGrid : TileMapLayer
         {
             value.QueueFree();
         }
+
         _buildedItems.Clear();
         _globalVariables.BuildedItems = _buildedItems;
     }
-    
+
+    public void SetCurrentStage(StageData stageData)
+    {
+        _currentStageData = stageData;
+    }
 }

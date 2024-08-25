@@ -1,3 +1,4 @@
+using Game.LevelSystem;
 using Godot;
 
 namespace Game.WorldBuilding;
@@ -38,5 +39,10 @@ public partial class WorldBuilding: Node2D
     public void OnStageFinished()
     {
         _buildGrid?.ClearBuildGrid();
+    }
+
+    public void SetCurrentStage(StageData stageData)
+    {
+        _buildGrid?.SetCurrentStage(stageData);
     }
 }
