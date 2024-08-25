@@ -21,6 +21,7 @@ public partial class GameManager : Node2D
     private BuildModeState _buildModeState;
     private DeathModeState _deathModeState;
     private LevelFinishedModeState _levelFinishedModeState;
+    private StageFinishedModeState _stageFinishedModeState;
 
     private LevelManager _currentLevel;
     private int _currentLevelIndex;
@@ -43,12 +44,13 @@ public partial class GameManager : Node2D
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
         _deathModeState = new DeathModeState(_globalEvents, _globalVariables);
         _levelFinishedModeState = new LevelFinishedModeState(_globalEvents, _globalVariables);
-
+        _stageFinishedModeState = new StageFinishedModeState(_globalEvents, _globalVariables);
 
         _globalVariables.GameStates.Add("PlayModeState", _playModeState);
         _globalVariables.GameStates.Add("BuildModeState", _buildModeState);
         _globalVariables.GameStates.Add("DeathModeState", _deathModeState);
         _globalVariables.GameStates.Add("LevelFinishedModeState", _levelFinishedModeState);
+        _globalVariables.GameStates.Add("StageFinishedModeState", _stageFinishedModeState);
 
         LoadLevel(_currentLevelIndex);
         _gameStateMachine.Initialize(_playModeState);
@@ -85,7 +87,7 @@ public partial class GameManager : Node2D
 
     private void OnStageFinished()
     {
-        throw new NotImplementedException();
+        _gameStateMachine.ChangeState(_stageFinishedModeState);
     }
 
     private void OnGameModeButtonPressed()

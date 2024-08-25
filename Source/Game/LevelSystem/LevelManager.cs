@@ -97,6 +97,7 @@ public partial class LevelManager : Node
 	private void OnLevelGoalReached()
 	{
 		if(!_minimumStageValueReached) {return;}
+		EmitSignal(nameof(StageFinished));
 		LoadNextStage();
 	}
 	
