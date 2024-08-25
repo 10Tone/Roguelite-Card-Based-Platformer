@@ -8,7 +8,7 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
-_worldGridSize = Vector2i(32, 32)
+_worldGridCellSize = 32
 _levelScenes = Array[PackedScene]([ExtResource("2_mkot1"), ExtResource("3_ddo2q")])
 metadata/_edit_lock_ = true
 

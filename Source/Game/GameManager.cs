@@ -10,7 +10,7 @@ namespace Game;
 
 public partial class GameManager : Node2D
 {
-    [Export] private Vector2I _worldGridSize;
+    [Export] private int _worldGridCellSize;
     [Export] private PackedScene[] _levelScenes;
     
     private GlobalEvents _globalEvents;
@@ -31,7 +31,7 @@ public partial class GameManager : Node2D
         _gameStateMachine = new GameStateMachine();
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
-        _globalVariables.WorldGridSize = _worldGridSize;
+        _globalVariables.WorldGridCellSize = _worldGridCellSize;
 
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));

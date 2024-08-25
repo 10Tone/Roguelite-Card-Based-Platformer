@@ -35,7 +35,7 @@ public partial class BuildGrid : TileMapLayer
 
     public override void _Ready()
     {
-        TileSet.SetTileSize(_globalVariables.WorldGridSize);
+        TileSet.SetTileSize(new Vector2I(_globalVariables.WorldGridCellSize, _globalVariables.WorldGridCellSize));
     }
 
     public override void _UnhandledInput(InputEvent @event)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwf2upxchtk0b"]
+
+[ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/GridShader.cs" id="2_nqpwt"]
+
+[node name="GridShader" type="ColorRect"]
+custom_minimum_size = Vector2(112, 112)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("2_nqpwt")
+_fadeRadius = 128.0
+_fadeStrength = 0.5

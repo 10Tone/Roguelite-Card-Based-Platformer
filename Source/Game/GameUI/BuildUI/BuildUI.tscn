@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://piu1vtg3qoot"]
+[gd_scene load_steps=4 format=3 uid="uid://piu1vtg3qoot"]
 
 [ext_resource type="PackedScene" uid="uid://py4tqnf1lhbd" path="res://Source/Game/GameUI/BuildUI/BuildItemButton.tscn" id="2"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildMenu.cs" id="3_xubfb"]
-[ext_resource type="PackedScene" uid="uid://1bqkwwpwqadv" path="res://Source/Game/GameUI/GameplayUI/grid.tscn" id="4_o2txc"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/BuildUI/BuildUI.cs" id="6"]
 
 [node name="BuildUI" type="Control"]
@@ -50,15 +49,3 @@ grow_vertical = 2
 
 [node name="BuildButtons" type="GridContainer" parent="BuildMenu/VBoxContainer"]
 layout_mode = 2
-
-[node name="Grid" parent="." instance=ExtResource("4_o2txc")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 576.0
-offset_bottom = 340.0
-grow_horizontal = 1
-grow_vertical = 1
