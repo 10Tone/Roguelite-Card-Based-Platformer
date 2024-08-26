@@ -16,20 +16,20 @@
 [sub_resource type="Resource" id="Resource_d8dir"]
 script = ExtResource("2_yxv84")
 StageNumber = 1
-MinScoreToAdvance = 10
+MinScoreToAdvance = 0
 MaxPlaceablePlatforms = 4
 
 [sub_resource type="Resource" id="Resource_ed4y1"]
 script = ExtResource("2_yxv84")
 StageNumber = 2
-MinScoreToAdvance = 20
+MinScoreToAdvance = 8
 MaxPlaceablePlatforms = 4
 
 [sub_resource type="Resource" id="Resource_bohvs"]
 script = ExtResource("2_yxv84")
 StageNumber = 3
-MinScoreToAdvance = 30
-MaxPlaceablePlatforms = 3
+MinScoreToAdvance = 15
+MaxPlaceablePlatforms = 5
 
 [sub_resource type="Resource" id="Resource_c8puh"]
 script = ExtResource("3_hylve")

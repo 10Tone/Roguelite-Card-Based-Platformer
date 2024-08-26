@@ -21,6 +21,7 @@ public partial class GameManager : Node2D
 {
     [Export] private int _worldGridCellSize;
     [Export] private PackedScene[] _levelScenes;
+    [Export] private float _switchStagesDelay = 2.0f;
     
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
@@ -95,8 +96,10 @@ public partial class GameManager : Node2D
         {_gameStateMachine.ChangeState(_buildModeState);}
     }
 
-    private void OnStageReady()
+    private async void OnStageReady()
     {
+        await ToSignal(GetTree().CreateTimer(_switchStagesDelay), SceneTreeTimer.SignalName.Timeout);
+        
         _gameStateMachine.ChangeState(_buildModeState);
     }
 
