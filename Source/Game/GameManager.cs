@@ -62,7 +62,7 @@ public partial class GameManager : Node2D
         _globalVariables.GameStates.Add(GameModeState.StageFinishedModeState, _stageFinishedModeState);
 
         LoadLevel(_currentLevelIndex);
-        _gameStateMachine.Initialize(_playModeState);
+        _gameStateMachine.Initialize(_buildModeState);
     }
 
     public override void _Process(double delta)
@@ -86,12 +86,18 @@ public partial class GameManager : Node2D
         _currentLevel.LevelFinished += OnLevelFinished;
         _currentLevel.StageFinished += OnStageFinished;
         _currentLevel.PlayerDeath += OnPlayerDeath;
+        _currentLevel.StageReady += OnStageReady;
         
         await ToSignal(_currentLevel, "ready");
         _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
         
-        if(_gameStateMachine.CurrentState != _playModeState)
-        {_gameStateMachine.ChangeState(_playModeState);}
+        if(_gameStateMachine.CurrentState != _buildModeState)
+        {_gameStateMachine.ChangeState(_buildModeState);}
+    }
+
+    private void OnStageReady()
+    {
+        _gameStateMachine.ChangeState(_buildModeState);
     }
 
     private void OnStageFinished()

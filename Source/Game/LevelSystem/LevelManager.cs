@@ -29,6 +29,9 @@ public partial class LevelManager : Node
     
 	[Signal]
 	public delegate void PlayerDeathEventHandler();
+	
+	[Signal]
+	public delegate void StageReadyEventHandler();
 
 	public override void _EnterTree()
 	{
@@ -49,6 +52,7 @@ public partial class LevelManager : Node
 		
 		LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
 		_worldManager.SetCurrentStage(LevelData.CurrentStage);
+		_globalEvents.EmitSignal(nameof(_globalEvents.StageValueUpdated),0, LevelData.CurrentStage);
 		ScanForDamageableNodes();
 		
 	}
@@ -120,6 +124,9 @@ public partial class LevelManager : Node
 		{
 			LevelData.CurrentStageIndex++;
 			LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
+			_worldManager?.SetCurrentStage(LevelData.CurrentStage);
+			_globalEvents.EmitSignal(nameof(_globalEvents.StageValueUpdated),0, LevelData.CurrentStage);
+			EmitSignal(nameof(StageReady));
 			//emit signal with updated game data
 		}
 		else
