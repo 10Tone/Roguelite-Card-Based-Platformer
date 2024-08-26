@@ -8,6 +8,15 @@ using Tools;
 
 namespace Game;
 
+public enum GameModeState
+{
+    PlayModeState,
+    BuildModeState,
+    DeathModeState,
+    LevelFinishedModeState,
+    StageFinishedModeState
+}
+
 public partial class GameManager : Node2D
 {
     [Export] private int _worldGridCellSize;
