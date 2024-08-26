@@ -1,6 +1,7 @@
 using System;
 using AutoLoads;
 using Game.PlayerStates;
+using Game.WorldBuilding;
 using Godot;
 using Tools;
 
@@ -28,13 +29,17 @@ public partial class Player : CharacterBody2D, IPlayer
 
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
-    
+
     private IdleState _idleState;
     private MoveState _moveState;
     private JumpState _jumpState;
-    
-    private AnimatedSprite2D _animatedSprite2D;
 
+    private AnimatedSprite2D _animatedSprite2D;
+    private Area2D _iDamageCollider;
+    private bool _isDamaged = false;
+    private int _health;
+
+    #region Initialization
     public override void _EnterTree()
     {
         PlayerStateMachine = new PlayerStateMachine();
@@ -51,23 +56,51 @@ public partial class Player : CharacterBody2D, IPlayer
         _globalVariables.StartPosition = GlobalPosition;
         AddToGroup("Player");
         PlayerData = _playerData;
-        if(PlayerData is null) {GD.PushWarning("PlayerData is null!");}
+        if (PlayerData is null)
+        {
+            GD.PushWarning("PlayerData is null!");
+        }
+        ResetHealth();
         InputHandler = GetNode(_inputHandlerPath) as PlayerInputHandler;
-        if(InputHandler is null) {GD.PushWarning("InputHandler is null!");}
+        if (InputHandler is null)
+        {
+            GD.PushWarning("InputHandler is null!");
+        }
+
         _animatedSprite2D = GetNode(_animatedSprite2DPath) as AnimatedSprite2D;
         FacingDirection = 1;
         AnimatedSprite = _animatedSprite2D;
+        _iDamageCollider = GetNode<Area2D>("IDamageCollider");
+        _iDamageCollider.AreaEntered += OnPlayerEnteredIDamage;
+        _iDamageCollider.AreaExited += OnPlayerExitedIDamage;
         AddStates();
     }
-    
-    public override void _Process(double delta) 
+
+    private void AddStates()
+    {
+        PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Idle,
+            _idleState = new IdleState(this, PlayerStates.PlayerStates.Idle.ToString()));
+        PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Move,
+            _moveState = new MoveState(this, PlayerStates.PlayerStates.Move.ToString()));
+        PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Jump,
+            _jumpState = new JumpState(this, PlayerStates.PlayerStates.Jump.ToString()));
+        PlayerStateMachine.Initialize(_idleState);
+    }
+
+    #endregion
+
+    public override void _Process(double delta)
     {
         PlayerStateMachine.CurrentState.LogicUpdate(delta);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if(!InputHandler.InputEnabled) { return; }
+        if (!InputHandler.InputEnabled)
+        {
+            return;
+        }
+
         PlayerStateMachine.CurrentState.PhysicsUpdate(delta);
         IsGrounded = IsOnFloor();
         var velocity = Velocity;
@@ -76,14 +109,7 @@ public partial class Player : CharacterBody2D, IPlayer
         MoveAndSlide();
     }
 
-    private void AddStates()
-    {
-        PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Idle, _idleState = new IdleState(this, PlayerStates.PlayerStates.Idle.ToString()));
-        PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Move, _moveState = new MoveState(this, PlayerStates.PlayerStates.Move.ToString()));
-        PlayerStateMachine.States.Add(PlayerStates.PlayerStates.Jump, _jumpState = new JumpState(this, PlayerStates.PlayerStates.Jump.ToString()));
-        PlayerStateMachine.Initialize(_idleState);
-        
-    }
+    #region Event Handlers
 
     private void OnGameStateEntered(GameState gameState)
     {
@@ -99,12 +125,58 @@ public partial class Player : CharacterBody2D, IPlayer
         }
     }
 
+    private void OnPlayerEnteredIDamage(Area2D area)
+    {
+        if (_isDamaged)
+        {
+            return;}
+        if (area is not IDamage damageable)
+        {
+            damageable = area.GetParent() as IDamage;
+        }
+
+        if (damageable == null)
+        {
+            var parent = area.GetParent();
+            if (parent != null)
+            {
+                foreach (var child in parent.GetChildren())
+                {
+                    if (child is IDamage damage)
+                    {
+                        damageable = damage;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        var node = damageable as Node2D;
+        if (damageable == null || node == null) return;
+        if (!node.IsInGroup("IDamageGroup"))
+        {
+            return;}
+
+        _isDamaged = true;
+        DealDamage(damageable.GetIDamageValue());
+        DebugOverlay.Instance.DebugPrint("Player health: " + _health);
+    }
+
+    private void OnPlayerExitedIDamage(Area2D area)
+    {
+        _isDamaged = false;
+    }
+
+    #endregion
+
+    #region Movement and Animation
+
     private void MoveBackToStartPosition()
     {
         // TEMP
         GlobalPosition = _globalVariables.StartPosition;
     }
-    
+
     private void Flip()
     {
         FacingDirection *= -1;
@@ -115,7 +187,7 @@ public partial class Player : CharacterBody2D, IPlayer
             _ => _animatedSprite2D.FlipH
         };
     }
-    
+
     public void CheckIfShouldFlip(float horizontalInput)
     {
         if (horizontalInput != 0 && Convert.ToInt32(horizontalInput) != FacingDirection)
@@ -123,5 +195,16 @@ public partial class Player : CharacterBody2D, IPlayer
             Flip();
         }
     }
-    
+
+    #endregion
+
+    private void DealDamage(int damage)
+    {
+        _health -= damage;
+    }
+
+    private void ResetHealth()
+    {
+        _health = PlayerData.Health;
+    }
 }

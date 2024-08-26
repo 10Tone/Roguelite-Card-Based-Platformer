@@ -6,8 +6,7 @@
 size = Vector2(800, 20)
 
 [node name="DeadBox" type="Area2D"]
-collision_layer = 0
-monitorable = false
+collision_layer = 4
 script = ExtResource("1_b0ivv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

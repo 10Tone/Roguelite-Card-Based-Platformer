@@ -13,3 +13,5 @@ Gravity = 632.0
 JumpForce = 328.0
 MaxSpeed = 128.0
 VariableJumpHeightMultiplier = 0.1
+Health = 100
+MaxHealth = 120

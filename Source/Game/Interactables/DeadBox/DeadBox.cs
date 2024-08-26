@@ -19,6 +19,11 @@ public partial class DeadBox : Interactable, IDamage
 		AddToGroup("IDamageGroup");
 	}
 
+	public int GetIDamageValue()
+	{
+		return 10000;
+	}
+
 	protected override void BodyEnteredAction(IPlayer player)
 	{
 		base.BodyEnteredAction(player);

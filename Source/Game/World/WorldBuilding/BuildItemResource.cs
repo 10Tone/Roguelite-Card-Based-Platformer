@@ -10,4 +10,5 @@ public partial class BuildItemResource : Resource
   [Export()] public PackedScene Scene { get; set; }
   [Export()] public BuildItemTypes BuildItemType { get; set; }
   [Export] public int BuildItemValue { get; set; }
+  [Export] public int DamageValue { get; set; }
 }

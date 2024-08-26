@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Tools;
 
 namespace Game.WorldBuilding;
 
@@ -43,5 +44,10 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 	{
 		AddToGroup("IDamageGroup");
 		
+	}
+
+	public int GetIDamageValue()
+	{
+		return _buildItemResource.DamageValue;
 	}
 }

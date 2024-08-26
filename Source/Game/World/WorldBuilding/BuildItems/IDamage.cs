@@ -7,4 +7,5 @@ public interface IDamage
 {
     event EventHandler PlayerEnteredIDamage;
     void AddToIDamageGroup();
+    int GetIDamageValue();
 }

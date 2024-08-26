@@ -11,3 +11,4 @@ Icon = ExtResource("1_rtlmd")
 Scene = ExtResource("2_4xpcf")
 BuildItemType = 3
 BuildItemValue = 1
+DamageValue = 25
