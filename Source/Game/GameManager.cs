@@ -46,6 +46,15 @@ public partial class GameManager : Node2D
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
         _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
+        _globalEvents.PlayerHealthUpdated += OnPlayerHealthUpdated;
+    }
+
+    private void OnPlayerHealthUpdated(int health, bool isdead)
+    {
+        if (isdead)
+        {
+            _gameStateMachine.ChangeState(_deathModeState);
+        }
     }
 
     public override void _Ready()

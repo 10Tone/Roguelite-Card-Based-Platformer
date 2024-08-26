@@ -32,4 +32,7 @@ public partial class GlobalEvents : Node
     [Signal]
     public delegate void GameModeButtonPressedEventHandler();
     
+    [Signal]
+    public delegate void PlayerHealthUpdatedEventHandler(int health, bool isDead);
+    
 }

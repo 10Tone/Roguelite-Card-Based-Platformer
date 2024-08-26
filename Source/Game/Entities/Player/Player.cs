@@ -201,6 +201,17 @@ public partial class Player : CharacterBody2D, IPlayer
     private void DealDamage(int damage)
     {
         _health -= damage;
+        
+        if (_health <= 0)
+        {
+            Die();
+        }
+        _globalEvents.EmitSignal(nameof(_globalEvents.PlayerHealthUpdated), _health, false);
+    }
+
+    private void Die()
+    {
+        _globalEvents.EmitSignal(nameof(_globalEvents.PlayerHealthUpdated), 0, true);
     }
 
     private void ResetHealth()
