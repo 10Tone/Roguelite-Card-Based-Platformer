@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://djyky6qjppmai"]
+
+[ext_resource type="FontFile" uid="uid://duy1vnn3qgq30" path="res://Content Assets/Fonts/crang/Crang.ttf" id="1_kk0l8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fqwbl"]
+font = ExtResource("1_kk0l8")
+font_size = 25
+font_color = Color(1, 1, 0.0470588, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0.137255, 0.137255, 0.137255, 0.729412)
+shadow_offset = Vector2(2, 2)
+
+[node name="GameplayFeedback" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainTextLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -26.0
+offset_right = 64.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "stage finished!"
+label_settings = SubResource("LabelSettings_fqwbl")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

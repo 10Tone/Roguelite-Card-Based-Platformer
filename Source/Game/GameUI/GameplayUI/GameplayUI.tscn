@@ -1,17 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5el1eqpdre2"]
+[gd_scene load_steps=8 format=3 uid="uid://c5el1eqpdre2"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://d1a5yw1vrma7h" path="res://Source/Game/GameUI/GameplayUI/level_points_display.tscn" id="2_1qjoq"]
 [ext_resource type="PackedScene" uid="uid://ddt7rqhh0hn6a" path="res://Source/Game/GameUI/GameplayUI/game_mode_button.tscn" id="2_qtil1"]
 [ext_resource type="PackedScene" uid="uid://dsgksdmuge5ud" path="res://Source/Game/GameUI/GameplayUI/stage_info_display.tscn" id="3_aur0n"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_tbu2t"]
+[ext_resource type="PackedScene" uid="uid://djyky6qjppmai" path="res://Source/Game/GameUI/GameplayFeedback/gameplay_feedback.tscn" id="6_484fi"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameplayFeedback/GameplayFeedback.cs" id="7_uo6wr"]
 
 [node name="GameplayUI" type="CanvasLayer"]
 layer = 0
 script = ExtResource("1")
-_gameModeButtonPath = NodePath("Control/HBoxContainer/TopBar/HBoxContainer/Control3/Button")
+_gameModeButtonPath = NodePath("UiContainer/HBoxContainer/TopBar/HBoxContainer/Control3/Button")
 
-[node name="Control" type="Control" parent="."]
+[node name="UiContainer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="HBoxContainer" type="VBoxContainer" parent="UiContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,12 +30,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="Control" parent="Control/HBoxContainer"]
+[node name="TopBar" type="Control" parent="UiContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 mouse_filter = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/TopBar"]
+[node name="MarginContainer" type="MarginContainer" parent="UiContainer/HBoxContainer/TopBar"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -45,11 +47,11 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control/HBoxContainer/TopBar/MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="UiContainer/HBoxContainer/TopBar/MarginContainer"]
 layout_mode = 2
 color = Color(0.207843, 0.207843, 0.207843, 0.6)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/TopBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UiContainer/HBoxContainer/TopBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,28 +59,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="Control/HBoxContainer/TopBar/HBoxContainer"]
+[node name="Control" type="Control" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 
-[node name="LevelPointsDisplay" parent="Control/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("2_1qjoq")]
+[node name="LevelPointsDisplay" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("2_1qjoq")]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
-[node name="StageInfoDisplay" parent="Control/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("3_aur0n")]
+[node name="StageInfoDisplay" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("3_aur0n")]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="Control/HBoxContainer/TopBar/HBoxContainer"]
+[node name="Control2" type="Control" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="Control3" type="Control" parent="Control/HBoxContainer/TopBar/HBoxContainer"]
+[node name="Control3" type="Control" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer"]
 custom_minimum_size = Vector2(34, 16)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="Button" parent="Control/HBoxContainer/TopBar/HBoxContainer/Control3" instance=ExtResource("2_qtil1")]
+[node name="Button" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer/Control3" instance=ExtResource("2_qtil1")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -92,7 +94,10 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BuildUI" parent="Control/HBoxContainer" instance=ExtResource("3_tbu2t")]
+[node name="BuildUI" parent="UiContainer/HBoxContainer" instance=ExtResource("3_tbu2t")]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
+
+[node name="GameplayFeedback" parent="." instance=ExtResource("6_484fi")]
+script = ExtResource("7_uo6wr")
