@@ -87,7 +87,7 @@ public partial class Player : CharacterBody2D, IPlayer
 
     private void OnGameStateEntered(GameState gameState)
     {
-        if (gameState == _globalVariables.GameStates["PlayModeState"])
+        if (gameState == _globalVariables.GameStates[GameModeState.PlayModeState])
         {
             InputHandler.InputEnabled = true;
         }

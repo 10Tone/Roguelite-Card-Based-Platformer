@@ -17,8 +17,26 @@ public partial class GameplayFeedback : Control
 	}
 
 	private void OnGameStateEntered(GameState gamestate)
-	{
-		
-	}
+{
+    switch (gamestate)
+    {
+        case var _ when gamestate == _globalVariables.GameStates[GameModeState.PlayModeState]:
+
+            break;
+        case var _ when gamestate == _globalVariables.GameStates[GameModeState.BuildModeState]:
+
+            break;
+        case var _ when gamestate == _globalVariables.GameStates[GameModeState.DeathModeState]:
+
+            break;
+        case var _ when gamestate == _globalVariables.GameStates[GameModeState.LevelFinishedModeState]:
+
+            break;
+        case var _ when gamestate == _globalVariables.GameStates[GameModeState.StageFinishedModeState]:
+
+            break;
+    }
+}
+
 }
 

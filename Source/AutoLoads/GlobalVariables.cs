@@ -9,7 +9,7 @@ public partial class GlobalVariables: Node
 {
     public Vector2 StartPosition { get; set; }
     public BuildItemResource SelectedBuildItem { get; set; }
-    public Dictionary<string, GameState> GameStates { get; set; }
+    public Dictionary<GameModeState, GameState> GameStates { get; set; }
     public int WorldGridCellSize { get; set; }
     public Godot.Collections.Dictionary<Vector2, Node2D> BuildedItems { get; set; }
 
@@ -32,7 +32,7 @@ public partial class GlobalVariables: Node
     public override void _EnterTree()
     {
         BuildedItems = new Godot.Collections.Dictionary<Vector2, Node2D>();
-        GameStates = new Dictionary<string, GameState>();
+        GameStates = new Dictionary<GameModeState, GameState>();
     }
 
     private void LoadResourcesFromDirectory(string dirPath)

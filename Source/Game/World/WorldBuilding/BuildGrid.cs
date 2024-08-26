@@ -55,17 +55,14 @@ public partial class BuildGrid : TileMapLayer
     }
 
 
-    private void OnGameStateEntered(GameState gameState)
+    private void OnGameStateEntered(GameState gameState) =>
+    _buildingEnabled = gameState switch
     {
-        if (gameState == _globalVariables.GameStates["PlayModeState"])
-        {
-            _buildingEnabled = false;
-        }
-        else if (gameState == _globalVariables.GameStates["BuildModeState"])
-        {
-            _buildingEnabled = true;
-        }
-    }
+        _ when gameState == _globalVariables.GameStates[GameModeState.PlayModeState] => false,
+        _ when gameState == _globalVariables.GameStates[GameModeState.BuildModeState] => true,
+        _ => _buildingEnabled
+    };
+
 
     private bool ShouldHandleInput(InputEvent @event, out InputEventMouseButton eventMouseButton, out Vector2 cellPos)
     {

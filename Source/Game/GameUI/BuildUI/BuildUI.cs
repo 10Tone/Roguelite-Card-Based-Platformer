@@ -19,13 +19,12 @@ public partial class BuildUI: Control
     
     private void OnGameStateEntered(GameState gameState)
     {
-        if (gameState == _globalVariables.GameStates["PlayModeState"])
+        Visible = gameState switch
         {
-            Visible = false;
-        }
-        else if (gameState == _globalVariables.GameStates["BuildModeState"])
-        {
-            Visible = true;
-        }
+            _ when gameState == _globalVariables.GameStates[GameModeState.PlayModeState] => false,
+            _ when gameState == _globalVariables.GameStates[GameModeState.BuildModeState] => true,
+            _ => Visible
+        };
     }
+
 }

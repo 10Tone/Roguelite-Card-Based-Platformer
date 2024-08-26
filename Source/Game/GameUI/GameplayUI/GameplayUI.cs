@@ -38,26 +38,15 @@ public partial class GameplayUI: CanvasLayer
     
     
     private void OnGameStateEntered(GameState gameState)
+{
+    _gameModeButton.Text = gameState switch
     {
-        if (_globalVariables?.GameStates == null)
-        {
-            GD.PushWarning("GameStates dictionary is null or not initialized");
-            return;
-        }
+        _ when gameState == _globalVariables.GameStates[GameModeState.PlayModeState] => "Build",
+        _ when gameState == _globalVariables.GameStates[GameModeState.BuildModeState] => "Play",
+        _ => _gameModeButton.Text
+    };
+}
 
-        if (gameState == _globalVariables.GameStates["PlayModeState"])
-        {
-            _gameModeButton.Text = "Build";
-        }
-        else if (gameState == _globalVariables.GameStates["BuildModeState"])
-        {
-            _gameModeButton.Text = "Play";
-        }
-        // else
-        // {
-        //     GD.PushWarning($"Unhandled game state: {gameState.GetType().Name}");
-        // }
-    }
     
 
 

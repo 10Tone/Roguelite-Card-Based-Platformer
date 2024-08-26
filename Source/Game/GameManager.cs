@@ -55,11 +55,11 @@ public partial class GameManager : Node2D
         _levelFinishedModeState = new LevelFinishedModeState(_globalEvents, _globalVariables);
         _stageFinishedModeState = new StageFinishedModeState(_globalEvents, _globalVariables);
 
-        _globalVariables.GameStates.Add("PlayModeState", _playModeState);
-        _globalVariables.GameStates.Add("BuildModeState", _buildModeState);
-        _globalVariables.GameStates.Add("DeathModeState", _deathModeState);
-        _globalVariables.GameStates.Add("LevelFinishedModeState", _levelFinishedModeState);
-        _globalVariables.GameStates.Add("StageFinishedModeState", _stageFinishedModeState);
+        _globalVariables.GameStates.Add(GameModeState.PlayModeState, _playModeState);
+        _globalVariables.GameStates.Add(GameModeState.BuildModeState, _buildModeState);
+        _globalVariables.GameStates.Add(GameModeState.DeathModeState, _deathModeState);
+        _globalVariables.GameStates.Add(GameModeState.LevelFinishedModeState, _levelFinishedModeState);
+        _globalVariables.GameStates.Add(GameModeState.StageFinishedModeState, _stageFinishedModeState);
 
         LoadLevel(_currentLevelIndex);
         _gameStateMachine.Initialize(_playModeState);
@@ -100,15 +100,24 @@ public partial class GameManager : Node2D
     }
 
     private void OnGameModeButtonPressed()
+{
+    var currentGameState = _globalVariables.GameStates.FirstOrDefault(x => x.Value.GetType() == _gameStateMachine.CurrentState.GetType()).Key;
+
+    switch (currentGameState)
     {
-        var currentGameState = _globalVariables.GameStates.Keys.FirstOrDefault(x => _globalVariables.GameStates[x].GetType() == _gameStateMachine.CurrentState.GetType());
-        
-        if (currentGameState == "PlayModeState")
+        case GameModeState.PlayModeState:
             _gameStateMachine.ChangeState(_buildModeState);
-        else if (currentGameState == "BuildModeState")
+            break;
+        case GameModeState.BuildModeState:
             _gameStateMachine.ChangeState(_playModeState);
-        
+            break;
+        // Add other cases if needed
+        default:
+            // Handle unexpected states or do nothing
+            break;
     }
+}
+
     
     private void LoadNextLevel()
     {
