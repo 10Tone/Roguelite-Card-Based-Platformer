@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsgksdmuge5ud"]
+[gd_scene load_steps=13 format=3 uid="uid://dsgksdmuge5ud"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/StageInfoDisplay.cs" id="1_isatv"]
 [ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="2_b7rqr"]
+[ext_resource type="Texture2D" uid="uid://dxb203j1lw1jm" path="res://Content Assets/free_fantasy_rpg_icons/compass1.png" id="2_kmbyk"]
 [ext_resource type="FontFile" uid="uid://02yqloqbfurx" path="res://Content Assets/Fonts/pixelmix/pixelmix_bold.ttf" id="3_8a18x"]
+[ext_resource type="Texture2D" uid="uid://c8k71cl72wfwe" path="res://Content Assets/free_fantasy_rpg_icons/key3.png" id="5_txfrj"]
+[ext_resource type="Texture2D" uid="uid://brxeul82j05sq" path="res://Content Assets/free_fantasy_rpg_icons/hammer1.png" id="6_y0ymx"]
+[ext_resource type="Texture2D" uid="uid://d2qih76ofd2ta" path="res://Content Assets/free_fantasy_rpg_icons/shoe.png" id="7_vu4hk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0hngr"]
 font = ExtResource("2_b7rqr")
@@ -56,10 +60,16 @@ grow_vertical = 2
 [node name="Stage" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Stage"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_kmbyk")
+
 [node name="NameLabel" type="Label" parent="HBoxContainer/Stage"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Stage"
 label_settings = SubResource("LabelSettings_0hngr")
 
 [node name="ValueLabel" type="Label" parent="HBoxContainer/Stage"]
@@ -71,10 +81,16 @@ label_settings = SubResource("LabelSettings_3bxbx")
 [node name="MinimumValue" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/MinimumValue"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("5_txfrj")
+
 [node name="NameLabel" type="Label" parent="HBoxContainer/MinimumValue"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Min Value"
 label_settings = SubResource("LabelSettings_0hngr")
 
 [node name="ValueLabel" type="Label" parent="HBoxContainer/MinimumValue"]
@@ -86,10 +102,16 @@ label_settings = SubResource("LabelSettings_aq1lw")
 [node name="BuildValue" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/BuildValue"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("6_y0ymx")
+
 [node name="NameLabel" type="Label" parent="HBoxContainer/BuildValue"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Build Value"
 label_settings = SubResource("LabelSettings_0hngr")
 
 [node name="ValueLabel" type="Label" parent="HBoxContainer/BuildValue"]
@@ -101,10 +123,16 @@ label_settings = SubResource("LabelSettings_ext5q")
 [node name="MaxPlatforms" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer/MaxPlatforms"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("7_vu4hk")
+
 [node name="NameLabel" type="Label" parent="HBoxContainer/MaxPlatforms"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Max Platforms"
 label_settings = SubResource("LabelSettings_0hngr")
 
 [node name="ValueLabel" type="Label" parent="HBoxContainer/MaxPlatforms"]
