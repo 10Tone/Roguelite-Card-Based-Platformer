@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5el1eqpdre2"]
+[gd_scene load_steps=7 format=3 uid="uid://c5el1eqpdre2"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://d1a5yw1vrma7h" path="res://Source/Game/GameUI/GameplayUI/level_points_display.tscn" id="2_1qjoq"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dsgksdmuge5ud" path="res://Source/Game/GameUI/GameplayUI/stage_info_display.tscn" id="3_aur0n"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_tbu2t"]
 [ext_resource type="PackedScene" uid="uid://djyky6qjppmai" path="res://Source/Game/GameUI/GameplayFeedback/gameplay_feedback.tscn" id="6_484fi"]
-[ext_resource type="Script" path="res://Source/Game/GameUI/GameplayFeedback/GameplayFeedback.cs" id="7_uo6wr"]
 
 [node name="GameplayUI" type="CanvasLayer"]
 layer = 0
@@ -100,4 +99,6 @@ size_flags_vertical = 3
 mouse_filter = 1
 
 [node name="GameplayFeedback" parent="." instance=ExtResource("6_484fi")]
-script = ExtResource("7_uo6wr")
+_deathMessage = "You Died!"
+_levelFinishedMessage = "Level Finished!"
+_stageFinishedMessage = "Stage Finished!"

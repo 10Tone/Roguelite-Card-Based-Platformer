@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://djyky6qjppmai"]
+[gd_scene load_steps=4 format=3 uid="uid://djyky6qjppmai"]
 
 [ext_resource type="FontFile" uid="uid://duy1vnn3qgq30" path="res://Content Assets/Fonts/crang/Crang.ttf" id="1_kk0l8"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameplayFeedback/GameplayFeedback.cs" id="1_xrbw8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fqwbl"]
 font = ExtResource("1_kk0l8")
@@ -20,8 +21,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_xrbw8")
 
 [node name="MainTextLabel" type="Label" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 1
 anchors_preset = 8
