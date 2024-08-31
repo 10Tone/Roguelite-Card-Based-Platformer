@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://2b78alxh057v"]
+[gd_scene load_steps=20 format=3 uid="uid://2b78alxh057v"]
 
 [ext_resource type="Script" path="res://Source/Game/LevelSystem/LevelManager.cs" id="1_e3p4l"]
+[ext_resource type="Resource" uid="uid://cfrak8om1x8nv" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/SpikeTrap.tres" id="2_hoptp"]
 [ext_resource type="Script" path="res://Source/Game/LevelSystem/StageData.cs" id="2_yxv84"]
 [ext_resource type="Script" path="res://Source/Game/LevelSystem/LevelData.cs" id="3_hylve"]
 [ext_resource type="Script" path="res://Source/Game/World/WorldManager.cs" id="4_7qjg4"]
+[ext_resource type="Resource" uid="uid://b64rn8mx85c6o" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/LittleTrap.tres" id="4_aliuq"]
 [ext_resource type="Texture2D" uid="uid://vw20ckbspvxw" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/1.png" id="4_p56vx"]
+[ext_resource type="Resource" uid="uid://owa07linld2k" path="res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/ElectricFieldTrap.tres" id="5_el1ex"]
 [ext_resource type="Texture2D" uid="uid://c774tjrt28753" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/2.png" id="5_k5tqd"]
 [ext_resource type="Texture2D" uid="uid://eye6yn5ayq8n" path="res://Content Assets/free-sky-with-clouds-background-pixel-art-set/Clouds/Clouds 1/4.png" id="6_pbmqh"]
 [ext_resource type="PackedScene" uid="uid://dv7k102vwgnv0" path="res://Source/Game/World/WorldBuilding/world_building.tscn" id="7_p4e43"]
@@ -18,18 +21,21 @@ script = ExtResource("2_yxv84")
 StageNumber = 1
 MinScoreToAdvance = 0
 MaxPlaceablePlatforms = 4
+BuildItemToUnlock = ExtResource("2_hoptp")
 
 [sub_resource type="Resource" id="Resource_ed4y1"]
 script = ExtResource("2_yxv84")
 StageNumber = 2
 MinScoreToAdvance = 8
 MaxPlaceablePlatforms = 4
+BuildItemToUnlock = ExtResource("4_aliuq")
 
 [sub_resource type="Resource" id="Resource_bohvs"]
 script = ExtResource("2_yxv84")
 StageNumber = 3
 MinScoreToAdvance = 15
 MaxPlaceablePlatforms = 5
+BuildItemToUnlock = ExtResource("5_el1ex")
 
 [sub_resource type="Resource" id="Resource_c8puh"]
 script = ExtResource("3_hylve")

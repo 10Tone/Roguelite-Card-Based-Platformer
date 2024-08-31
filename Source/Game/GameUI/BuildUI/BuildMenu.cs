@@ -23,6 +23,7 @@ public partial class BuildMenu : Control
     {
         foreach (var item in _globalVariables.BuildItemResources)
         {
+            if (!item.IsUnlocked) continue;
             var buildItemButton = (BuildItemButton)_buildItemButtonScene.Instantiate();
             buildItemButton.LoadButtonWithData(item);
             _buildButtonsContainer.AddChild(buildItemButton);
