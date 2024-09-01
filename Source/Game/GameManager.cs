@@ -78,7 +78,7 @@ public partial class GameManager : Node2D
         _gameStateMachine.CurrentState.PhysicsUpdate(delta);
     }
 
-    private async void LoadLevel(int levelIndex)
+    private void LoadLevel(int levelIndex)
     {
         _currentLevel?.QueueFree();
         
@@ -88,18 +88,21 @@ public partial class GameManager : Node2D
         _currentLevel.StageFinished += OnStageFinished;
         _currentLevel.PlayerDeath += OnPlayerDeath;
         _currentLevel.StageReady += OnStageReady;
+     
         
-        await ToSignal(_currentLevel, "ready");
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
+        // if(_gameStateMachine.CurrentState != _buildModeState)
+        // {_gameStateMachine.ChangeState(_buildModeState);}
         
-        if(_gameStateMachine.CurrentState != _buildModeState)
-        {_gameStateMachine.ChangeState(_buildModeState);}
+        _globalEvents.EmitSignal(nameof(_globalEvents.GameReady));
+        DebugOverlay.Instance.DebugPrint("OnGameReady called");
+        
     }
+
 
     private async void OnStageReady()
     {
         await ToSignal(GetTree().CreateTimer(_switchStagesDelay), SceneTreeTimer.SignalName.Timeout);
-        
+        _globalEvents.EmitSignal(nameof(_globalEvents.GameReady));
         _gameStateMachine.ChangeState(_buildModeState);
     }
 
