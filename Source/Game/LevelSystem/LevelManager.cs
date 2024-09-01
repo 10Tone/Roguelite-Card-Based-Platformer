@@ -49,7 +49,7 @@ public partial class LevelManager : Node
 		
 		_globalEvents.ItemBuild += OnItemBuild;
 		_globalEvents.ItemRemoved += OnItemRemoved;
-		
+		LevelData.CurrentStageIndex = 0;
 		LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
 		_worldManager.SetCurrentStage(LevelData.CurrentStage);
 		_globalEvents.EmitSignal(nameof(_globalEvents.StageValueUpdated),0, LevelData.CurrentStage);

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://djyky6qjppmai"]
+[gd_scene load_steps=5 format=3 uid="uid://djyky6qjppmai"]
 
 [ext_resource type="FontFile" uid="uid://duy1vnn3qgq30" path="res://Content Assets/Fonts/crang/Crang.ttf" id="1_kk0l8"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayFeedback/GameplayFeedback.cs" id="1_xrbw8"]
+[ext_resource type="FontFile" uid="uid://02yqloqbfurx" path="res://Content Assets/Fonts/pixelmix/pixelmix_bold.ttf" id="3_s7eyc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fqwbl"]
 font = ExtResource("1_kk0l8")
@@ -22,24 +23,51 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xrbw8")
+_mainTextLabelPath = NodePath("VBoxContainer/MainTextLabel")
+_gameOverButtonsPath = NodePath("VBoxContainer/GameOverButtons")
 
-[node name="MainTextLabel" type="Label" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -26.0
-offset_right = 64.0
-offset_bottom = 26.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MainTextLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 text = "stage finished!"
 label_settings = SubResource("LabelSettings_fqwbl")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="GameOverButtons" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TryAgainButton" type="Button" parent="VBoxContainer/GameOverButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_s7eyc")
+text = "Try Again"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/GameOverButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_s7eyc")
+text = "Quit"

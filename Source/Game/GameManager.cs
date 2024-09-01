@@ -152,7 +152,7 @@ public partial class GameManager : Node2D
         LoadNextLevel();
     }
 
-    private void OnPlayerDeath()
+    private async void OnPlayerDeath()
     {
         _gameStateMachine.ChangeState(_deathModeState);
     }

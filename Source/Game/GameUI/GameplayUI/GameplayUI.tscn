@@ -98,7 +98,8 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="GameplayFeedback" parent="." instance=ExtResource("6_484fi")]
+[node name="GameplayFeedback" parent="UiContainer" instance=ExtResource("6_484fi")]
+layout_mode = 1
 _deathMessage = "You Died!"
 _levelFinishedMessage = "Level Finished!"
 _stageFinishedMessage = "Stage Finished!"
