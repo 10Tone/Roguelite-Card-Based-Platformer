@@ -12,3 +12,4 @@ Scene = ExtResource("2_bcjfd")
 BuildItemType = 3
 BuildItemValue = 4
 IsUnlocked = false
+DamageValue = 0

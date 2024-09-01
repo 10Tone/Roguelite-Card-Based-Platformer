@@ -11,4 +11,5 @@ public partial class BuildItemResource : Resource
   [Export()] public BuildItemTypes BuildItemType { get; set; }
   [Export] public int BuildItemValue { get; private set; }
   [Export] public bool IsUnlocked { get; set; }
+  [Export] public int DamageValue { get; private set; }
 }
