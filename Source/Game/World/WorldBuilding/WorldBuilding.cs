@@ -61,12 +61,29 @@ public partial class WorldBuilding: Node2D
     
     private void UnlockBuildingBlocks(List<BuildItemResource> blocksToUnlock)
     {
-        foreach (var buildItemResource in from buildItem in blocksToUnlock
-                 from buildItemResource in _globalVariables.BuildItemResources
-                 where buildItemResource.Name == buildItem.Name
-                 select buildItemResource)
+        if (_globalVariables == null || _globalVariables.BuildItemResources == null)
         {
-            buildItemResource.IsUnlocked = true;
+            // GD.PrintErr("GlobalVariables or BuildItemResources is null");
+            return;
+        }
+
+        foreach (var buildItem in blocksToUnlock)
+        {
+            if (buildItem == null || string.IsNullOrEmpty(buildItem.Name))
+            {
+                // GD.PrintErr("BuildItem or its Name is null");
+                continue;
+            }
+
+            var buildItemResource = _globalVariables.BuildItemResources.FirstOrDefault(r => r != null && r.Name == buildItem.Name);
+            if (buildItemResource != null)
+            {
+                buildItemResource.IsUnlocked = true;
+            }
+            else
+            {
+                GD.PrintErr($"BuildItemResource with name {buildItem.Name} not found");
+            }
         }
     }
 }
