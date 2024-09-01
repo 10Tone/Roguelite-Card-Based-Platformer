@@ -60,6 +60,7 @@ public partial class GlobalVariables: Node
                         var resource = ResourceLoader.Load<BuildItemResource>(fullPath);
                         if (resource != null)
                         {
+                            resource.ResetToInitialState();
                             _buildItemResources.Add(resource);
                             // GD.Print($"Loaded BuildItemResource: {resource.Name}");
                         }
