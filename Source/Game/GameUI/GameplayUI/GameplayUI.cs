@@ -33,7 +33,7 @@ public partial class GameplayUI: CanvasLayer
             GD.PushWarning("GameModeButton is null!");
             return;
         }
-        _gameModeButton.Pressed += OnGameModeButtonPressed;
+        _gameModeButton.Pressed += OnGameUiButtonPressed;
     }
     
     
@@ -50,8 +50,8 @@ public partial class GameplayUI: CanvasLayer
     
 
 
-    private void OnGameModeButtonPressed()
+    private void OnGameUiButtonPressed()
     {
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameModeButtonPressed));
+        _globalEvents.EmitSignal(nameof(GlobalEvents.GameUiButtonPressed), (int)ButtonType.Play);
     }
 }

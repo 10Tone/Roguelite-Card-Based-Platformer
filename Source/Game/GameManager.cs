@@ -22,7 +22,7 @@ public partial class GameManager : Node2D
     [Export] private int _worldGridCellSize;
     [Export] private PackedScene[] _levelScenes;
     [Export] private float _switchStagesDelay = 2.0f;
-    
+
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
     private GameStateMachine _gameStateMachine;
@@ -45,7 +45,7 @@ public partial class GameManager : Node2D
 
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
-        _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
+        _globalEvents.GameUiButtonPressed += OnGameUiButtonPressed;
         _globalEvents.PlayerHealthUpdated += OnPlayerHealthUpdated;
     }
 
@@ -90,21 +90,20 @@ public partial class GameManager : Node2D
     private void LoadLevel(int levelIndex)
     {
         _currentLevel?.QueueFree();
-        
+
         _currentLevel = (LevelManager)_levelScenes[levelIndex].Instantiate();
         AddChild(_currentLevel);
         _currentLevel.LevelFinished += OnLevelFinished;
         _currentLevel.StageFinished += OnStageFinished;
         _currentLevel.PlayerDeath += OnPlayerDeath;
         _currentLevel.StageReady += OnStageReady;
-     
-        
+
+
         // if(_gameStateMachine.CurrentState != _buildModeState)
         // {_gameStateMachine.ChangeState(_buildModeState);}
-        
+
         _globalEvents.EmitSignal(nameof(_globalEvents.GameReady));
         DebugOverlay.Instance.DebugPrint("OnGameReady called");
-        
     }
 
 
@@ -120,29 +119,30 @@ public partial class GameManager : Node2D
         _gameStateMachine.ChangeState(_stageFinishedModeState);
     }
 
-    private void OnGameModeButtonPressed()
-{
-    var currentGameState = _globalVariables.GameStates.FirstOrDefault(x => x.Value.GetType() == _gameStateMachine.CurrentState.GetType()).Key;
-
-    switch (currentGameState)
+    private void OnGameUiButtonPressed(ButtonType buttonType)
     {
-        case GameModeState.PlayModeState:
-            _gameStateMachine.ChangeState(_buildModeState);
-            break;
-        case GameModeState.BuildModeState:
-            _gameStateMachine.ChangeState(_playModeState);
-            break;
-        // Add other cases if needed
-        default:
-            // Handle unexpected states or do nothing
-            break;
-    }
-}
+        var currentGameState = _globalVariables.GameStates
+            .FirstOrDefault(x => x.Value.GetType() == _gameStateMachine.CurrentState.GetType()).Key;
 
-    
+        switch (currentGameState)
+        {
+            case GameModeState.PlayModeState:
+                _gameStateMachine.ChangeState(_buildModeState);
+                break;
+            case GameModeState.BuildModeState:
+                _gameStateMachine.ChangeState(_playModeState);
+                break;
+            // Add other cases if needed
+            default:
+                // Handle unexpected states or do nothing
+                break;
+        }
+    }
+
+
     private void LoadNextLevel()
     {
-		_currentLevelIndex++;
+        _currentLevelIndex++;
         LoadLevel(_currentLevelIndex);
     }
 

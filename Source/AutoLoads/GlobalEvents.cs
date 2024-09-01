@@ -30,7 +30,7 @@ public partial class GlobalEvents : Node
     public delegate void GameStateEnteredEventHandler(GameState gameState);
 
     [Signal]
-    public delegate void GameModeButtonPressedEventHandler();
+    public delegate void GameUiButtonPressedEventHandler(ButtonType buttonType);
     
     [Signal]
     public delegate void PlayerHealthUpdatedEventHandler(int health, bool isDead);

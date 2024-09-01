@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://djyky6qjppmai"]
+[gd_scene load_steps=9 format=3 uid="uid://djyky6qjppmai"]
 
 [ext_resource type="FontFile" uid="uid://duy1vnn3qgq30" path="res://Content Assets/Fonts/crang/Crang.ttf" id="1_kk0l8"]
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayFeedback/GameplayFeedback.cs" id="1_xrbw8"]
 [ext_resource type="FontFile" uid="uid://02yqloqbfurx" path="res://Content Assets/Fonts/pixelmix/pixelmix_bold.ttf" id="3_s7eyc"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameUiButton.cs" id="4_wucy1"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameUiDataResources/ButtonData.cs" id="5_ghilp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fqwbl"]
 font = ExtResource("1_kk0l8")
@@ -13,6 +15,14 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0.137255, 0.137255, 0.137255, 0.729412)
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Resource" id="Resource_d24lo"]
+script = ExtResource("5_ghilp")
+_buttonType = 2
+
+[sub_resource type="Resource" id="Resource_px2wa"]
+script = ExtResource("5_ghilp")
+_buttonType = 3
 
 [node name="GameplayFeedback" type="Control"]
 layout_mode = 3
@@ -58,12 +68,14 @@ layout_mode = 2
 [node name="GameOverButtons" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="TryAgainButton" type="Button" parent="VBoxContainer/GameOverButtons"]
+[node name="ReplayButton" type="Button" parent="VBoxContainer/GameOverButtons"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_s7eyc")
 text = "Try Again"
+script = ExtResource("4_wucy1")
+_buttonData = SubResource("Resource_d24lo")
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/GameOverButtons"]
 layout_mode = 2
@@ -71,3 +83,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_s7eyc")
 text = "Quit"
+script = ExtResource("4_wucy1")
+_buttonData = SubResource("Resource_px2wa")
