@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://caubdygfnq68x"]
+
+[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="1_skbmb"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameUiButton.cs" id="2_6qire"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameUiDataResources/ButtonData.cs" id="3_uoi80"]
+
+[sub_resource type="Resource" id="Resource_t6e3k"]
+script = ExtResource("3_uoi80")
+_buttonType = 1
+
+[node name="PlayButton" type="Button"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_skbmb")
+theme_override_font_sizes/font_size = 8
+text = "Play"
+script = ExtResource("2_6qire")
+_buttonData = SubResource("Resource_t6e3k")

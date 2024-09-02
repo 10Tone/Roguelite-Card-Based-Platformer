@@ -18,6 +18,6 @@ public partial class MainManager : Node2D
 
    private void OnGameReady()
    {
-      DebugOverlay.Instance.DebugPrint("Game Loaded");
+      // DebugOverlay.Instance.DebugPrint("Game Loaded");
    }
 }

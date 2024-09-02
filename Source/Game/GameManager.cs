@@ -103,7 +103,7 @@ public partial class GameManager : Node2D
         // {_gameStateMachine.ChangeState(_buildModeState);}
 
         _globalEvents.EmitSignal(nameof(_globalEvents.GameReady));
-        DebugOverlay.Instance.DebugPrint("OnGameReady called");
+        // DebugOverlay.Instance.DebugPrint("OnGameReady called");
     }
 
 
@@ -121,20 +121,19 @@ public partial class GameManager : Node2D
 
     private void OnGameUiButtonPressed(ButtonType buttonType)
     {
-        var currentGameState = _globalVariables.GameStates
-            .FirstOrDefault(x => x.Value.GetType() == _gameStateMachine.CurrentState.GetType()).Key;
-
-        switch (currentGameState)
+        
+        switch (buttonType)
         {
-            case GameModeState.PlayModeState:
+            case ButtonType.Build:
                 _gameStateMachine.ChangeState(_buildModeState);
                 break;
-            case GameModeState.BuildModeState:
+            case ButtonType.Play:
                 _gameStateMachine.ChangeState(_playModeState);
                 break;
-            // Add other cases if needed
+            case ButtonType.Replay:
+            case ButtonType.Quit:
+            case ButtonType.Options:
             default:
-                // Handle unexpected states or do nothing
                 break;
         }
     }

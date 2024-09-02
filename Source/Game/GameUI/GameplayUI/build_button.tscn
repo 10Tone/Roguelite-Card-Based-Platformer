@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr2certk5rk2t"]
+
+[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="1_htv02"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameUiButton.cs" id="2_flega"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameUiDataResources/ButtonData.cs" id="3_d1tvn"]
+
+[sub_resource type="Resource" id="Resource_t6e3k"]
+script = ExtResource("3_d1tvn")
+_buttonType = 0
+
+[node name="BuildButton" type="Button"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_htv02")
+theme_override_font_sizes/font_size = 8
+text = "Build"
+script = ExtResource("2_flega")
+_buttonData = SubResource("Resource_t6e3k")

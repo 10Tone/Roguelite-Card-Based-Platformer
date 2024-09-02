@@ -28,7 +28,7 @@ public partial class BuildMenu : Control
             _buildButtonsContainer = GetNode<GridContainer>(_buildButtonsPath);
         }
         
-        DebugOverlay.Instance.DebugPrint("build buttons");
+        // DebugOverlay.Instance.DebugPrint("build buttons");
         CreateBuildButtons();
     }
 

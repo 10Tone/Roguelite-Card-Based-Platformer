@@ -1,16 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5el1eqpdre2"]
+[gd_scene load_steps=8 format=3 uid="uid://c5el1eqpdre2"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://d1a5yw1vrma7h" path="res://Source/Game/GameUI/GameplayUI/level_points_display.tscn" id="2_1qjoq"]
-[ext_resource type="PackedScene" uid="uid://ddt7rqhh0hn6a" path="res://Source/Game/GameUI/GameplayUI/game_mode_button.tscn" id="2_qtil1"]
+[ext_resource type="PackedScene" uid="uid://dr2certk5rk2t" path="res://Source/Game/GameUI/GameplayUI/build_button.tscn" id="2_g6vuk"]
 [ext_resource type="PackedScene" uid="uid://dsgksdmuge5ud" path="res://Source/Game/GameUI/GameplayUI/stage_info_display.tscn" id="3_aur0n"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_tbu2t"]
+[ext_resource type="PackedScene" uid="uid://caubdygfnq68x" path="res://Source/Game/GameUI/GameplayUI/play_button.tscn" id="3_vnxty"]
 [ext_resource type="PackedScene" uid="uid://djyky6qjppmai" path="res://Source/Game/GameUI/GameplayFeedback/gameplay_feedback.tscn" id="6_484fi"]
 
 [node name="GameplayUI" type="CanvasLayer"]
 layer = 0
 script = ExtResource("1")
-_gameModeButtonPath = NodePath("UiContainer/HBoxContainer/TopBar/HBoxContainer/Control3/Button")
+_buildButtonScene = ExtResource("2_g6vuk")
+_playButtonScene = ExtResource("3_vnxty")
+_buildPlayButtonsPath = NodePath("UiContainer/HBoxContainer/TopBar/HBoxContainer/BuildPlayButtons")
 
 [node name="UiContainer" type="Control" parent="."]
 layout_mode = 3
@@ -74,24 +77,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="Control3" type="Control" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer"]
+[node name="BuildPlayButtons" type="Control" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer"]
 custom_minimum_size = Vector2(34, 16)
 layout_mode = 2
 size_flags_horizontal = 6
-
-[node name="Button" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer/Control3" instance=ExtResource("2_qtil1")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -17.0
-offset_top = -8.0
-offset_right = 17.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="BuildUI" parent="UiContainer/HBoxContainer" instance=ExtResource("3_tbu2t")]
 layout_mode = 2

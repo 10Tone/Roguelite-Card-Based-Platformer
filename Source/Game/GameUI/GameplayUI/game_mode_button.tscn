@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddt7rqhh0hn6a"]
+[gd_scene load_steps=3 format=3 uid="uid://ddt7rqhh0hn6a"]
 
 [ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="1_pxcyc"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameUiButton.cs" id="2_lcpvj"]
 
 [node name="Button" type="Button"]
 size_flags_horizontal = 4
@@ -8,3 +9,4 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_pxcyc")
 theme_override_font_sizes/font_size = 8
 text = "Build"
+script = ExtResource("2_lcpvj")

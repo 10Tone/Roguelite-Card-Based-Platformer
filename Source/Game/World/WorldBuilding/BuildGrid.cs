@@ -223,7 +223,7 @@ public partial class BuildGrid : TileMapLayer
 
     public void CancelPlacement(Vector2I tilePosition)
     {
-        DebugOverlay.Instance.DebugPrint("Placement at " + tilePosition + " is not allowed.");
+        // DebugOverlay.Instance.DebugPrint("Placement at " + tilePosition + " is not allowed.");
     }
 
     public void ClearBuildGrid()
