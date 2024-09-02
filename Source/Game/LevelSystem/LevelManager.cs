@@ -122,6 +122,7 @@ public partial class LevelManager : Node
 		// LevelData.CurrentStage.SurplusScore = LevelValue - LevelData.CurrentStage.MinScoreToAdvance
 		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)
 		{
+			var stageData = LevelData.CompletedStages.Append(LevelData.CurrentStage);
 			LevelData.CurrentStageIndex++;
 			LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
 			_worldManager?.SetCurrentStage(LevelData.CurrentStage);

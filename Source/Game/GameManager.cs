@@ -22,6 +22,7 @@ public partial class GameManager : Node2D
     [Export] private int _worldGridCellSize;
     [Export] private PackedScene[] _levelScenes;
     [Export] private float _switchStagesDelay = 2.0f;
+    [Export] private NodePath _progressManagerPath;
 
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
@@ -35,6 +36,7 @@ public partial class GameManager : Node2D
 
     private LevelManager _currentLevel;
     private int _currentLevelIndex;
+    private ProgressManager _progressManager;
 
     public override void _EnterTree()
     {
@@ -59,6 +61,8 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
+        _progressManager = GetNode<ProgressManager>(_progressManagerPath);
+        
         _playModeState = new PlayModeState(_globalEvents, _globalVariables);
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
         _deathModeState = new DeathModeState(_globalEvents, _globalVariables);
