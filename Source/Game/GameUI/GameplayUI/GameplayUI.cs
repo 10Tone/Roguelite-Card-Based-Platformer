@@ -50,11 +50,12 @@ public partial class GameplayUI : CanvasLayer
         _gameModeButton?.QueueFree();
         _gameModeButton = buttonScene.Instantiate() as GameUiButton;
         _buildPlayButtonsContainer.AddChild(_gameModeButton);
+        // _gameModeButton.LayoutMode = 1;
+        // _gameModeButton.SetAnchorsPreset(Control.LayoutPreset.Center);
 
-        if (_gameModeButton != null)
-        {
-            _gameModeButton.Pressed += OnGameModeButtonPressed;
-        }
+        if (_gameModeButton == null) return;
+        
+        _gameModeButton.Pressed += OnGameModeButtonPressed;
     }
 
 
