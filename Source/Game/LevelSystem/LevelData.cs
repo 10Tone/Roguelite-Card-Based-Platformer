@@ -11,7 +11,7 @@ public partial class LevelData : Resource
 	[Export] public StageData[] Stages { get; private set; }
 	public StageData CurrentStage { get; set; }
 	public int CurrentStageIndex { get; set; }
-	public StageData[] CompletedStages { get; set; }
+	public StageData[] CompletedStages { get; set; } = Array.Empty<StageData>();
 
 	public void ResetLevelData()
 	{
