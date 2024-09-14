@@ -2,20 +2,20 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cye8sknvo7fpg"
-path="res://.godot/imported/pixelmix.ttf-e1feb761ff0b2e2bbfd53f7f9bb3b0f1.fontdata"
+uid="uid://bp1yebdqpj63d"
+path="res://.godot/imported/DS-DIGII.TTF-cc32fc5f253d564cee7e7434097f1e0f.fontdata"
 
 [deps]
 
-source_file="res://Content Assets/Fonts/pixelmix/pixelmix.ttf"
-dest_files=["res://.godot/imported/pixelmix.ttf-e1feb761ff0b2e2bbfd53f7f9bb3b0f1.fontdata"]
+source_file="res://Content Assets/Fonts/ds_digital/DS-DIGII.TTF"
+dest_files=["res://.godot/imported/DS-DIGII.TTF-cc32fc5f253d564cee7e7434097f1e0f.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=0
+antialiasing=1
 generate_mipmaps=false
-disable_embedded_bitmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

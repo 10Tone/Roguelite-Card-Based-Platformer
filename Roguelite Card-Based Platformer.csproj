@@ -8,4 +8,7 @@
   <ItemGroup>
     <Folder Include="Source\Game\GameUI\BuildUI" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Source\Game\GameUI\GameplayUI\level_points_display.tscn" />
+  </ItemGroup>
 </Project>
