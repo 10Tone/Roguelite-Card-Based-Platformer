@@ -11,3 +11,5 @@ Icon = ExtResource("1_g2t4c")
 Scene = ExtResource("2_x512w")
 BuildItemType = 0
 BuildItemValue = 0
+DamageValue = 0
+_initialUnlockState = true

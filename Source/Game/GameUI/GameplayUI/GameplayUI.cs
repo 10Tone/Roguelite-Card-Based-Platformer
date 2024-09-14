@@ -5,53 +5,78 @@ using Tools;
 
 namespace Game.GameplayUI;
 
-public partial class GameplayUI: CanvasLayer
+public partial class GameplayUI : CanvasLayer
 {
-    [Export()] private NodePath _gameModeButtonPath;
+    [Export] private PackedScene _buildButtonScene, _playButtonScene;
+
+    [Export()] private NodePath _buildPlayButtonsPath;
+
     // private GameStates _gameState;
-    private Button _gameModeButton;
-    
+    private GameUiButton _gameModeButton;
+    private Control _buildPlayButtonsContainer;
+
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
-    
-    
+
 
     public override void _EnterTree()
     {
         _globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
         _globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
-        // _globalEvents.Connect(nameof(GlobalEvents.GameStateEnteredEventHandler), new Callable(this, nameof(OnGameStateEntered)));
         _globalEvents.GameStateEntered += OnGameStateEntered;
     }
 
     public override void _Ready()
     {
-        _gameModeButton = GetNode(_gameModeButtonPath) as Button;
-        // _gameModeButton?.Connect("pressed", new Callable(this, nameof(OnGameModeButtonPressed)));
-        if(_gameModeButton == null) 
+        _buildPlayButtonsContainer = GetNode(_buildPlayButtonsPath) as Control;
+
+    }
+
+
+    private void OnGameStateEntered(GameState gameState)
+    {
+        PackedScene buttonScene = null;
+
+        if (gameState == _globalVariables.GameStates[GameModeState.PlayModeState])
         {
-            GD.PushWarning("GameModeButton is null!");
-            return;
+            buttonScene = _buildButtonScene;
         }
+        else if (gameState == _globalVariables.GameStates[GameModeState.BuildModeState])
+        {
+            buttonScene = _playButtonScene;
+        }
+
+        if (buttonScene == null) return;
+        _gameModeButton?.QueueFree();
+        _gameModeButton = buttonScene.Instantiate() as GameUiButton;
+        _buildPlayButtonsContainer.AddChild(_gameModeButton);
+        // _gameModeButton.LayoutMode = 1;
+        // _gameModeButton.SetAnchorsPreset(Control.LayoutPreset.Center);
+
+        if (_gameModeButton == null) return;
+        
         _gameModeButton.Pressed += OnGameModeButtonPressed;
     }
-    
-    
-    private void OnGameStateEntered(GameState gameState)
-{
-    _gameModeButton.Text = gameState switch
-    {
-        _ when gameState == _globalVariables.GameStates[GameModeState.PlayModeState] => "Build",
-        _ when gameState == _globalVariables.GameStates[GameModeState.BuildModeState] => "Play",
-        _ => _gameModeButton.Text
-    };
-}
-
-    
 
 
     private void OnGameModeButtonPressed()
     {
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameModeButtonPressed));
+        switch (_gameModeButton.ButtonData.ButtonType)
+        {
+            case ButtonType.Build:
+                DebugOverlay.Instance.DebugPrint(_gameModeButton.ButtonData.ButtonType + " button pressed");
+                _globalEvents.EmitSignal(nameof(GlobalEvents.GameUiButtonPressed),
+                    (int)_gameModeButton.ButtonData.ButtonType);
+
+
+                break;
+            case ButtonType.Play:
+                DebugOverlay.Instance.DebugPrint(_gameModeButton.ButtonData.ButtonType + " button pressed");
+                _globalEvents.EmitSignal(nameof(GlobalEvents.GameUiButtonPressed),
+                    (int)_gameModeButton.ButtonData.ButtonType);
+
+
+                break;
+        }
     }
 }

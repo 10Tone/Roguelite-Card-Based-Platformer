@@ -10,6 +10,7 @@
 script = ExtResource("1")
 _worldGridCellSize = 32
 _levelScenes = Array[PackedScene]([ExtResource("2_mkot1"), ExtResource("3_ddo2q")])
+_progressManagerPath = NodePath("ProgressManager")
 metadata/_edit_lock_ = true
 
 [node name="GameplayUI" parent="." instance=ExtResource("3_orpuk")]

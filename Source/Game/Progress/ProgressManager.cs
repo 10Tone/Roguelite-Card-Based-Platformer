@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using AutoLoads;
 using Game.LevelSystem;
 
 public partial class ProgressManager : Node
@@ -8,13 +9,27 @@ public partial class ProgressManager : Node
 	private List<LevelData> _unlockedLevels;
 	private LevelData _currentLevelData;
 	
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	private GlobalEvents _globalEvents;
+	private GlobalVariables _globalVariables;
+
+	public override void _EnterTree()
 	{
+		_globalEvents = GetNode<GlobalEvents>("/root/GlobalEvents");
+		_globalVariables = GetNode<GlobalVariables>("/root/GlobalVariables");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void OnInitializeGame(LevelData levelData)
 	{
+		
+	}
+
+	public void OnStageFinished(LevelData levelData)
+	{
+		
+	}
+
+	public void OnLevelFinished(LevelData levelData)
+	{
+		
 	}
 }

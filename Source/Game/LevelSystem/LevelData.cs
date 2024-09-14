@@ -13,5 +13,13 @@ public partial class LevelData : Resource
 	public int CurrentStageIndex { get; set; }
 	public StageData[] CompletedStages { get; set; }
 
+	public void ResetLevelData()
+	{
+		CurrentStageIndex = 0;
+		CurrentStage = Stages[CurrentStageIndex];
+		CompletedStages = Array.Empty<StageData>();
+		IsLocked = true;
+	}
+	
 }
  

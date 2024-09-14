@@ -36,7 +36,7 @@ public partial class BuildItemButton : TextureRect
         if (@event is not InputEventMouseButton eventMouseButton) return;
         if (eventMouseButton.Pressed && eventMouseButton.ButtonIndex == MouseButton.Left)
         {
-            DebugOverlay.Instance.DebugPrint($"Clicked {_buildItemResource.Name}");
+            // DebugOverlay.Instance.DebugPrint($"Clicked {_buildItemResource.Name}");
             _globalEvents.EmitSignal(nameof(GlobalEvents.BuildItemButtonClicked), _buildItemResource);
             _globalVariables.SelectedBuildItem = _buildItemResource;
         }

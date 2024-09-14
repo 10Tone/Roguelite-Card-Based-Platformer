@@ -29,7 +29,7 @@ namespace Tools
         {
             _debugLabel = new Label();
             // _debugLabel.Modulate = new Color(231, 221, 0);
-            _debugLabel.Position = new Vector2(16, 8);
+            _debugLabel.Position = new Vector2(16, 16);
             var settings = new LabelSettings();
             settings.FontColor = new Color(231, 221, 0);
             settings.FontSize = 8;

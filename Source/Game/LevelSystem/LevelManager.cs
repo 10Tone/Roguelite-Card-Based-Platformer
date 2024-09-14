@@ -49,7 +49,7 @@ public partial class LevelManager : Node
 		
 		_globalEvents.ItemBuild += OnItemBuild;
 		_globalEvents.ItemRemoved += OnItemRemoved;
-		
+		LevelData.CurrentStageIndex = 0;
 		LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
 		_worldManager.SetCurrentStage(LevelData.CurrentStage);
 		_globalEvents.EmitSignal(nameof(_globalEvents.StageValueUpdated),0, LevelData.CurrentStage);
@@ -122,6 +122,7 @@ public partial class LevelManager : Node
 		// LevelData.CurrentStage.SurplusScore = LevelValue - LevelData.CurrentStage.MinScoreToAdvance
 		if (LevelData.CurrentStageIndex < LevelData.Stages.Length - 1)
 		{
+			var stageData = LevelData.CompletedStages.Append(LevelData.CurrentStage);
 			LevelData.CurrentStageIndex++;
 			LevelData.CurrentStage = LevelData.Stages[LevelData.CurrentStageIndex];
 			_worldManager?.SetCurrentStage(LevelData.CurrentStage);

@@ -22,7 +22,8 @@ public partial class GameManager : Node2D
     [Export] private int _worldGridCellSize;
     [Export] private PackedScene[] _levelScenes;
     [Export] private float _switchStagesDelay = 2.0f;
-    
+    [Export] private NodePath _progressManagerPath;
+
     private GlobalEvents _globalEvents;
     private GlobalVariables _globalVariables;
     private GameStateMachine _gameStateMachine;
@@ -35,6 +36,7 @@ public partial class GameManager : Node2D
 
     private LevelManager _currentLevel;
     private int _currentLevelIndex;
+    private ProgressManager _progressManager;
 
     public override void _EnterTree()
     {
@@ -45,7 +47,7 @@ public partial class GameManager : Node2D
 
         // _globalEvents.Connect(nameof(GlobalEvents.GameModeButtonPressedEventHandler), new Callable(this, nameof(OnGameModeButtonPressed)));
         // _globalEvents.Connect(nameof(GlobalEvents.PlayerFinishedLevelEventHandler), new Callable(this, nameof(OnPlayerFinishedLevel)));
-        _globalEvents.GameModeButtonPressed += OnGameModeButtonPressed;
+        _globalEvents.GameUiButtonPressed += OnGameUiButtonPressed;
         _globalEvents.PlayerHealthUpdated += OnPlayerHealthUpdated;
     }
 
@@ -59,6 +61,8 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
+        _progressManager = GetNode<ProgressManager>(_progressManagerPath);
+        
         _playModeState = new PlayModeState(_globalEvents, _globalVariables);
         _buildModeState = new BuildModeState(_globalEvents, _globalVariables);
         _deathModeState = new DeathModeState(_globalEvents, _globalVariables);
@@ -87,28 +91,30 @@ public partial class GameManager : Node2D
         _gameStateMachine.CurrentState.PhysicsUpdate(delta);
     }
 
-    private async void LoadLevel(int levelIndex)
+    private void LoadLevel(int levelIndex)
     {
         _currentLevel?.QueueFree();
-        
+
         _currentLevel = (LevelManager)_levelScenes[levelIndex].Instantiate();
         AddChild(_currentLevel);
         _currentLevel.LevelFinished += OnLevelFinished;
         _currentLevel.StageFinished += OnStageFinished;
         _currentLevel.PlayerDeath += OnPlayerDeath;
         _currentLevel.StageReady += OnStageReady;
-        
-        await ToSignal(_currentLevel, "ready");
-        _globalEvents.EmitSignal(nameof(GlobalEvents.GameReady));
-        
-        if(_gameStateMachine.CurrentState != _buildModeState)
-        {_gameStateMachine.ChangeState(_buildModeState);}
+
+
+        // if(_gameStateMachine.CurrentState != _buildModeState)
+        // {_gameStateMachine.ChangeState(_buildModeState);}
+
+        _globalEvents.EmitSignal(nameof(_globalEvents.GameReady));
+        // DebugOverlay.Instance.DebugPrint("OnGameReady called");
     }
+
 
     private async void OnStageReady()
     {
         await ToSignal(GetTree().CreateTimer(_switchStagesDelay), SceneTreeTimer.SignalName.Timeout);
-        
+        _globalEvents.EmitSignal(nameof(_globalEvents.GameReady));
         _gameStateMachine.ChangeState(_buildModeState);
     }
 
@@ -117,29 +123,29 @@ public partial class GameManager : Node2D
         _gameStateMachine.ChangeState(_stageFinishedModeState);
     }
 
-    private void OnGameModeButtonPressed()
-{
-    var currentGameState = _globalVariables.GameStates.FirstOrDefault(x => x.Value.GetType() == _gameStateMachine.CurrentState.GetType()).Key;
-
-    switch (currentGameState)
+    private void OnGameUiButtonPressed(ButtonType buttonType)
     {
-        case GameModeState.PlayModeState:
-            _gameStateMachine.ChangeState(_buildModeState);
-            break;
-        case GameModeState.BuildModeState:
-            _gameStateMachine.ChangeState(_playModeState);
-            break;
-        // Add other cases if needed
-        default:
-            // Handle unexpected states or do nothing
-            break;
+        
+        switch (buttonType)
+        {
+            case ButtonType.Build:
+                _gameStateMachine.ChangeState(_buildModeState);
+                break;
+            case ButtonType.Play:
+                _gameStateMachine.ChangeState(_playModeState);
+                break;
+            case ButtonType.Replay:
+            case ButtonType.Quit:
+            case ButtonType.Options:
+            default:
+                break;
+        }
     }
-}
 
-    
+
     private void LoadNextLevel()
     {
-		_currentLevelIndex++;
+        _currentLevelIndex++;
         LoadLevel(_currentLevelIndex);
     }
 
@@ -149,7 +155,7 @@ public partial class GameManager : Node2D
         LoadNextLevel();
     }
 
-    private void OnPlayerDeath()
+    private async void OnPlayerDeath()
     {
         _gameStateMachine.ChangeState(_deathModeState);
     }
