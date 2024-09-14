@@ -20,7 +20,7 @@ public partial class ProgressManager : Node
 
 	public void OnInitializeGame(LevelData levelData)
 	{
-		
+		_unlockedLevels = new List<LevelData> { levelData };
 	}
 
 	public void OnStageFinished(LevelData levelData)
@@ -30,6 +30,18 @@ public partial class ProgressManager : Node
 
 	public void OnLevelFinished(LevelData levelData)
 	{
+		_unlockedLevels.Add(levelData);
+	}
+	
+
+	public LevelData GetCurrentLevelData()
+	{
+		return _currentLevelData;
+	}
+
+	public void SaveGame()
+	{
 		
 	}
+	
 }

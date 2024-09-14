@@ -51,14 +51,6 @@ public partial class GameManager : Node2D
         _globalEvents.PlayerHealthUpdated += OnPlayerHealthUpdated;
     }
 
-    private void OnPlayerHealthUpdated(int health, bool isdead)
-    {
-        if (isdead)
-        {
-            _gameStateMachine.ChangeState(_deathModeState);
-        }
-    }
-
     public override void _Ready()
     {
         _progressManager = GetNode<ProgressManager>(_progressManagerPath);
@@ -110,6 +102,26 @@ public partial class GameManager : Node2D
         // DebugOverlay.Instance.DebugPrint("OnGameReady called");
     }
 
+    private void LoadGame(int levelIndex)
+    {
+        // get saved game data from progressmanager
+        // load level 
+        // start game
+    }
+    
+    private void ResetGame()
+    {
+        DebugOverlay.Instance.DebugPrint("ResetGame called");
+    }
+
+    private void OnPlayerHealthUpdated(int health, bool isdead)
+    {
+        if (isdead)
+        {
+            _gameStateMachine.ChangeState(_deathModeState);
+        }
+    }
+
 
     private async void OnStageReady()
     {
@@ -135,7 +147,12 @@ public partial class GameManager : Node2D
                 _gameStateMachine.ChangeState(_playModeState);
                 break;
             case ButtonType.Replay:
+                ResetGame();
+                break;
             case ButtonType.Quit:
+                // move this functionality to main manager
+                GetTree().Quit();
+                break;
             case ButtonType.Options:
             default:
                 break;
@@ -155,8 +172,9 @@ public partial class GameManager : Node2D
         LoadNextLevel();
     }
 
-    private async void OnPlayerDeath()
+    private void OnPlayerDeath()
     {
         _gameStateMachine.ChangeState(_deathModeState);
+        ResetGame();
     }
 }
