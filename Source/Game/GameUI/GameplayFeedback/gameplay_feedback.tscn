@@ -33,6 +33,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xrbw8")
+_deathMessage = "You Died!"
+_levelFinishedMessage = "Level Finished!"
+_stageFinishedMessage = "Stage Finished!"
 _mainTextLabelPath = NodePath("VBoxContainer/MainTextLabel")
 _gameOverButtonsPath = NodePath("VBoxContainer/GameOverButtons")
 

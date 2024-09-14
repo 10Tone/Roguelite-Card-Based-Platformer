@@ -89,6 +89,3 @@ mouse_filter = 1
 
 [node name="GameplayFeedback" parent="UiContainer" instance=ExtResource("6_484fi")]
 layout_mode = 1
-_deathMessage = "You Died!"
-_levelFinishedMessage = "Level Finished!"
-_stageFinishedMessage = "Stage Finished!"
