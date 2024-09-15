@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5el1eqpdre2"]
+[gd_scene load_steps=9 format=3 uid="uid://c5el1eqpdre2"]
 
 [ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/GameplayUI.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://d1a5yw1vrma7h" path="res://Source/Game/GameUI/GameplayUI/level_points_display.tscn" id="2_1qjoq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dsgksdmuge5ud" path="res://Source/Game/GameUI/GameplayUI/stage_info_display.tscn" id="3_aur0n"]
 [ext_resource type="PackedScene" uid="uid://piu1vtg3qoot" path="res://Source/Game/GameUI/BuildUI/BuildUI.tscn" id="3_tbu2t"]
 [ext_resource type="PackedScene" uid="uid://caubdygfnq68x" path="res://Source/Game/GameUI/GameplayUI/play_button.tscn" id="3_vnxty"]
+[ext_resource type="PackedScene" uid="uid://bji7a1go1pkj7" path="res://Source/Game/GameUI/GameplayUI/player_health_display.tscn" id="4_78dcv"]
 [ext_resource type="PackedScene" uid="uid://djyky6qjppmai" path="res://Source/Game/GameUI/GameplayFeedback/gameplay_feedback.tscn" id="6_484fi"]
 
 [node name="GameplayUI" type="CanvasLayer"]
@@ -62,11 +63,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Control" type="Control" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="PlayerHealthDisplay" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("4_78dcv")]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 
 [node name="LevelPointsDisplay" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("2_1qjoq")]
-custom_minimum_size = Vector2(128, 0)
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 
 [node name="StageInfoDisplay" parent="UiContainer/HBoxContainer/TopBar/HBoxContainer" instance=ExtResource("3_aur0n")]

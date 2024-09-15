@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bji7a1go1pkj7"]
+
+[ext_resource type="Texture2D" uid="uid://by4ehwo7l8u0o" path="res://Content Assets/free_fantasy_rpg_icons/mana.png" id="1_633h3"]
+[ext_resource type="Script" path="res://Source/Game/GameUI/GameplayUI/PlayerHealthDisplay.cs" id="1_nwyvw"]
+[ext_resource type="FontFile" uid="uid://cye8sknvo7fpg" path="res://Content Assets/Fonts/pixelmix/pixelmix.ttf" id="2_2qqve"]
+[ext_resource type="FontFile" uid="uid://02yqloqbfurx" path="res://Content Assets/Fonts/pixelmix/pixelmix_bold.ttf" id="3_ro1jf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0hngr"]
+font = ExtResource("2_2qqve")
+font_size = 8
+font_color = Color(1, 1, 0.0980392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0pgov"]
+font = ExtResource("3_ro1jf")
+font_size = 8
+
+[node name="PlayerHealthDisplay" type="Control"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_right = 64.0
+grow_vertical = 2
+script = ExtResource("1_nwyvw")
+_healthLabelPath = NodePath("ValueDisplay/ValueLabel")
+
+[node name="ValueDisplay" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 49.0
+offset_bottom = 8.0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="ValueDisplay"]
+modulate = Color(0.760784, 0.0862745, 0.388235, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("1_633h3")
+
+[node name="NameLabel" type="Label" parent="ValueDisplay"]
+layout_mode = 2
+size_flags_horizontal = 8
+label_settings = SubResource("LabelSettings_0hngr")
+
+[node name="ValueLabel" type="Label" parent="ValueDisplay"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "0000"
+label_settings = SubResource("LabelSettings_0pgov")
