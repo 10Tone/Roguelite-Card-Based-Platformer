@@ -23,14 +23,14 @@ MaxPlaceablePlatforms = 4
 [sub_resource type="Resource" id="Resource_ed4y1"]
 script = ExtResource("2_yxv84")
 StageNumber = 2
-MinScoreToAdvance = 8
+MinScoreToAdvance = 2
 MaxPlaceablePlatforms = 4
 BuildItemToUnlock = ExtResource("4_aliuq")
 
 [sub_resource type="Resource" id="Resource_bohvs"]
 script = ExtResource("2_yxv84")
 StageNumber = 3
-MinScoreToAdvance = 15
+MinScoreToAdvance = 4
 MaxPlaceablePlatforms = 5
 BuildItemToUnlock = ExtResource("4_aliuq")
 
