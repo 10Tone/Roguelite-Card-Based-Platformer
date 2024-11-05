@@ -22,6 +22,10 @@ public partial class PlayerHealthDisplay : Control
 
 	private void OnPlayerHealthUpdated(int health, bool isdead)
 	{
+		if (health < 0)
+		{
+			health = 0;
+		}
 		_healthLabel.Text = health.ToString();
 	}
 }
