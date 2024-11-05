@@ -10,8 +10,9 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 	[Export] public string ResourcePath { get; set; }
 	
 	protected BuildItemResource _buildItemResource;
-	protected bool _trapActive;
+	protected bool _iDamageActive;
 	protected bool _playerIsInTrap;
+	protected bool _isAnPassiveTrap;
 
 	public event EventHandler IDamageActive;
 
@@ -31,7 +32,11 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 		_area2D.BodyEntered += OnPlayerEntered;
 		_area2D.BodyExited += OnPlayerExited;
 		AddToIDamageGroup();
-		_trapActive = true;
+		_isAnPassiveTrap = true;
+		if (_isAnPassiveTrap)
+		{
+			_iDamageActive = true;
+		}
 	}
 
 	public override void _Ready()
@@ -73,9 +78,9 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 		return _buildItemResource.DamageValue;
 	}
 
-	public bool GetTrapActive()
+	public bool GetIDamageActive()
 	{
-		return _trapActive;
+		return _iDamageActive;
 	}
 
 
@@ -83,7 +88,7 @@ public partial class Trap : Node2D, IBuildItem, IDamage
 
 	protected void TrapStateChanged()
 	{
-		if (!_trapActive) return;
+		if (!_iDamageActive) return;
 		IDamageActive?.Invoke(this, EventArgs.Empty);
 	}
 	

@@ -11,17 +11,18 @@ public partial class ActiveTrap: Trap
     public override void _EnterTree()
     {
         base._EnterTree();
+        _isAnPassiveTrap = false; 
     }
 
     public void ActivateTrap()
     {
-        _trapActive = true;
+        _iDamageActive = true;
         TrapStateChanged();
     }
 
     public void IdleTrap()
     {
-        _trapActive = false;
+        _iDamageActive = false;
         TrapStateChanged();
     }
     

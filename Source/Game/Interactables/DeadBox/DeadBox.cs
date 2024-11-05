@@ -24,9 +24,9 @@ public partial class DeadBox : Interactable, IDamage
 		return 10000;
 	}
 
-	public bool GetTrapActive()
+	public bool GetIDamageActive()
 	{
-		throw new NotImplementedException();
+		return true;
 	}
 
 	public bool PlayerEnteredIDamage { get; set; }

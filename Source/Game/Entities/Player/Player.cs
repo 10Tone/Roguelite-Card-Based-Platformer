@@ -226,12 +226,12 @@ public partial class Player : CharacterBody2D, IPlayer
     {
         
         if (!_damageable) return;
-        DebugOverlay.Instance.DebugPrint("trap active: " + iDamage.GetTrapActive());   
-        if (iDamage.GetTrapActive())
+        DebugOverlay.Instance.DebugPrint("trap active: " + iDamage.GetIDamageActive());   
+        if (iDamage.GetIDamageActive())
         {
             DealDamage(iDamage.GetIDamageValue());
             DebugOverlay.Instance.DebugPrint("Damage" + iDamage.GetIDamageValue());
-            await ToSignal(GetTree().CreateTimer(0.25f), SceneTreeTimer.SignalName.Timeout);
+            await ToSignal(GetTree().CreateTimer(1f), SceneTreeTimer.SignalName.Timeout);
             DealDamageTask(iDamage);
         }
 
