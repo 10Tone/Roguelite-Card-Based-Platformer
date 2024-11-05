@@ -1,3 +1,4 @@
+using Game.WorldBuilding;
 using Godot;
 using Tools;
 
@@ -13,4 +14,7 @@ public interface IPlayer
     AnimatedSprite2D AnimatedSprite { get; set; }
     
     void CheckIfShouldFlip(float horizontalInput);
-    }
+    
+}
+    
+    

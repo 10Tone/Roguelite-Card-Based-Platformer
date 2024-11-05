@@ -36,8 +36,8 @@ public partial class Player : CharacterBody2D, IPlayer
 
     private AnimatedSprite2D _animatedSprite2D;
     private Area2D _iDamageCollider;
-    private bool _isDamaged = false;
     private int _health;
+    private bool _damageable;
 
     #region Initialization
     public override void _EnterTree()
@@ -74,6 +74,10 @@ public partial class Player : CharacterBody2D, IPlayer
         _iDamageCollider.AreaEntered += OnPlayerEnteredIDamage;
         _iDamageCollider.AreaExited += OnPlayerExitedIDamage;
         AddStates();
+        
+        _globalEvents.EmitSignal(nameof(_globalEvents.PlayerHealthUpdated), _health, false);
+        
+        
     }
 
     private void AddStates()
@@ -127,44 +131,53 @@ public partial class Player : CharacterBody2D, IPlayer
 
     private void OnPlayerEnteredIDamage(Area2D area)
     {
-        if (_isDamaged)
+        if(_damageable) return;
+        IDamage iDamage;
+        try
         {
-            return;}
-        if (area is not IDamage damageable)
-        {
-            damageable = area.GetParent() as IDamage;
-        }
-
-        if (damageable == null)
-        {
-            var parent = area.GetParent();
-            if (parent != null)
+            iDamage = area.GetParent() as IDamage;
+            if (iDamage != null)
             {
-                foreach (var child in parent.GetChildren())
+                _damageable = true;
+                DebugOverlay.Instance.DebugPrint("Player Entered");
+                DealDamageTask(iDamage);
+
+            }
+
+            else
+            {
+                try
                 {
-                    if (child is IDamage damage)
+                    iDamage = area as IDamage;
+                    if (iDamage != null)
                     {
-                        damageable = damage;
-                        break;
+                        _damageable = true;
+                        DealDamageTask(iDamage);
+                        DebugOverlay.Instance.DebugPrint("Player Entered");
                     }
+                }
+                catch (Exception e)
+                {
+                    GD.PrintErr($"Error in OnPlayerEnteredIDamage: {e.Message}");
                 }
             }
         }
-        
-        var node = damageable as Node2D;
-        if (damageable == null || node == null) return;
-        if (!node.IsInGroup("IDamageGroup"))
+        catch (Exception e)
         {
-            return;}
+            // Handle or log the exception
+            GD.PrintErr($"Error in OnPlayerEnteredIDamage: {e.Message}");
+        }
+    }
 
-        _isDamaged = true;
-        DealDamage(damageable.GetIDamageValue());
-        DebugOverlay.Instance.DebugPrint("Player health: " + _health);
+    private void DamageableOnIDamageActive(object sender, EventArgs e)
+    {
+        DebugOverlay.Instance.DebugPrint("Deal Damage");
     }
 
     private void OnPlayerExitedIDamage(Area2D area)
     {
-        _isDamaged = false;
+        _damageable = false;
+        DebugOverlay.Instance.DebugPrint("Player Exited");
     }
 
     #endregion
@@ -209,6 +222,25 @@ public partial class Player : CharacterBody2D, IPlayer
         _globalEvents.EmitSignal(nameof(_globalEvents.PlayerHealthUpdated), _health, false);
     }
 
+    private async void DealDamageTask(IDamage iDamage)
+    {
+        
+        if (!_damageable) return;
+        DebugOverlay.Instance.DebugPrint("trap active: " + iDamage.GetTrapActive());   
+        if (iDamage.GetTrapActive())
+        {
+            DealDamage(iDamage.GetIDamageValue());
+            DebugOverlay.Instance.DebugPrint("Damage" + iDamage.GetIDamageValue());
+            await ToSignal(GetTree().CreateTimer(0.25f), SceneTreeTimer.SignalName.Timeout);
+            DealDamageTask(iDamage);
+        }
+
+        else
+        {
+            await ToSignal(GetTree().CreateTimer(0.25f), SceneTreeTimer.SignalName.Timeout);
+            DealDamageTask(iDamage);
+        }
+    }
     private void Die()
     {
         _globalEvents.EmitSignal(nameof(_globalEvents.PlayerHealthUpdated), 0, true);

@@ -1,85 +1,81 @@
-[gd_scene load_steps=12 format=3 uid="uid://cf4vnylb02t5y"]
+[gd_scene load_steps=7 format=3 uid="uid://cf4vnylb02t5y"]
 
 [ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/ActiveTrap.cs" id="1_6ktb8"]
 [ext_resource type="Texture2D" uid="uid://bpchi81vnaw5k" path="res://Content Assets/animated-traps-pixel-art-pack/11 Circular saw/11 Circular Saw.png" id="2_lhv1n"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2mnff"]
-atlas = ExtResource("2_lhv1n")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="Animation" id="Animation_04wje"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8fxu0"]
-atlas = ExtResource("2_lhv1n")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xdvtl"]
-atlas = ExtResource("2_lhv1n")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bq5il"]
-atlas = ExtResource("2_lhv1n")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0s22l"]
-atlas = ExtResource("2_lhv1n")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yy8uo"]
-atlas = ExtResource("2_lhv1n")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m5ibd"]
-atlas = ExtResource("2_lhv1n")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_gqlfq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2mnff")
+[sub_resource type="Animation" id="Animation_6qqh5"]
+resource_name = "anim"
+length = 4.0
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"ActivateTrap"
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8fxu0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xdvtl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bq5il")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0s22l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yy8uo")
-}],
-"loop": true,
-"name": &"active",
-"speed": 60.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m5ibd")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
+"args": [],
+"method": &"IdleTrap"
 }]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jbfih"]
+_data = {
+"RESET": SubResource("Animation_04wje"),
+"anim": SubResource("Animation_6qqh5")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qte35"]
 size = Vector2(32, 32)
 
 [node name="CircularSawTrap" type="Node2D"]
 script = ExtResource("1_6ktb8")
-_animatedSprite2DPath = NodePath("AnimatedSprite2D")
-_idleTimerPath = NodePath("IdleTimer")
-_activeTimerPath = NodePath("ActiveTimer")
 _area2DPath = NodePath("Area2D")
 ResourcePath = "res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/CircularSawTrap.tres"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_gqlfq")
-animation = &"active"
-frame_progress = 0.794472
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lhv1n")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jbfih")
+}
+autoplay = "anim"
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 8)
@@ -88,12 +84,3 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_qte35")
-
-[node name="IdleTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-autostart = true
-
-[node name="ActiveTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true

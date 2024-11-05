@@ -65,7 +65,7 @@ public partial class LevelManager : Node
 			// DebugOverlay.Instance.DebugPrint(damageable.Name);
 			if (damageable is IDamage iDamage)
 			{
-				iDamage.PlayerEnteredIDamage += OnPlayerEnteredIDamage;
+				iDamage.IDamageActive += OnDamageActive;
 		        
 			}
 		}
@@ -78,7 +78,7 @@ public partial class LevelManager : Node
 		
 		if (item is IDamage iDamage)
         {
-            iDamage.PlayerEnteredIDamage += OnPlayerEnteredIDamage;
+            iDamage.IDamageActive += OnDamageActive;
         }
 	}
 
@@ -89,7 +89,7 @@ public partial class LevelManager : Node
 		
 		if (item is IDamage iDamage)
 		{
-			iDamage.PlayerEnteredIDamage -= OnPlayerEnteredIDamage;
+			iDamage.IDamageActive -= OnDamageActive;
 		}
 	}
 
@@ -136,7 +136,7 @@ public partial class LevelManager : Node
 		}
 	}
 
-	private void OnPlayerEnteredIDamage(object sender, EventArgs e)
+	private void OnDamageActive(object sender, EventArgs e)
 	{
 		// DebugOverlay.Instance.DebugPrint("Player entered IDamage");
 	}

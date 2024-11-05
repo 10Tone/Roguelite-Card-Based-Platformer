@@ -42,7 +42,7 @@ public partial class LevelValueCalculator : Node
     private void UpdateStageValue(int valueChange)
     {
         CurrentStageValue += valueChange;
-        DebugOverlay.Instance.DebugPrint(CurrentStageValue.ToString());
+        // DebugOverlay.Instance.DebugPrint(CurrentStageValue.ToString());
         _globalEvents.EmitSignal(nameof(GlobalEvents.StageValueUpdated), CurrentStageValue, _currentStage);
     }
 

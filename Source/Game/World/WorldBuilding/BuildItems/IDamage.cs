@@ -5,7 +5,9 @@ namespace Game.WorldBuilding;
 
 public interface IDamage
 {
-    event EventHandler PlayerEnteredIDamage;
+    event EventHandler IDamageActive;
     void AddToIDamageGroup();
     int GetIDamageValue();
+    bool GetTrapActive();
+    bool PlayerEnteredIDamage { get; set; }
 }

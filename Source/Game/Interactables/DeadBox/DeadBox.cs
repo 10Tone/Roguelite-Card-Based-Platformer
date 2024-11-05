@@ -6,7 +6,7 @@ using Tools;
 
 public partial class DeadBox : Interactable, IDamage
 {
-	public event EventHandler PlayerEnteredIDamage;
+	public event EventHandler IDamageActive;
 
 	public override void _EnterTree()
 	{
@@ -24,11 +24,18 @@ public partial class DeadBox : Interactable, IDamage
 		return 10000;
 	}
 
+	public bool GetTrapActive()
+	{
+		throw new NotImplementedException();
+	}
+
+	public bool PlayerEnteredIDamage { get; set; }
+
 	protected override void BodyEnteredAction(IPlayer player)
 	{
 		base.BodyEnteredAction(player);
 		
-		PlayerEnteredIDamage?.Invoke(this, EventArgs.Empty);
+		IDamageActive?.Invoke(this, EventArgs.Empty);
 	}
 
 

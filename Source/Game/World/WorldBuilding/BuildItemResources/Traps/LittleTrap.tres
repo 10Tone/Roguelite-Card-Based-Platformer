@@ -12,3 +12,4 @@ Scene = ExtResource("2_4xpcf")
 BuildItemType = 3
 BuildItemValue = 1
 DamageValue = 25
+_initialUnlockState = true

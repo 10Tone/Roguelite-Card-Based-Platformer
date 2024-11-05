@@ -12,3 +12,4 @@ Scene = ExtResource("2_evs85")
 BuildItemType = 3
 BuildItemValue = 1
 DamageValue = 15
+_initialUnlockState = true

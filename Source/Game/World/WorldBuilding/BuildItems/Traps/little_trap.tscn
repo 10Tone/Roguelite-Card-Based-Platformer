@@ -1,65 +1,82 @@
-[gd_scene load_steps=9 format=3 uid="uid://cr15ixo13dhvd"]
+[gd_scene load_steps=7 format=3 uid="uid://cr15ixo13dhvd"]
 
 [ext_resource type="Script" path="res://Source/Game/World/WorldBuilding/BuildItems/Traps/ActiveTrap.cs" id="1_2ykvy"]
 [ext_resource type="Texture2D" uid="uid://dd6r3o5mtpus0" path="res://Content Assets/animated-traps-pixel-art-pack/3 Little trap/3 Little Trap.png" id="2_8oi0c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l1peo"]
-atlas = ExtResource("2_8oi0c")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="Animation" id="Animation_7jdhp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_efyfy"]
-atlas = ExtResource("2_8oi0c")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mov6c"]
-atlas = ExtResource("2_8oi0c")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s0hpm"]
-atlas = ExtResource("2_8oi0c")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_gqlfq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l1peo")
+[sub_resource type="Animation" id="Animation_bkl74"]
+resource_name = "anim"
+length = 2.0
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.66801, 1.68997, 1.95042),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.00997369, 1.65882),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"IdleTrap"
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_efyfy")
-}, {
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_mov6c")
-}],
-"loop": false,
-"name": &"active",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s0hpm")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
+"args": [],
+"method": &"ActivateTrap"
 }]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4htke"]
+_data = {
+"RESET": SubResource("Animation_7jdhp"),
+"anim": SubResource("Animation_bkl74")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qte35"]
 size = Vector2(32, 16)
 
 [node name="Little Trap" type="Node2D"]
 script = ExtResource("1_2ykvy")
-_animatedSprite2DPath = NodePath("AnimatedSprite2D")
-_idleTimerPath = NodePath("IdleTimer")
-_activeTimerPath = NodePath("ActiveTimer")
-_oneShot = true
 _area2DPath = NodePath("Area2D")
 ResourcePath = "res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/LittleTrap.tres"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 1
-sprite_frames = SubResource("SpriteFrames_gqlfq")
-animation = &"active"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8oi0c")
+hframes = 3
+region_rect = Rect2(-2, 16, 32, 16)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4htke")
+}
+autoplay = "anim"
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 8)
@@ -67,9 +84,3 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_qte35")
-
-[node name="IdleTimer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
-[node name="ActiveTimer" type="Timer" parent="."]

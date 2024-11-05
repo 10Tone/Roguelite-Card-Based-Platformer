@@ -70,9 +70,6 @@ size = Vector2(32, 32)
 
 [node name="ElectricFieldTrap" type="Node2D"]
 script = ExtResource("1_t8snx")
-_animatedSprite2DPath = NodePath("AnimatedSprite2D")
-_idleTimerPath = NodePath("IdleTimer")
-_activeTimerPath = NodePath("ActiveTimer")
 _area2DPath = NodePath("Area2D")
 ResourcePath = "res://Source/Game/World/WorldBuilding/BuildItemResources/Traps/ElectricFieldTrap.tres"
 
